@@ -24,10 +24,14 @@ steps:
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+
 - task: AzureRmWebAppDeployment@4
   inputs:
-    ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    package: $(System.DefaultWorkingDirectory)/**/*.zip 
