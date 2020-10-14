@@ -19,6 +19,7 @@ steps:
     npm install -g @angular/cli
     ng build --prod
   displayName: 'npm install and build'
+  workingDirectory: './P2-Angular'
 
 - task: AzureWebApp@1
   inputs:
