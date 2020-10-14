@@ -21,7 +21,7 @@ steps:
 
 
 - script: |
-    npm install -g @angular/cli
+
     ng update @angular/cli --migrate-only --from=1.7.4
     ng build --build
   displayName: 'npm install and build'
