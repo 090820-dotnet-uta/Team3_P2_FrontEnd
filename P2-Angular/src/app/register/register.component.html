@@ -1,0 +1,10 @@
+<br>
+<form [formGroup]="register">
+  <div>
+    <label for="userName">Email: </label>
+    <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required>
+  </div>
+  <div>
+    <button type="submit" (click)="onSubmit()">Login</button>
+  </div>
+</form>

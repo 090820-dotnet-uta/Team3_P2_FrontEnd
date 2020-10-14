@@ -1,0 +1,15 @@
+<br>
+<form [formGroup]="login">
+  <div>
+    <label for="userName">Email: </label>
+    <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required>
+  </div>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" (click)="onSubmit()">Login</button>
+    <button routerLink="register">Register</button>
+  </div>
+</form>
+<!-- <h2>{{name1}}</h2>
+<h2>{{userName}}</h2> -->
+<pre>{{login.value | json}}</pre>
