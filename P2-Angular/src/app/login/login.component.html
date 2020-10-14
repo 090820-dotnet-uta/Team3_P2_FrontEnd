@@ -7,9 +7,36 @@
   <div>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="submit" (click)="onSubmit()">Login</button>
-    <button routerLink="register">Register</button>
+    <button routerLink="/register">Register</button>
   </div>
 </form>
+
+<br>
+
+<ul>
+  <li *ngFor="let user of users$ | async">
+    <ul>
+      <li>ID: {{ user.userId }}</li>
+      <li>Name: {{ user.username }}</li>
+      <li>Email: {{ user.email }}</li>
+      <li>Password: {{ user.password }}</li>
+      <li>Preference ID: {{ user.preferencesId }}</li>
+    </ul>
+  </li>
+</ul>
+
+<br>
+<br>
+
+<div *ngIf="user">
+  <ul>
+    <li>ID: {{ user.userId }}</li>
+    <li>Name: {{ user.username }}</li>
+    <li>Email: {{ user.email }}</li>
+    <li>Password: {{ user.password }}</li>
+    <li>Preference ID: {{ user.preferencesId }}</li>
+  </ul>
+</div>
 <!-- <h2>{{name1}}</h2>
 <h2>{{userName}}</h2> -->
-<!-- <pre>{{login.value | json}}</pre> -->
+<!-- <pre>{{login.value | json}}</pre> -->    
