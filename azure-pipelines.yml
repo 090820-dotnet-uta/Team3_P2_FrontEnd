@@ -22,7 +22,7 @@ steps:
 
 - script: |
     npm install -g @angular/cli
-    ng update @angular/cli
+    ng update --all --force
     ng build --build
   displayName: 'npm install and build'
 
