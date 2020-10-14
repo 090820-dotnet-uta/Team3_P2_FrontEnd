@@ -28,14 +28,10 @@ steps:
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
-- task: AzureAppServiceSettings@1
-  inputs:
-    azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
-    appName: 'WinnerTeamFrontEnd'
-    resourceGroupName: 'P2ResourceGroup'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
