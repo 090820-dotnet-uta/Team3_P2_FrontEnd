@@ -22,7 +22,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 
 - task: ArchiveFiles@2
   inputs:
@@ -35,4 +35,4 @@ steps:
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
-    package: $(System.DefaultWorkingDirectory)/**/*.zip 
+    package: $(Build.ArtifactStagingDirectory)/**/*.zip 
