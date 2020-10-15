@@ -33,7 +33,8 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
     ArtifactName: 'drop'
-    publishLocation: 'Container'
+    publishLocation: FilePath
+    TargetPath: '$(System.DefaultWorkingDirectory)/Project2_Team3'
   displayName: 'Publish Artifacts'
 
 - task: AzureRmWebAppDeployment@4
