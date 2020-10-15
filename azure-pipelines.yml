@@ -28,11 +28,14 @@ steps:
     publishRegistry: 'useFeed'
     publishFeed: '9d510b2b-c475-48bb-ae82-ee9e54125d68/cbea9f56-583b-4bc9-bf12-03bab8f39ad4'
   
-- task: PublishBuildArtifacts@1
+- task: DownloadPackage@1
   inputs:
-    TargetPath: '$(System.DefaultWorkingDirectory)/P2-Angular'
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop1 
+    packageType: 'npm'
+    feed: '9d510b2b-c475-48bb-ae82-ee9e54125d68/cbea9f56-583b-4bc9-bf12-03bab8f39ad4'
+    view: 'd32c01fc-775f-4595-915e-1c57b18bfc61'
+    definition: '831f37c6-2e4b-4bba-b51d-26ac998cdca0'
+    version: '0.0.0'
+    downloadPath: '$(System.ArtifactsDirectory)'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -40,7 +43,7 @@ steps:
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
-    package: '$(Build.ArtifactStagingDirectory)'
+    package: '$(System.ArtifactsDirectory)'
     enableCustomDeployment: true
     DeploymentType: 'webDeploy'
     TakeAppOfflineFlag: false
