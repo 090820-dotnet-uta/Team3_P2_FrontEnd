@@ -35,4 +35,4 @@ steps:
     appType: webApp
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appName: 'WinnerTeamFrontEnd'
-    package: './P2-Angular/dist'
+    package: './P2-Angular/dist/P2-Angular'
