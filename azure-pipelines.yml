@@ -29,7 +29,7 @@ steps:
   inputs:
     command: 'custom'
     workingDir: './P2-Angular'
-    customCommand: 'run build'
+    customCommand: 'ng build --prod'
   displayName: 'npm build'
 
 - task: AzureRmWebAppDeployment@4
