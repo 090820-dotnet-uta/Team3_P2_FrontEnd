@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "private" : false,
             "outputPath": "dist/P2-Angular",
             "index": "src/index.html",
             "main": "src/main.ts",
