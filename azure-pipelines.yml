@@ -7,7 +7,7 @@ trigger:
 - main
 
 variables:
-  appDir: ./P2-Angular
+  appDir: P2-Angular
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -25,7 +25,7 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: $(addDir)
+    workingDir: ./P2-Angular
     customCommand: 'ci'
   displayName: 'npm ci'
 
