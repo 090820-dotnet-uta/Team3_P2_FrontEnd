@@ -33,6 +33,11 @@ steps:
   workingDirectory: $(appDir)
   displayName: ng build
 
+- script: npm run lint
+  workingDirectory: $(appDir)
+  continueOnError: true
+  displayName: ng lint
+  
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
