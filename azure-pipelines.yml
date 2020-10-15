@@ -23,12 +23,14 @@ steps:
   inputs:
     command: 'install'
     workingDir: './P2-Angular'
+  displayName: 'npm install'
     
 - task: Npm@1
   inputs:
     command: 'custom'
     workingDir: './P2-Angular'
     customCommand: 'run build'
+  displayName: 'npm build'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -37,4 +39,5 @@ steps:
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
     packageForLinux: 'dist/'
+  displayName: 'Web Deploy'
 
