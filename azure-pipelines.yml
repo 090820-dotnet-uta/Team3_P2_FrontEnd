@@ -16,7 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: 
-    npm -g @angular/cli
+    npm install -g @angular/cli
   displayName: 'npm install angular'
 
 - task: Npm@1
