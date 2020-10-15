@@ -31,7 +31,7 @@ steps:
     includeRootFolder: false
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'dist/P2-Angular'
+    PathtoPublish: '$(build.artifactstagingdirectory)\artifact'
     ArtifactName: 'web-app'
     publishLocation: 'Container'
   displayName: 'Publish Artifacts'
