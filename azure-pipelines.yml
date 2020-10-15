@@ -17,16 +17,11 @@ steps:
 
 - script: |
     npm install
-    ng build --prod --base-href /Angular-P2/
+    ng build run
   displayName: 'npm install and build'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-    ArtifactName: 'drop'
-    publishLocation: FilePath
-    TargetPath: '$(System.DefaultWorkingDirectory)/Project2_Team3'
-  displayName: 'Publish Artifacts'
+- script: npm publish
+  
 
 - task: AzureRmWebAppDeployment@4
   inputs:
