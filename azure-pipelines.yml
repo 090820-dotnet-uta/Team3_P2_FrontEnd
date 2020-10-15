@@ -20,6 +20,7 @@ steps:
     ng build run
   displayName: 'npm install and build'
   workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular'
+  target: '$(System.DefaultWorkingDirectory)/P2-Angular'
   
 - task: PublishBuildArtifacts@1
   inputs:
