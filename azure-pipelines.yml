@@ -15,19 +15,26 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script:
-    npm install
-    ng build run
-  displayName: 'npm install and build'
-  workingDirectory: './P2-Angular'
+- script: 
+    npm -g @angular/cli
+  displayName: 'npm install angular'
+
 - task: Npm@1
   inputs:
-    command: 'publish'
+    command: 'install'
     workingDir: './P2-Angular'
-    verbose: true
-    publishRegistry: 'useFeed'
-    publishFeed: '9d510b2b-c475-48bb-ae82-ee9e54125d68/cbea9f56-583b-4bc9-bf12-03bab8f39ad4'
+    
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: './P2-Angular'
+    customCommand: 'run build'
 
-
-
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
+    appType: 'webApp'
+    WebAppName: 'WinnerTeamFrontEnd'
+    packageForLinux: 'dist/'
 
