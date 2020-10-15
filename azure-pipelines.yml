@@ -18,19 +18,13 @@ steps:
 - script: 
     npm install -g @angular/cli
   displayName: 'npm install angular'
-
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: './P2-Angular'
-  displayName: 'npm install'
     
 - task: Npm@1
   inputs:
     command: 'custom'
     workingDir: './P2-Angular'
-    customCommand: 'ng build --prod'
-  displayName: 'npm build'
+    customCommand: 'ci'
+  displayName: 'npm ci'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
