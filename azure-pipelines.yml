@@ -32,7 +32,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
-    ArtifactName: 'web-app'
+    ArtifactName: 'drop'
     publishLocation: 'Container'
   displayName: 'Publish Artifacts'
 
@@ -42,7 +42,7 @@ steps:
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/Project2_Team3/drop'
+    package: '$(System.DefaultWorkingDirectory)/Project2_Team3/drop'
     enableCustomDeployment: true
     DeploymentType: 'webDeploy'
     TakeAppOfflineFlag: false
