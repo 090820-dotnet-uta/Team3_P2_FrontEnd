@@ -30,6 +30,7 @@ steps:
   inputs:
     script: 'ng build --prod'
     workingDirectory: './P2-Angular'
+  displayName: 'ng build'
 
 - task: ArchiveFiles@2
   inputs:
@@ -39,9 +40,11 @@ steps:
     archiveFile: 'dist1'
     replaceExistingArchive: true
     verbose: true
+  displayName: 'zip dist folder'
 - task: AzureWebApp@1
   inputs:
     appType: webApp
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appName: 'WinnerTeamFrontEnd'
-    package: './**.zip'
+    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    
