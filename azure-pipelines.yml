@@ -20,15 +20,6 @@ steps:
     ng build --prod --base-href /Angular-P2/
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-    includeRootFolder: false
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
