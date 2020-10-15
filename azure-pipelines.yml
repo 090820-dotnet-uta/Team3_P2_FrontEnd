@@ -26,12 +26,19 @@ steps:
     customCommand: 'ci'
   displayName: 'npm ci'
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: './P2-Angular/dist/P2-Angular'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+    verbose: true
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
-    packageForLinux: './dist/P2-Angular/'
-  displayName: 'Web Deploy'
-
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
