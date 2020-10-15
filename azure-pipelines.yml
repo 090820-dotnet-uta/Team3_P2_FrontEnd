@@ -20,10 +20,7 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 
 - task: ArchiveFiles@2
   inputs:
