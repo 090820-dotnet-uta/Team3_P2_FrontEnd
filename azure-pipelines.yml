@@ -6,13 +6,16 @@
 trigger:
 - main
 
+variables:
+  appDir: P2-Angular
+
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
   displayName: 'Install Node.js'
 
 - script: 
@@ -22,29 +25,19 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: './P2-Angular'
+    workingDir: $(addDir)
     customCommand: 'ci'
   displayName: 'npm ci'
 
-- task: CmdLine@2
-  inputs:
-    script: 'ng build --prod'
-    workingDirectory: './P2-Angular'
-  displayName: 'ng build'
+- script: npx ng build --prod
+  workingDirectory: $(appDir)
+  displayName: ng build
 
-- task: ArchiveFiles@2
+- task: AzureRmWebAppDeployment@4
   inputs:
-    rootFolderOrFile: './P2-Angular/dist/P2-Angular'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: 'dist1'
-    replaceExistingArchive: true
-    verbose: true
-  displayName: 'zip dist folder'
-- task: AzureWebApp@1
-  inputs:
-    appType: webApp
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
-    appName: 'WinnerTeamFrontEnd'
-    package: './**.zip'
-    
+    appType: 'webApp'
+    WebAppName: 'WinnerTeamFrontEnd'
+    packageForLinux: '$(appDir)/dist/*'
+  displayName: deploy to azure web service
