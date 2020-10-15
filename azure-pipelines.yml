@@ -17,7 +17,7 @@ steps:
 
 - script: |
     npm install
-    npm run build
+    ng build --prod --base-href /Angular-P2/
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
@@ -29,11 +29,13 @@ steps:
   inputs:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
     includeRootFolder: false
-
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop'
+    publishLocation: FilePath
+    TargetPath: '$(System.DefaultWorkingDirectory)/Project2_Team3'
+  displayName: 'Publish Artifacts'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -41,4 +43,8 @@ steps:
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
-    package: $(Build.ArtifactStagingDirectory)/**/*.zip 
+    package: '$(System.DefaultWorkingDirectory)/Project2_Team3/drop'
+    enableCustomDeployment: true
+    DeploymentType: 'webDeploy'
+    TakeAppOfflineFlag: false
+
