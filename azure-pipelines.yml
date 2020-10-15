@@ -15,10 +15,11 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
+- script:
     npm install
     ng build run
   displayName: 'npm install and build'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular'
 
 - script: npm publish
   
