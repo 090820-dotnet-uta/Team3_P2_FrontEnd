@@ -21,8 +21,11 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular'
   
-- script: npm publish
-  workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular' 
+- task: PublishBuildArtifacts@1
+  inputs:
+    TargetPath: '$(System.DefaultWorkingDirectory)/P2-Angular'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop1 
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -30,7 +33,7 @@ steps:
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appType: 'webApp'
     WebAppName: 'WinnerTeamFrontEnd'
-    package: '$(System.DefaultWorkingDirectory)/P2-Angular'
+    package: '$(Build.ArtifactStagingDirectory)'
     enableCustomDeployment: true
     DeploymentType: 'webDeploy'
     TakeAppOfflineFlag: false
