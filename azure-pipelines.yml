@@ -17,7 +17,7 @@ steps:
 
 - script:
     npm install
-    ng build --prod
+    ng build run
   displayName: 'npm install and build'
   workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular'
   
