@@ -17,14 +17,12 @@ steps:
 
 - script:
     npm install
-    ng build run
-    npm set registry https://registry.npmjs.org/
+    ng build --prod
   displayName: 'npm install and build'
   workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular'
   
 - script: npm publish
-  workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular'
-  
+  workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular' 
 
 - task: AzureRmWebAppDeployment@4
   inputs:
