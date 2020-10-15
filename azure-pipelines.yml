@@ -30,9 +30,18 @@ steps:
   inputs:
     script: 'ng build --prod'
     workingDirectory: './P2-Angular'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: './P2-Angular/dist/P2-Angular'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: 'zip'
+    replaceExistingArchive: true
+    verbose: true
 - task: AzureWebApp@1
   inputs:
     appType: webApp
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appName: 'WinnerTeamFrontEnd'
-    package: './P2-Angular/dist/P2-Angular'
+    package: './P2-Angular/dist/P2-Angular/**.zip'
