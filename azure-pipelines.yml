@@ -46,5 +46,5 @@ steps:
     appType: webApp
     azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
     appName: 'WinnerTeamFrontEnd'
-    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    package: './**.zip'
     
