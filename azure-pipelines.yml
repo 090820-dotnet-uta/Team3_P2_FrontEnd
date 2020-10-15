@@ -29,18 +29,5 @@ steps:
     publishFeed: '9d510b2b-c475-48bb-ae82-ee9e54125d68/cbea9f56-583b-4bc9-bf12-03bab8f39ad4'
 
 
-- task: DownloadPipelineArtifact@2
-  inputs:
-    buildType: 'current'
-    targetPath: '$(Pipeline.Workspace)'
-
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Azure subscription 1(4d58c592-1d2c-41cc-99ec-37f71536b901)'
-    appType: 'webApp'
-    appName: 'WinnerTeamFrontEnd'
-    package: '$(Pipeline.Workspace)'
-    deploymentMethod: 'runFromPackage'
-
 
 
