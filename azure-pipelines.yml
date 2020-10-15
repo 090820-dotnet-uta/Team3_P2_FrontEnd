@@ -19,8 +19,14 @@ steps:
     npm install
     ng build run
   displayName: 'npm install and build'
-  workingDirectory: '$(System.DefaultWorkingDirectory)/P2-Angular'
-  target: '$(System.DefaultWorkingDirectory)/P2-Angular'
+  workingDirectory: './P2-Angular'
+- task: Npm@1
+  inputs:
+    command: 'publish'
+    workingDir: './P2-Angular'
+    verbose: true
+    publishRegistry: 'useFeed'
+    publishFeed: '9d510b2b-c475-48bb-ae82-ee9e54125d68/cbea9f56-583b-4bc9-bf12-03bab8f39ad4'
   
 - task: PublishBuildArtifacts@1
   inputs:
