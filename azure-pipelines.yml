@@ -17,26 +17,15 @@ steps:
   inputs:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
-
-- script: 
-    npm install -g @angular/cli
-  displayName: 'npm install angular'
     
 - task: Npm@1
   inputs:
-    command: 'custom'
-    workingDir: ./P2-Angular
-    customCommand: 'ci'
-  displayName: 'npm ci'
+    command: 'ci'
+    workingDir: '$(appDir)'
 
 - script: npx ng build --prod
   workingDirectory: $(appDir)
   displayName: ng build
-
-- script: npm run lint
-  workingDirectory: $(appDir)
-  continueOnError: true
-  displayName: ng lint
   
 - task: AzureRmWebAppDeployment@4
   inputs:
