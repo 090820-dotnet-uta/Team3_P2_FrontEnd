@@ -12,11 +12,19 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatButtonModule,
+  MatTableModule,
+  MatDividerModule,
+  MatProgressSpinnerModule,
+  MatInputModule,
+  MatCardModule,
+  MatSlideToggleModule,
+  MatSelectModule,
+  MatOptionModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,11 +42,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatToolbarModule,
     MatCardModule,
     MatMenuModule,
-    MatToolbarModule,
     MatIconModule,
-    MatFormFieldModule
+    MatButtonModule,
+    MatTableModule,
+    MatDividerModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
