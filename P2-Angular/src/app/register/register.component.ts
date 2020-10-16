@@ -29,12 +29,12 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  onSubmit() {
+  onRegister() {
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
     let preferencesId = this.register.get('preferencesId').value;
-    
+
     this.apiService.createUser( { username, email, password, preferencesId } as User)
       .subscribe(user => this.user = user);
   }
