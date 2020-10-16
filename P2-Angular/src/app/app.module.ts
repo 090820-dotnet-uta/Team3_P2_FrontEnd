@@ -12,19 +12,6 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatMenuModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatButtonModule,
-  MatTableModule,
-  MatDividerModule,
-  MatProgressSpinnerModule,
-  MatInputModule,
-  MatCardModule,
-  MatSlideToggleModule,
-  MatSelectModule,
-  MatOptionModule} from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,20 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatDividerModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatProgressSpinnerModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
