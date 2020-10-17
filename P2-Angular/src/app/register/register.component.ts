@@ -63,16 +63,16 @@ export class RegisterComponent implements OnInit {
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
 
-    let animals = this.register.get('animals').value;
-    let art = this.register.get('art').value;
-    let nightlife = this.register.get('nightlife').value;
-    let beauty = this.register.get('beauty').value;
-    let learning = this.register.get('learning').value;
-    let entertainment = this.register.get('entertainment').value;
-    let religion = this.register.get('religion').value;
-    let shopping = this.register.get('shopping').value;
-    let homedecour = this.register.get('homedecour').value;
-    let fitness = this.register.get('fitness').value;
+    let animals = (<HTMLInputElement> document.getElementById("1")).checked;
+    let art = (<HTMLInputElement> document.getElementById("2")).checked;
+    let nightlife = (<HTMLInputElement> document.getElementById("3")).checked;
+    let beauty = (<HTMLInputElement> document.getElementById("4")).checked;
+    let learning = (<HTMLInputElement> document.getElementById("5")).checked;
+    let entertainment = (<HTMLInputElement> document.getElementById("6")).checked;
+    let religion = (<HTMLInputElement> document.getElementById("7")).checked;
+    let shopping = (<HTMLInputElement> document.getElementById("8")).checked;
+    let homedecour = (<HTMLInputElement> document.getElementById("9")).checked;
+    let fitness = (<HTMLInputElement> document.getElementById("10")).checked;
 
     this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
     this.passedUser = { username: username, email: email, password: password, preferences: this.preferences}
