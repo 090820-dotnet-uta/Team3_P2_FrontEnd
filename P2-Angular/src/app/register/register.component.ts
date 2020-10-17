@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../user';
 import { ApiService } from '../api.service';
 import { UserService } from '../user.service';
+import { Preferences } from '../preferences';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,19 @@ export class RegisterComponent implements OnInit {
   password: string;
   register: FormGroup;
   user: User;
+  passedUser: User;
   users: User[];
+  preferences: Preferences;
+  animals: boolean;
+  art: boolean;
+  nightlife: boolean;
+  beauty: boolean;
+  learning: boolean;
+  entertainment: boolean;
+  religion: boolean;
+  shopping: boolean;
+  homedecour: boolean;
+  fitness: boolean;
 
   constructor(private apiService: ApiService, private userService: UserService) { }
 
@@ -30,7 +43,17 @@ export class RegisterComponent implements OnInit {
         username: new FormControl(),
         email: new FormControl(),
         password: new FormControl(),
-        preferencesId: new FormControl()
+        // preferencesId: new FormControl()
+        animals: new FormControl(),
+        art: new FormControl(),
+        nightlife: new FormControl(),
+        beauty: new FormControl(),
+        learning: new FormControl(),
+        entertainment: new FormControl(),
+        religion: new FormControl(),
+        shopping: new FormControl(),
+        homedecour: new FormControl(),
+        fitness: new FormControl()
       }
     );
   }
@@ -39,9 +62,22 @@ export class RegisterComponent implements OnInit {
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
-    let preferencesId: number = this.register.get('preferencesId').value;
 
-    this.apiService.createUser( { username, email, password, preferencesId } as User)
+    let animals = this.register.get('animals').value;
+    let art = this.register.get('art').value;
+    let nightlife = this.register.get('nightlife').value;
+    let beauty = this.register.get('beauty').value;
+    let learning = this.register.get('learning').value;
+    let entertainment = this.register.get('entertainment').value;
+    let religion = this.register.get('religion').value;
+    let shopping = this.register.get('shopping').value;
+    let homedecour = this.register.get('homedecour').value;
+    let fitness = this.register.get('fitness').value;
+
+    this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
+    this.passedUser = { username: username, email: email, password: password, preferences: this.preferences}
+
+    this.apiService.createUser(this.passedUser)
       .subscribe(user => this.user = user);
     try {
       this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);

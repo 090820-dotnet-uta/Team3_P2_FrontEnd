@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../user';
 import { ApiService } from '../api.service';
 import { UserService } from '../user.service';
+import { Preferences } from '../preferences';
 
 @Component({
   selector: 'app-landing',
@@ -21,6 +22,8 @@ export class LandingComponent implements OnInit {
 
   users$: Observable<User[]>;
   user: User;
+  users: User[];
+  filteredUsers: User[];
   // currentID: number;
   form: FormGroup;
 
@@ -45,6 +48,7 @@ export class LandingComponent implements OnInit {
     });
 
     this.users$ = this.apiService.getUsers();
+    this.apiService.getUsers().subscribe(users => this.users = users);
     this.apiService.getUser(this.currentID)
        .subscribe(user => this.user = user);
   }
@@ -79,5 +83,35 @@ export class LandingComponent implements OnInit {
     // localStorage.setItem("currentID", "0");
     this.currentID = 0;
     // window.location.href = 'http://localhost:4200/home';
+  }
+
+  ShowSimilarUsers(userID: number) {
+    this.users$ = this.apiService.getUsers();
+    this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
+
+    for(let i=0; i< this.users.length; i++)
+    {
+      // Animals, Art, Nightlife, Beauty, Learning, Entertainment, Religion, Shopping, HomeDecour, Fitness
+      if (this.users[i].preferences.animals == this.user.preferences.animals ||
+          this.users[i].preferences.art == this.user.preferences.art ||
+          this.users[i].preferences.nightlife == this.user.preferences.nightlife ||
+          this.users[i].preferences.beauty == this.user.preferences.beauty ||
+          this.users[i].preferences.learning == this.user.preferences.learning ||
+          this.users[i].preferences.entertainment == this.user.preferences.entertainment ||
+          this.users[i].preferences.religion == this.user.preferences.religion ||
+          this.users[i].preferences.shopping == this.user.preferences.shopping ||
+          this.users[i].preferences.homedecour == this.user.preferences.homedecour ||
+          this.users[i].preferences.fitness == this.user.preferences.fitness)
+      {
+        this.filteredUsers.push(this.users[i]);
+      }
+    }
+
+    var x = document.getElementById("ShowUsersDisplay");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
 }

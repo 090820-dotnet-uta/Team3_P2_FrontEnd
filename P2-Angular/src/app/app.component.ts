@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.currentID = this.userService.getCurrentID();
-    this.isAuthenticated = await this.authService.checkAuthenticated();
+    this.currentID = 0;
+    // this.isAuthenticated = await this.authService.checkAuthenticated();
   }
 
   currentIDEventHandler($event: any) {

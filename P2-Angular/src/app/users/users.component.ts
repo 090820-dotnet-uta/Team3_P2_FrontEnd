@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
+import { Preferences } from '../preferences';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ export class UsersComponent implements OnInit {
     username: "",
     email: "",
     password: "",
-    preferencesId: 0
+    preferences: {animals: false, art: false, nightlife: false, beauty: false, learning: false, entertainment: false, religion: false, shopping: false, homedecour: false, fitness: false}
   }
 
   constructor() { }

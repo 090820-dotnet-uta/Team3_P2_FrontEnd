@@ -4,6 +4,7 @@
 
   <button (click)="EditUser()">Edit Profile</button>
   <button (click)="DeleteUser(user.userId)">Delete Account</button>
+  <button (click)="ShowSimilarUsers(user.userId)">Show Similar Users</button>
 
   <div id="EditingForm" style="display: none;">
     <br>
@@ -19,19 +20,20 @@
       </form>
   </div>
 
-  <br>
-  <h2>All Users (Debug)</h2>
-  <ul>
-    <li *ngFor="let user of users$ | async">
-      <ul>
-        <li>ID: {{ user.userId }}</li>
-        <li>Name: {{ user.username }}</li>
-        <li>Email: {{ user.email }}</li>
-        <li>Password: {{ user.password }}</li>
-        <li>Preference ID: {{ user.preferencesId }}</li>
-      </ul>
-    </li>
-  </ul>
+  <div id="ShowUsersDisplay" style="display: none;">
+    <h2>All Users (Debug)</h2>
+    <ul>
+      <li *ngFor="let user of filteredUsers">
+        <ul>
+          <li>ID: {{ user.userId }}</li>
+          <li>Name: {{ user.username }}</li>
+          <li>Email: {{ user.email }}</li>
+          <li>Password: {{ user.password }}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
 
   <br>
   <br>
@@ -42,7 +44,6 @@
       <li>Name: {{ user.username }}</li>
       <li>Email: {{ user.email }}</li>
       <li>Password: {{ user.password }}</li>
-      <li>Preference ID: {{ user.preferencesId }}</li>
     </ul>
   </div>
 </div>
