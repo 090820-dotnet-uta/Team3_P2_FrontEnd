@@ -43,6 +43,6 @@ export class RegisterComponent implements OnInit {
     this.apiService.createUser( { username, email, password, preferencesId } as User)
       .subscribe(user => this.user = user);
     localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
-    window.location.href = 'http://localhost:4200/landing';
+    window.location.href = 'https://winnerteamfrontend.azurewebsites.net/landing';
   }
 }

@@ -25,7 +25,7 @@ export class LandingComponent implements OnInit {
     this.currentID = parseInt(localStorage.getItem("currentID"));
     if (this.currentID == 0)
     {
-      window.location.href = 'http://localhost:4200/login';
+      window.location.href = 'https://winnerteamfrontend.azurewebsites.net/login';
     }
     // alert(`${this.currentID}`);
 
@@ -69,6 +69,6 @@ export class LandingComponent implements OnInit {
     this.apiService.deleteUser(userID).subscribe(user => this.user = user);
     localStorage.setItem("currentID", "0");
     this.currentID = 0;
-    window.location.href = 'http://localhost:4200/home';
+    window.location.href = 'https://winnerteamfrontend.azurewebsites.net/home';
   }
 }

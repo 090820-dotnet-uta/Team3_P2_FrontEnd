@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     this.currentID = parseInt(localStorage.getItem("currentID"));
     if (this.currentID == 0)
     {
-      window.location.href = 'http://localhost:4200/login';
+      window.location.href = 'https://winnerteamfrontend.azurewebsites.net/login';
     }
   }
 
