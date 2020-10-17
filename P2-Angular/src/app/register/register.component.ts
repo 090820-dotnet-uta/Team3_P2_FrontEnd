@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
     this.passedUser = { username: username, email: email, password: password, preferencesModel: this.preferences}
 
     this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
-    this.delay(100);
+    this.delay(500);
 
     try {
       this.apiService.getUser(this.users[this.users.length-1].userId + 1).subscribe(user => this.user = user);
