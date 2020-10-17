@@ -21,14 +21,18 @@
   </div>
 
   <div id="ShowUsersDisplay" style="display: none;">
-    <h2>All Users (Debug)</h2>
+    <h2>Similar Users</h2>
     <ul>
-      <li *ngFor="let user of filteredUsers">
+      <li *ngFor="let filtereduser of filteredUsers">
         <ul>
-          <li>ID: {{ user.userId }}</li>
-          <li>Name: {{ user.username }}</li>
-          <li>Email: {{ user.email }}</li>
-          <li>Password: {{ user.password }}</li>
+          <li>Name: {{ filtereduser.username }}</li>
+          <li>Email: {{ filtereduser.email }}</li>
+          <li>Preferences:</li>
+          <li *ngFor="let pref of filtereduser.preferencesModel">
+            <ul>
+              <li>&nbsp;&nbsp;&nbsp;&nbsp;{{ pref }}</li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
