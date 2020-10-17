@@ -79,13 +79,9 @@ export class RegisterComponent implements OnInit {
 
     this.apiService.createUser(this.passedUser)
       .subscribe(user => this.user = user);
-    try {
-      this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);
-    }
-    catch (e) {
-      console.log(e);
-      this.currentIDEvent.emit(1);
-    }
+
+    console.log(this.user.userId);
+    this.currentIDEvent.emit(this.user.userId);
 
     // localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
     // window.location.href = 'http://localhost:4200/landing';
