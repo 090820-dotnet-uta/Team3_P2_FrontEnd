@@ -23,5 +23,5 @@
 </div>
 
 <div *ngIf="registerFlag == true">
-  <app-register></app-register>
+  <app-register (registeredEvent)="registeredEventHandler($event)"></app-register>
 </div>

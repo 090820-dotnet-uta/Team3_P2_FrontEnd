@@ -12,6 +12,8 @@ import { Preferences } from '../preferences';
 })
 export class RegisterComponent implements OnInit {
   // @Output() currentIDEvent = new EventEmitter<number>();
+  @Output() registeredEvent = new EventEmitter<number>();
+
   id: number;
   name: string;
   email: string;
@@ -87,6 +89,7 @@ export class RegisterComponent implements OnInit {
     //   this.currentIDEvent.emit(1);
     // }
 
+    this.registeredEvent.emit(1);
     // localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
     // window.location.href = 'http://localhost:4200/landing';
   }

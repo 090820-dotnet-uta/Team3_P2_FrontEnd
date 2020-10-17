@@ -33,6 +33,11 @@ export class AppComponent implements OnInit {
     this.registerFlag = false;
   }
 
+  registeredEventHandler($event: any) {
+    this.loginFlag = false;
+    this.registerFlag = false;
+  }
+
   clickedHome() {
     this.registerFlag = false;
     this.loginFlag = false;
