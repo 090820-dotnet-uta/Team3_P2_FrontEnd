@@ -77,20 +77,17 @@ export class RegisterComponent implements OnInit {
     this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
     this.passedUser = { username: username, email: email, password: password, preferencesModel: this.preferences}
 
-    this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
-    this.delay(500);
+    this.apiService.createUser(this.passedUser);
 
     try {
-      this.apiService.getUser(this.users[this.users.length-1].userId + 1).subscribe(user => this.user = user);
+      this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);
     }
     catch (e) {
       console.log(e);
-      this.apiService.getUser(1).subscribe(user => this.user = user);
+      this.currentIDEvent.emit(1);
     }
-    this.currentIDEvent.emit(this.user.userId);
-  }
 
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    // localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
+    // window.location.href = 'http://localhost:4200/landing';
   }
 }
