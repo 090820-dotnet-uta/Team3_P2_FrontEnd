@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private API_URL = 'https://localhost:5001/users';
+  private API_URL = 'https://winnerteambackend.azurewebsites.net/users';
 
   constructor(private http: HttpClient) { }
 
