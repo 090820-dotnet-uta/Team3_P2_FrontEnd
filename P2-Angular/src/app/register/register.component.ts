@@ -11,7 +11,7 @@ import { Preferences } from '../preferences';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @Output() currentIDEvent = new EventEmitter<number>();
+  // @Output() currentIDEvent = new EventEmitter<number>();
   id: number;
   name: string;
   email: string;
@@ -79,13 +79,13 @@ export class RegisterComponent implements OnInit {
 
     this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
 
-    try {
-      this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);
-    }
-    catch (e) {
-      console.log(e);
-      this.currentIDEvent.emit(1);
-    }
+    // try {
+    //   this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);
+    // }
+    // catch (e) {
+    //   console.log(e);
+    //   this.currentIDEvent.emit(1);
+    // }
 
     // localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
     // window.location.href = 'http://localhost:4200/landing';
