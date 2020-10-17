@@ -28,16 +28,16 @@
           <li>Name: {{ filtereduser.username }}</li>
           <li>Email: {{ filtereduser.email }}</li>
           <li>Preferences:</li>
-          <li *ngIf="user.preferencesModel.animals == filtereduser.preferencesModel.animals == true"> &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
-          <li *ngIf="user.preferencesModel.art == filtereduser.preferencesModel.art == true"> &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
-          <li *ngIf="user.preferencesModel.beauty == filtereduser.preferencesModel.beauty == true"> &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
-          <li *ngIf="user.preferencesModel.entertainment == filtereduser.preferencesModel.entertainment == true"> &nbsp;&nbsp;&nbsp;&nbsp;Entertainment</li>
-          <li *ngIf="user.preferencesModel.fitness == filtereduser.preferencesModel.fitness== true"> &nbsp;&nbsp;&nbsp;&nbsp;Fitness</li>
-          <li *ngIf="user.preferencesModel.homedecour == filtereduser.preferencesModel.homedecour == true"> &nbsp;&nbsp;&nbsp;&nbsp;Home Decour</li>
-          <li *ngIf="user.preferencesModel.learning == filtereduser.preferencesModel.learning == true"> &nbsp;&nbsp;&nbsp;&nbsp;Learning</li>
-          <li *ngIf="user.preferencesModel.nightlife == filtereduser.preferencesModel.nightlife == true"> &nbsp;&nbsp;&nbsp;&nbsp;Nightlife</li>
-          <li *ngIf="user.preferencesModel.religion == filtereduser.preferencesModel.religion == true"> &nbsp;&nbsp;&nbsp;&nbsp;Religion</li>
-          <li *ngIf="user.preferencesModel.shopping == filtereduser.preferencesModel.shopping == true"> &nbsp;&nbsp;&nbsp;&nbsp;Shopping</li>
+          <li *ngIf="(user.preferencesModel.animals == filtereduser.preferencesModel.animals) && (filtereduser.preferencesModel.animals == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
+          <li *ngIf="(user.preferencesModel.art == filtereduser.preferencesModel.art) && (filtereduser.preferencesModel.art == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
+          <li *ngIf="(user.preferencesModel.beauty == filtereduser.preferencesModel.beauty) && (filtereduser.preferencesModel.beauty == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
+          <li *ngIf="(user.preferencesModel.entertainment == filtereduser.preferencesModel.entertainment) && (filtereduser.preferencesModel.entertainment == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Entertainment</li>
+          <li *ngIf="(user.preferencesModel.fitness == filtereduser.preferencesModel.fitness) && (filtereduser.preferencesModel.fitness== true)"> &nbsp;&nbsp;&nbsp;&nbsp;Fitness</li>
+          <li *ngIf="(user.preferencesModel.homedecour == filtereduser.preferencesModel.homedecour) && (filtereduser.preferencesModel.homedecour == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Home Decour</li>
+          <li *ngIf="(user.preferencesModel.learning == filtereduser.preferencesModel.learning) && (filtereduser.preferencesModel.learning == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Learning</li>
+          <li *ngIf="(user.preferencesModel.nightlife == filtereduser.preferencesModel.nightlife) && (filtereduser.preferencesModel.nightlife == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Nightlife</li>
+          <li *ngIf="(user.preferencesModel.religion == filtereduser.preferencesModel.religion) && (filtereduser.preferencesModel.religion == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Religion</li>
+          <li *ngIf="(user.preferencesModel.shopping == filtereduser.preferencesModel.shopping) && (filtereduser.preferencesModel.shopping == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Shopping</li>
         </ul>
       </li>
     </ul>
