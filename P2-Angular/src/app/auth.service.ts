@@ -39,9 +39,4 @@ export class AuthService {
       console.error(err);
     }
   }
-
-  private extractData(res: Response) {
-    let body = res;
-    return body || {};
-  }
 }

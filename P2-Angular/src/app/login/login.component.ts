@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -12,6 +12,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @Output() currentIDEvent = new EventEmitter<number>();
   form: FormGroup;
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
@@ -56,10 +57,11 @@ export class LoginComponent implements OnInit {
         {
           if (this.users[i].email == username && this.users[i].password == password)
           {
-            this.userService.setCurrentID(this.users[i].userId);
-            localStorage.setItem("currentID", this.users[i].userId.toString());
+            // this.userService.setCurrentID(this.users[i].userId);
+            this.currentIDEvent.emit(this.users[i].userId);
+            // localStorage.setItem("currentID", this.users[i].userId.toString());
             //alert(`${this.userService.getCurrentID()}`);
-            window.location.href = 'https://winnerteamfrontend.azurewebsites.net/landing';
+            // window.location.href = 'http://localhost:4200/landing';
           }
         }
 

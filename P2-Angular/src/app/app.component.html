@@ -2,15 +2,26 @@
 <h1>{{title}}</h1>
 
 <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-  <button mat-button routerLink="/home">{{title}}</button>
-  <button mat-button routerLink="/login" *ngIf="currentID == 0">
+  <button mat-button (click)="clickedHome()">{{title}}</button>
+  <button mat-button *ngIf="currentID == 0" (click)="clickedLogin()">
     Login
   </button>
-  <button mat-button routerLink="/register" *ngIf="currentID == 0">
+  <button mat-button *ngIf="currentID == 0" (click)="clickedRegister()">
     Register
   </button>
-  <button mat-button *ngIf="currentID != 0" (click)="logout()">
+  <button mat-button *ngIf="currentID != 0" (click)="clickedLogout()">
     Logout
   </button>
 </div>
-<router-outlet></router-outlet>
+
+<div *ngIf="currentID != 0">
+  <app-landing [IDVal]="currentID"></app-landing>
+</div>
+
+<div *ngIf="loginFlag == true">
+  <app-login (currentIDEvent)="currentIDEventHandler($event)"></app-login>
+</div>
+
+<div *ngIf="registerFlag == true">
+  <app-register (currentIDEvent)="currentIDEventHandler($event)"></app-register>
+</div>

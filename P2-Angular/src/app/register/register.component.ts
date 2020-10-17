@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../user';
 import { ApiService } from '../api.service';
@@ -10,6 +10,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @Output() currentIDEvent = new EventEmitter<number>();
   id: number;
   name: string;
   email: string;
@@ -38,11 +39,19 @@ export class RegisterComponent implements OnInit {
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
-    let preferencesId = this.register.get('preferencesId').value;
+    let preferencesId: number = this.register.get('preferencesId').value;
 
     this.apiService.createUser( { username, email, password, preferencesId } as User)
       .subscribe(user => this.user = user);
-    localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
-    window.location.href = 'https://winnerteamfrontend.azurewebsites.net/landing';
+    try {
+      this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);
+    }
+    catch (e) {
+      console.log(e);
+      this.currentIDEvent.emit(1);
+    }
+
+    // localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
+    // window.location.href = 'http://localhost:4200/landing';
   }
 }

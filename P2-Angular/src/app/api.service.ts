@@ -28,7 +28,8 @@ export class ApiService {
 
   public createUser(user: User): Observable<User> {
     console.log(`${user.username} ${user.email} ${user.password}`);
-    return this.http.post<User>(this.API_URL, user, this.httpOptions);
+    var x = JSON.stringify(user);
+    return this.http.post<User>(this.API_URL, x, this.httpOptions);
   }
 
   public editUser(user: User): Observable<User> {

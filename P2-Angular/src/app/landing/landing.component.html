@@ -7,16 +7,16 @@
 
   <div id="EditingForm" style="display: none;">
     <br>
-  <form [formGroup]="form" (ngSubmit)="onEdit()">
-      Name:
-      <input matInput type="username" placeholder="John Doe" formControlName="username" required> &nbsp;
-      Email:
-      <input matInput placeholder="johndoe@email.com" formControlName="email" required> &nbsp;
-      Password:
-      <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
-      <br><br>
-      <button mat-raised-button color="primary">Submit Changes</button>
-    </form>
+    <form [formGroup]="form" (ngSubmit)="onEdit()">
+        Name:
+        <input matInput type="username" placeholder="John Doe" formControlName="username" required> &nbsp;
+        Email:
+        <input matInput placeholder="johndoe@email.com" formControlName="email" required> &nbsp;
+        Password:
+        <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
+        <br><br>
+        <button mat-raised-button color="primary">Submit Changes</button>
+      </form>
   </div>
 
   <br>
