@@ -80,11 +80,11 @@ export class RegisterComponent implements OnInit {
     this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
 
     try {
-      this.user.userId = this.users[this.users.length-1].userId + 1;
+      this.apiService.getUser(this.users[this.users.length-1].userId + 1).subscribe(user => this.user = user);
     }
     catch (e) {
       console.log(e);
-      this.user.userId = 1;
+      this.apiService.getUser(1).subscribe(user => this.user = user);
     }
     this.currentIDEvent.emit(this.user.userId);
   }
