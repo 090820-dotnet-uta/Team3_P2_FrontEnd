@@ -86,7 +86,7 @@ export class LandingComponent implements OnInit {
   }
 
   ShowSimilarUsers(userID: number) {
-    this.users$ = this.apiService.getUsers();
+    this.apiService.getUsers().subscribe(users => this.users = users);
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
     this.filteredUsers = [];
     for(let i=0; i< this.users.length; i++)
