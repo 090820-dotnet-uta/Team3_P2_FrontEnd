@@ -78,6 +78,7 @@ export class RegisterComponent implements OnInit {
     this.passedUser = { username: username, email: email, password: password, preferencesModel: this.preferences}
 
     this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
+    this.delay(100);
 
     try {
       this.apiService.getUser(this.users[this.users.length-1].userId + 1).subscribe(user => this.user = user);
@@ -87,5 +88,9 @@ export class RegisterComponent implements OnInit {
       this.apiService.getUser(1).subscribe(user => this.user = user);
     }
     this.currentIDEvent.emit(this.user.userId);
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }
