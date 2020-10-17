@@ -92,16 +92,16 @@ export class LandingComponent implements OnInit {
     for(let i=0; i< this.users.length; i++)
     {
       // Animals, Art, Nightlife, Beauty, Learning, Entertainment, Religion, Shopping, HomeDecour, Fitness
-      if (this.users[i].preferences.animals == this.user.preferences.animals ||
-          this.users[i].preferences.art == this.user.preferences.art ||
-          this.users[i].preferences.nightlife == this.user.preferences.nightlife ||
-          this.users[i].preferences.beauty == this.user.preferences.beauty ||
-          this.users[i].preferences.learning == this.user.preferences.learning ||
-          this.users[i].preferences.entertainment == this.user.preferences.entertainment ||
-          this.users[i].preferences.religion == this.user.preferences.religion ||
-          this.users[i].preferences.shopping == this.user.preferences.shopping ||
-          this.users[i].preferences.homedecour == this.user.preferences.homedecour ||
-          this.users[i].preferences.fitness == this.user.preferences.fitness)
+      if (this.users[i].preferencesModel.animals == this.user.preferencesModel.animals ||
+          this.users[i].preferencesModel.art == this.user.preferencesModel.art ||
+          this.users[i].preferencesModel.nightlife == this.user.preferencesModel.nightlife ||
+          this.users[i].preferencesModel.beauty == this.user.preferencesModel.beauty ||
+          this.users[i].preferencesModel.learning == this.user.preferencesModel.learning ||
+          this.users[i].preferencesModel.entertainment == this.user.preferencesModel.entertainment ||
+          this.users[i].preferencesModel.religion == this.user.preferencesModel.religion ||
+          this.users[i].preferencesModel.shopping == this.user.preferencesModel.shopping ||
+          this.users[i].preferencesModel.homedecour == this.user.preferencesModel.homedecour ||
+          this.users[i].preferencesModel.fitness == this.user.preferencesModel.fitness)
       {
         this.filteredUsers.push(this.users[i]);
       }
