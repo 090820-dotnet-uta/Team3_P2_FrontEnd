@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
     this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
     this.passedUser = { username: username, email: email, password: password, preferencesModel: this.preferences}
 
-    this.apiService.createUser(this.passedUser);
+    this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
 
     try {
       this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);

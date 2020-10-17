@@ -1,4 +1,4 @@
-<form [formGroup]="register">
+<form [formGroup]="register" (ngSubmit)="onRegister()">
   <div>
     <h2>Register</h2>
     <label for="username">Name: </label>
@@ -7,8 +7,6 @@
     <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required> &nbsp;
     <label for="password">Password: </label>
     <input formControlName="password" type="text" placeholder="johndoe99" name="password" id="password" required> &nbsp;<br>
-    <!-- <label for="preferencesId">Preference: </label>
-    <input formControlName="preferencesId" type="number" placeholder="1" name="preferencesId" id="preferencesId" required>  </div> -->
     Preferences:<br>
     <p>
       <input type="checkbox" name="animals" id="1" value="true"> Animals
@@ -23,6 +21,6 @@
       <input type="checkbox" name="fitness" id="10" value="true"> Fitness
     </p>
     <br>
-    <button type="submit" (click)="onRegister()">Register</button>
+    <button mat-raised-button color="primary">Register</button>
   </div>
 </form>
