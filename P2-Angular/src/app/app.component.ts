@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 export class AppComponent implements OnInit {
   title = 'P2-Angular';
   isAuthenticated: boolean;
+  currentID = parseInt(localStorage.getItem("currentID"));
 
   constructor(public authService: AuthService) {
     this.authService.isAuthenticated.subscribe(
@@ -21,6 +22,8 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+    localStorage.setItem("currentID", "0");
+    this.currentID = 0;
     this.authService.logout('/');
   }
 }

@@ -3,13 +3,13 @@
 
 <div fxLayout="row" fxShow="false" fxShow.gt-sm>
   <button mat-button routerLink="/home">{{title}}</button>
-  <button mat-button routerLink="/login" *ngIf="!isAuthenticated">
+  <button mat-button routerLink="/login" *ngIf="currentID == 0">
     Login
   </button>
-  <button mat-button routerLink="/register" *ngIf="!isAuthenticated">
+  <button mat-button routerLink="/register" *ngIf="currentID == 0">
     Register
   </button>
-  <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+  <button mat-button *ngIf="currentID != 0" (click)="logout()">
     Logout
   </button>
 </div>

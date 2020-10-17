@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import OktaAuth from '@okta/okta-auth-js';
+import { HttpClient, HttpHeaders, JsonpInterceptor } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
     clientId: '0oa9u95eCneasJmYN5d5'
   });
   public isAuthenticated = new BehaviorSubject<boolean>(false);
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
   }
   async checkAuthenticated() {
     const authenticated = await this.authClient.session.exists();
@@ -28,6 +29,7 @@ export class AuthService {
     this.isAuthenticated.next(true);
     this.authClient.session.setCookieAndRedirect(transaction.sessionToken);
   }
+
   async logout(redirect: string) {
     try {
       await this.authClient.signOut();
@@ -36,5 +38,10 @@ export class AuthService {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  private extractData(res: Response) {
+    let body = res;
+    return body || {};
   }
 }

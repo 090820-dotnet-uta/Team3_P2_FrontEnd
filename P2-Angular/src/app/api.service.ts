@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private API_URL = 'https://winnerteambackend.azurewebsites.net/users';
+  private API_URL = 'https://localhost:5001/users';
 
   constructor(private http: HttpClient) { }
 
@@ -21,8 +21,8 @@ export class ApiService {
     return this.http.get<User[]>(`${REQUEST_URL}`);
   }
 
-  public getUser(): Observable<User> {
-    const REQUEST_URL = `${this.API_URL}/8`;
+  public getUser(userID: number): Observable<User> {
+    const REQUEST_URL = `${this.API_URL}/${userID}`;
     return this.http.get<User>(`${REQUEST_URL}`);
   }
 
@@ -31,17 +31,14 @@ export class ApiService {
     return this.http.post<User>(this.API_URL, user, this.httpOptions);
   }
 
-  public editUser(user: User | number): Observable<User> {
-    const id = typeof user === 'number' ? user : user.userId;
-    const REQUEST_URL = `${this.API_URL}/${id}`
+  public editUser(user: User): Observable<User> {
+    const REQUEST_URL = `${this.API_URL}/${user.userId}`
 
     return this.http.put<User>(REQUEST_URL, user, this.httpOptions)
   }
 
-  public deleteUser(user: User | number): Observable<User> {
-    const id = typeof user === 'number' ? user : user.userId;
-    const REQUEST_URL = `${this.API_URL}/${id}`
-
+  public deleteUser(userID: number): Observable<User> {
+    const REQUEST_URL = `${this.API_URL}/${userID}`
     return this.http.delete<User>(REQUEST_URL, this.httpOptions)
   }
 }

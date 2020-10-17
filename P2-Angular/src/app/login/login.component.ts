@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { User } from '../user';
+import { ApiService } from '../api.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,26 +16,31 @@ export class LoginComponent implements OnInit {
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
   private returnUrl: string;
+  users: User[];
+  currentID: number;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private apiService: ApiService,
+    private userService: UserService
   ) {
   }
 
   async ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/landing';
+    this.apiService.getUsers().subscribe(users => this.users = users);
+    // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/landing';
 
     this.form = this.fb.group({
       username: ['', Validators.email],
       password: ['', Validators.required]
     });
 
-    if (await this.authService.checkAuthenticated()) {
-      await this.router.navigate([this.returnUrl]);
-    }
+    // if (await this.authService.checkAuthenticated()) {
+    //   await this.router.navigate([this.returnUrl]);
+    // }
   }
 
   async onSubmit() {
@@ -42,7 +50,19 @@ export class LoginComponent implements OnInit {
       try {
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
-        await this.authService.login(username, password);
+        // await this.authService.login(username, password);
+
+        for(let i=0; i< this.users.length; i++)
+        {
+          if (this.users[i].email == username && this.users[i].password == password)
+          {
+            this.userService.setCurrentID(this.users[i].userId);
+            localStorage.setItem("currentID", this.users[i].userId.toString());
+            //alert(`${this.userService.getCurrentID()}`);
+            window.location.href = 'http://localhost:4200/landing';
+          }
+        }
+
       } catch (err) {
         this.loginInvalid = true;
       }

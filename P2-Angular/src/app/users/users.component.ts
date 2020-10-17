@@ -8,11 +8,11 @@ import { User } from '../user';
 })
 export class UsersComponent implements OnInit {
   user: User = {
-    userId: 1,
-    username: "David Dowd",
-    email: "daviddowd@gmail.com",
-    password: "ddowd97",
-    preferencesId: 1
+    userId: 0,
+    username: "",
+    email: "",
+    password: "",
+    preferencesId: 0
   }
 
   constructor() { }
