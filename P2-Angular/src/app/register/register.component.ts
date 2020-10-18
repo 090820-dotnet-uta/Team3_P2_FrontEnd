@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../user';
 import { ApiService } from '../api.service';
 import { UserService } from '../user.service';
@@ -33,34 +33,53 @@ export class RegisterComponent implements OnInit {
   shopping: boolean;
   homedecour: boolean;
   fitness: boolean;
+  registerErrorFlag: boolean = false;
+  isSubmitted: boolean = false;
 
-  constructor(private apiService: ApiService, private userService: UserService) { }
+  constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) { }
 
   ngOnInit(): void {
     // alert(`${this.userService.getCurrentID()}`);
     //localStorage.getItem("currentEmail");
     this.apiService.getUsers().subscribe(users => this.users = users);
-    this.register = new FormGroup(
-      {
-        username: new FormControl(),
-        email: new FormControl(),
-        password: new FormControl(),
-        // preferencesId: new FormControl()
-        animals: new FormControl(),
-        art: new FormControl(),
-        nightlife: new FormControl(),
-        beauty: new FormControl(),
-        learning: new FormControl(),
-        entertainment: new FormControl(),
-        religion: new FormControl(),
-        shopping: new FormControl(),
-        homedecour: new FormControl(),
-        fitness: new FormControl()
-      }
-    );
+    // this.register = new FormGroup(
+    //   {
+    //     username: new FormControl(),
+    //     email: new FormControl(),
+    //     password: new FormControl(),
+    //     // preferencesId: new FormControl()
+    //     animals: new FormControl(),
+    //     art: new FormControl(),
+    //     nightlife: new FormControl(),
+    //     beauty: new FormControl(),
+    //     learning: new FormControl(),
+    //     entertainment: new FormControl(),
+    //     religion: new FormControl(),
+    //     shopping: new FormControl(),
+    //     homedecour: new FormControl(),
+    //     fitness: new FormControl()
+    //   }
+    // );
+
+    this.register = this.fb.group({
+      username:       ['', Validators.required],
+      email:          ['', Validators.required, Validators.email],
+      password:       ['', Validators.required, Validators.minLength(5)],
+      animals:        [''],
+      art:            [''],
+      nightlife:      [''],
+      beauty:         [''],
+      learning:       [''],
+      entertainment:  [''],
+      religion:       [''],
+      shopping:       [''],
+      homedecour:     [''],
+      fitness:        ['']
+    });
   }
 
   onRegister() {
+    this.isSubmitted = true;
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
@@ -79,7 +98,17 @@ export class RegisterComponent implements OnInit {
     this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
     this.passedUser = { username: username, email: email, password: password, preferencesModel: this.preferences}
 
-    this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
+    if (this.register.valid)
+    {
+      this.registerErrorFlag = false;
+      this.isSubmitted = false;
+      this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
+      this.registeredEvent.emit(1);
+    }
+    else
+    {
+      this.registerErrorFlag = true;
+    }
 
     // try {
     //   this.currentIDEvent.emit(this.users[this.users.length-1].userId + 1);
@@ -89,7 +118,7 @@ export class RegisterComponent implements OnInit {
     //   this.currentIDEvent.emit(1);
     // }
 
-    this.registeredEvent.emit(1);
+    // this.registeredEvent.emit(1);
     // localStorage.setItem("currentID", (this.users[this.users.length-1].userId + 1).toString());
     // window.location.href = 'http://localhost:4200/landing';
   }

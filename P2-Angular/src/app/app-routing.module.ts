@@ -9,10 +9,10 @@ import { LandingComponent } from './landing/landing.component';
 const routes: Routes =
 [
     { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'home', component: LandingComponent },
-    { path: 'landing', component: LandingComponent}
+    { path: 'login', component: HomeComponent },
+    { path: 'register', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'landing', component: HomeComponent}
 ];
 
 @NgModule({

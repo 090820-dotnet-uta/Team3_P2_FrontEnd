@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/landing';
 
     this.form = this.fb.group({
-      username: ['', Validators.email],
+      username: ['', Validators.email, Validators.required],
       password: ['', Validators.required]
     });
 
