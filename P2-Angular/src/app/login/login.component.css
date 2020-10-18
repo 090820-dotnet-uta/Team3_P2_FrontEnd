@@ -1,9 +1,20 @@
-mat-card {
-  max-width: 400px;
-  margin: 2em auto;
-  text-align: center;
+#loginSection {
+  background: grey;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
-mat-form-field {
-  display: block;
+#dangerText {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  -webkit-font-smoothing: antialiased;
+  color: red;
+  text-align: center;
 }

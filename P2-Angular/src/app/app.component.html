@@ -1,17 +1,22 @@
 <br><br><br>
-<h1>{{title}}</h1>
+<div *ngIf="currentID == 0 && !loginFlag && !registerFlag">
+  <br><br><br><br><br><br><br><br>
+</div>
+<div id="navSection">
+  <h1>{{title}}</h1>
 
-<div fxLayout="row" fxShow="false" fxShow.gt-sm>
-  <button mat-button (click)="clickedHome()">{{title}}</button>
-  <button mat-button *ngIf="currentID == 0" (click)="clickedLogin()">
-    Login
-  </button>
-  <button mat-button *ngIf="currentID == 0" (click)="clickedRegister()">
-    Register
-  </button>
-  <button mat-button *ngIf="currentID != 0" (click)="clickedLogout()">
-    Logout
-  </button>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button mat-button (click)="clickedHome()">{{title}}</button>
+    <button mat-button *ngIf="currentID == 0" (click)="clickedLogin()">
+      Login
+    </button>
+    <button mat-button *ngIf="currentID == 0" (click)="clickedRegister()">
+      Register
+    </button>
+    <button mat-button *ngIf="currentID != 0" (click)="clickedLogout()">
+      Logout
+    </button>
+  </div>
 </div>
 
 <div *ngIf="currentID != 0">
