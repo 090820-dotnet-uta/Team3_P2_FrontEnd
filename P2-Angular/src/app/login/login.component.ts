@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 @Output() currentIDEvent = new EventEmitter<number>();
   form: FormGroup;
   public loginInvalid: boolean;
-  private formSubmitAttempt: boolean;
+  formSubmitAttempt: boolean;
   private returnUrl: string;
   users: User[];
   currentID: number;

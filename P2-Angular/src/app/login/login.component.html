@@ -4,7 +4,7 @@
     <input matInput placeholder="johndoe@email.com" formControlName="username" required> &nbsp;
     Password:
     <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
-    <div *ngIf="loginInvalid">
+    <div *ngIf="formSubmitAttempt">
       <span style="color: red;">Please enter a valid email and password!</span>
     </div>
     <br>
