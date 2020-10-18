@@ -18,12 +18,12 @@
         <br><br>
         <button mat-raised-button color="primary">Submit Changes</button>
       </form>
-      <div *ngIf="editingForm.get('username').errors && isSubmitted">
+      <div *ngIf="editingForm.get('username').errors && editedSubmitted">
         <div *ngIf="editingForm.get('username').hasError('required')">
           <span style="color: red;">Please enter your name!</span>
         </div>
       </div>
-      <div *ngIf="editingForm.get('email').errors && isSubmitted">
+      <div *ngIf="editingForm.get('email').errors && editedSubmitted">
         <div *ngIf="editingForm.get('email').hasError('required')">
           <span style="color: red;">Please enter your email!</span>
         </div>
@@ -31,7 +31,7 @@
           <span style="color: red;">You must enter a valid email!</span>
         </div>
       </div>
-      <div *ngIf="editingForm.get('password').errors && isSubmitted">
+      <div *ngIf="editingForm.get('password').errors && editedSubmitted">
         <div *ngIf="editingForm.get('password').hasError('required')">
           <span style="color: red;">Please enter your password!</span>
         </div>

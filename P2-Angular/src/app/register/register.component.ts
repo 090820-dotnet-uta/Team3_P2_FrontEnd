@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   shopping: boolean;
   homedecour: boolean;
   fitness: boolean;
-  isSubmitted: boolean = false;
+  registerSubmitted: boolean = false;
 
   constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) {
   }
@@ -81,7 +81,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
-    this.isSubmitted = true;
+    this.registerSubmitted = true;
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
@@ -103,7 +103,7 @@ export class RegisterComponent implements OnInit {
 
     if (this.register.valid)
     {
-      this.isSubmitted = false;
+      this.registerSubmitted = false;
       this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
       this.registeredEvent.emit(1);
     }
