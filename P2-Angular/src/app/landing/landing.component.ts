@@ -26,7 +26,6 @@ export class LandingComponent implements OnInit {
   filteredUsers: User[];
   // currentID: number;
   editingForm: FormGroup;
-  editedSubmitted: boolean = false;
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) {
   }
@@ -70,7 +69,6 @@ export class LandingComponent implements OnInit {
   }
 
   onEdit() {
-    this.editedSubmitted = true;
     const username = this.editingForm.get('username').value;
     const email = this.editingForm.get('email').value;
     const password = this.editingForm.get('password').value;
@@ -83,12 +81,8 @@ export class LandingComponent implements OnInit {
     if (password.length > 0) { this.user.password = password; }
     if (city.length > 0) { this.user.city = city; }
 
-    if (this.editingForm.valid)
-    {
-      this.editedSubmitted = false;
-      this.apiService.editUser(this.user).subscribe(user => this.user = user);
-      this.EditUser();
-    }
+    this.apiService.editUser(this.user).subscribe(user => this.user = user);
+    this.EditUser();
   }
 
   EditUser() {

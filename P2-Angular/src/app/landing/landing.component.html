@@ -19,7 +19,7 @@
         <br><br>
         <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)" style="background-color: red;">Delete Account</button>
       </form>
-      <div *ngIf="editingForm.get('username').errors && editedSubmitted">
+      <!-- <div *ngIf="editingForm.get('username').errors && editedSubmitted">
         <div *ngIf="editingForm.get('username').hasError('required')">
           <span style="color: red;">Please enter your name!</span>
         </div>
@@ -41,7 +41,7 @@
         <div *ngIf="editingForm.get('city').hasError('required')">
           <span style="color: red;">Please enter your city!</span>
         </div>
-      </div>
+      </div> -->
   </div>
 
   <div id="ShowUsersDisplay" style="display: none;">
