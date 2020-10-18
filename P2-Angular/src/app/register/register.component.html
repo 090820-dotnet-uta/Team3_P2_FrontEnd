@@ -20,20 +20,20 @@
       <input type="checkbox" name="homedecour" id="9" value="true"> Home Decour
       <input type="checkbox" name="fitness" id="10" value="true"> Fitness
     </p>
-    <div *ngIf="register.get('username').errors  && isSubmitted">
+    <div *ngIf="register.get('username').errors && isSubmitted">
       <div *ngIf="register.get('username').hasError('required')">
         <span style="color: red;">Please enter your name!</span>
       </div>
     </div>
-    <div *ngIf="register.get('email').errors  && isSubmitted">
+    <div *ngIf="register.get('email').errors && isSubmitted">
       <div *ngIf="register.get('email').hasError('required')">
         <span style="color: red;">Please enter your email!</span>
       </div>
-      <div *ngIf="register.get('email').hasError('email')">
+      <div *ngIf="register.get('email').hasError('pattern')">
         <span style="color: red;">You must enter a valid email!</span>
       </div>
     </div>
-    <div *ngIf="register.get('password').errors  && isSubmitted">
+    <div *ngIf="register.get('password').errors && isSubmitted">
       <div *ngIf="register.get('password').hasError('required')">
         <span style="color: red;">Please enter your password!</span>
       </div>
