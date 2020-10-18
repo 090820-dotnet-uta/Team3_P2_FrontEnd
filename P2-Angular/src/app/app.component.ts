@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.currentID = 0;
+    this.currentID = 1;
     // this.isAuthenticated = await this.authService.checkAuthenticated();
   }
 

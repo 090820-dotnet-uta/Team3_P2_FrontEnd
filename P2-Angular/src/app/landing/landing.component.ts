@@ -89,6 +89,10 @@ export class LandingComponent implements OnInit {
     } else {
       x.style.display = "none";
     }
+    (<HTMLInputElement> document.getElementById('username')).value = this.user.username;
+    (<HTMLInputElement> document.getElementById('email')).value = this.user.email;
+    (<HTMLInputElement> document.getElementById('password')).value = this.user.password;
+    (<HTMLInputElement> document.getElementById('city')).value = this.user.city;
   }
 
   DeleteUser(userID: number) {

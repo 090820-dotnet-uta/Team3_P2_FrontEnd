@@ -27,8 +27,6 @@ export class ApiService {
   }
 
   public createUser(user: User): Observable<User> {
-    console.log(`${user.username} ${user.email} ${user.password}`);
-    // var x = JSON.stringify(user);
     return this.http.post<User>(this.API_URL, user, this.httpOptions);
   }
 

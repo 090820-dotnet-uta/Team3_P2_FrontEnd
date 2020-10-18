@@ -61,12 +61,10 @@ export class LoginComponent implements OnInit {
 
         for(let i=0; i< this.users.length; i++)
         {
-          console.log(this.users[i].userId);
           if (this.users[i].email == username && this.users[i].password == password)
           {
             // this.userService.setCurrentID(this.users[i].userId);
             this.currentIDEvent.emit(this.users[i].userId);
-            console.log(this.users[i].userId);
             // localStorage.setItem("currentID", this.users[i].userId.toString());
             //alert(`${this.userService.getCurrentID()}`);
             // window.location.href = 'http://localhost:4200/landing';

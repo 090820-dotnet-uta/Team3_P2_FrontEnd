@@ -3,22 +3,21 @@
   <h1>Welcome to the website!</h1>
 
   <button (click)="EditUser()">Edit Profile</button>
-  <button (click)="DeleteUser(user.userId)">Delete Account</button>
   <button (click)="ShowSimilarUsers(user.userId)">Show Similar Users</button>
 
   <div id="EditingForm" style="display: none;">
     <br>
     <form [formGroup]="editingForm" (ngSubmit)="onEdit()">
         Name:
-        <input matInput type="username" placeholder="John Doe" formControlName="username" required> &nbsp;
+        <input matInput type="username" formControlName="username" id="username" required> &nbsp;
         Email:
-        <input matInput placeholder="johndoe@email.com" formControlName="email" required> &nbsp;
+        <input matInput formControlName="email" id="email" required> &nbsp;
         Password:
-        <input matInput type="password" placeholder="johndoe99" formControlName="password" required> &nbsp;
+        <input matInput type="password" formControlName="password" id="password" required> &nbsp;
         City:
-        <input matInput type="city" placeholder="Chicago" formControlName="city" required>
+        <input matInput type="city" formControlName="city" id="city" required>
         <br><br>
-        <button mat-raised-button color="primary">Submit Changes</button>
+        <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)" style="background-color: red;">Delete Account</button>
       </form>
       <div *ngIf="editingForm.get('username').errors && editedSubmitted">
         <div *ngIf="editingForm.get('username').hasError('required')">
