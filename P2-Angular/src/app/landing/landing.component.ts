@@ -47,17 +47,18 @@ export class LandingComponent implements OnInit {
     this.users$ = this.apiService.getUsers();
     this.apiService.getUsers().subscribe(users => this.users = users);
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
-    this.editingForm = this.fb.group({
-      username: new FormControl('', [Validators.required]),
-      email:    new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
-      city:     new FormControl('', [Validators.required])
-    });
     // this.editingForm = this.fb.group({
-    //   username: ['', Validators.required],
-    //   email: ['', Validators.email],
-    //   password: ['', Validators.required]
+    //   username: new FormControl('', [Validators.required]),
+    //   email:    new FormControl('', [Validators.required, Validators.email]),
+    //   password: new FormControl('', [Validators.required]),
+    //   city:     new FormControl('', [Validators.required])
     // });
+    this.editingForm = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', Validators.email],
+      password: ['', Validators.required],
+      city: ['', Validators.required]
+    });
   }
 
   onEdit() {
@@ -69,10 +70,10 @@ export class LandingComponent implements OnInit {
 
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
 
-    this.user.username = username;
-    this.user.email = email;
-    this.user.password = password;
-    this.user.city = city;
+    if (username.length > 0) { this.user.username = username; }
+    if (email.length > 0) { this.user.email = email; }
+    if (password.length > 0) { this.user.password = password; }
+    if (city.length > 0) { this.user.city = city; }
 
     if (this.editingForm.valid)
     {
