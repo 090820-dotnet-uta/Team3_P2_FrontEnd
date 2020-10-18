@@ -74,28 +74,35 @@ export class LandingComponent implements OnInit {
     const password = this.editingForm.get('password').value;
     const city = this.editingForm.get('city').value;
 
+    console.log("Hit 1!")
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
+    console.log("Hit 2!")
 
     if (username.length > 0) { this.user.username = username; }
     if (email.length > 0) { this.user.email = email; }
     if (password.length > 0) { this.user.password = password; }
     if (city.length > 0) { this.user.city = city; }
+    console.log("Hit 3!")
 
     this.apiService.editUser(this.user).subscribe(user => this.user = user);
+    console.log("Hit 4!")
+
     this.EditUser();
+    console.log("Hit 5!")
+
   }
 
   EditUser() {
     var x = document.getElementById("EditingForm");
     if (x.style.display === "none") {
       x.style.display = "block";
+      (<HTMLInputElement> document.getElementById('username')).value = this.user.username;
+      (<HTMLInputElement> document.getElementById('email')).value = this.user.email;
+      (<HTMLInputElement> document.getElementById('password')).value = this.user.password;
+      (<HTMLInputElement> document.getElementById('city')).value = this.user.city;
     } else {
       x.style.display = "none";
     }
-    (<HTMLInputElement> document.getElementById('username')).value = this.user.username;
-    (<HTMLInputElement> document.getElementById('email')).value = this.user.email;
-    (<HTMLInputElement> document.getElementById('password')).value = this.user.password;
-    (<HTMLInputElement> document.getElementById('city')).value = this.user.city;
   }
 
   DeleteUser(userID: number) {
