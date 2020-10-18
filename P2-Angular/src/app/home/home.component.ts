@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  private currentID: number;
   constructor() { }
 
   ngOnInit(): void {
+    // this.currentID = parseInt(localStorage.getItem("currentID"));
+    // if (this.currentID == 0)
+    // {
+    //   window.location.href = 'http://localhost:4200/login';
+    // }
   }
 
 }

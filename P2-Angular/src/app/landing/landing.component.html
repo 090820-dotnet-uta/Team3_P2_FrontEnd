@@ -1,0 +1,76 @@
+<div *ngIf="currentID != 0">
+  <br>
+  <h1>Welcome to the website!</h1>
+
+  <button (click)="EditUser()">Edit Profile</button>
+  <button (click)="DeleteUser(user.userId)">Delete Account</button>
+  <button (click)="ShowSimilarUsers(user.userId)">Show Similar Users</button>
+
+  <div id="EditingForm" style="display: none;">
+    <br>
+    <form [formGroup]="editingForm" (ngSubmit)="onEdit()">
+        Name:
+        <input matInput type="username" placeholder="John Doe" formControlName="username" required> &nbsp;
+        Email:
+        <input matInput placeholder="johndoe@email.com" formControlName="email" required> &nbsp;
+        Password:
+        <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
+        <br><br>
+        <button mat-raised-button color="primary">Submit Changes</button>
+      </form>
+      <div *ngIf="editingForm.get('username').errors && editedSubmitted">
+        <div *ngIf="editingForm.get('username').hasError('required')">
+          <span style="color: red;">Please enter your name!</span>
+        </div>
+      </div>
+      <div *ngIf="editingForm.get('email').errors && editedSubmitted">
+        <div *ngIf="editingForm.get('email').hasError('required')">
+          <span style="color: red;">Please enter your email!</span>
+        </div>
+        <div *ngIf="editingForm.get('email').hasError('email')">
+          <span style="color: red;">You must enter a valid email!</span>
+        </div>
+      </div>
+      <div *ngIf="editingForm.get('password').errors && editedSubmitted">
+        <div *ngIf="editingForm.get('password').hasError('required')">
+          <span style="color: red;">Please enter your password!</span>
+        </div>
+      </div>
+  </div>
+
+  <div id="ShowUsersDisplay" style="display: none;">
+    <h2>Similar Users</h2>
+    <ul>
+      <li *ngFor="let filtereduser of filteredUsers">
+        <ul>
+          <li>Name: {{ filtereduser.username }}</li>
+          <li>Email: {{ filtereduser.email }}</li>
+          <li>Preferences:</li>
+          <li *ngIf="(user.preferencesModel.animals == filtereduser.preferencesModel.animals) && (filtereduser.preferencesModel.animals == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
+          <li *ngIf="(user.preferencesModel.art == filtereduser.preferencesModel.art) && (filtereduser.preferencesModel.art == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
+          <li *ngIf="(user.preferencesModel.beauty == filtereduser.preferencesModel.beauty) && (filtereduser.preferencesModel.beauty == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
+          <li *ngIf="(user.preferencesModel.entertainment == filtereduser.preferencesModel.entertainment) && (filtereduser.preferencesModel.entertainment == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Entertainment</li>
+          <li *ngIf="(user.preferencesModel.fitness == filtereduser.preferencesModel.fitness) && (filtereduser.preferencesModel.fitness== true)"> &nbsp;&nbsp;&nbsp;&nbsp;Fitness</li>
+          <li *ngIf="(user.preferencesModel.homedecour == filtereduser.preferencesModel.homedecour) && (filtereduser.preferencesModel.homedecour == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Home Decour</li>
+          <li *ngIf="(user.preferencesModel.learning == filtereduser.preferencesModel.learning) && (filtereduser.preferencesModel.learning == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Learning</li>
+          <li *ngIf="(user.preferencesModel.nightlife == filtereduser.preferencesModel.nightlife) && (filtereduser.preferencesModel.nightlife == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Nightlife</li>
+          <li *ngIf="(user.preferencesModel.religion == filtereduser.preferencesModel.religion) && (filtereduser.preferencesModel.religion == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Religion</li>
+          <li *ngIf="(user.preferencesModel.shopping == filtereduser.preferencesModel.shopping) && (filtereduser.preferencesModel.shopping == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Shopping</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+
+  <br>
+  <br>
+  <div *ngIf="user">
+    <h2>Current User (Debug)</h2>
+    <ul>
+      <li>ID: {{ user.userId }}</li>
+      <li>Name: {{ user.username }}</li>
+      <li>Email: {{ user.email }}</li>
+      <li>Password: {{ user.password }}</li>
+    </ul>
+  </div>
+</div>

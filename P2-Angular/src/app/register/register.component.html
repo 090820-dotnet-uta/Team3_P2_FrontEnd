@@ -1,16 +1,51 @@
-<br>
-<form [formGroup]="register">
+<form [formGroup]="register" (ngSubmit)="onRegister()">
   <div>
+    <h2>Register</h2>
     <label for="username">Name: </label>
     <input formControlName="username" type="text" placeholder="John Doe" name="username" id="username" required> &nbsp;
     <label for="email">Email: </label>
     <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required> &nbsp;
     <label for="password">Password: </label>
-    <input formControlName="password" type="text" placeholder="johndoe99" name="password" id="password" required> &nbsp;
-    <label for="preferencesId">Preference: </label>
-    <input formControlName="preferencesId" type="text" placeholder="1" name="preferencesId" id="preferencesId" required>  </div>
-  <div>
+    <input formControlName="password" type="text" placeholder="johndoe99" name="password" id="password" required> &nbsp;<br>
+    <label for="city">City: </label>
+    <input formControlName="city" type="text" placeholder="Chicago" name="city" id="city" required> &nbsp;<br>
+    Preferences:<br>
+    <p>
+      <input type="checkbox" name="animals" id="1" value="true"> Animals
+      <input type="checkbox" name="art" id="2" value="true"> Art
+      <input type="checkbox" name="nightlife" id="3" value="true"> Nightlife
+      <input type="checkbox" name="beauty" id="4" value="true"> Beauty
+      <input type="checkbox" name="learning" id="5" value="true"> Learning
+      <input type="checkbox" name="entertainment" id="6" value="true"> Entertainment
+      <input type="checkbox" name="religion" id="7" value="true"> Religion
+      <input type="checkbox" name="shopping" id="8" value="true"> Shopping
+      <input type="checkbox" name="homedecour" id="9" value="true"> Home Decour
+      <input type="checkbox" name="fitness" id="10" value="true"> Fitness
+    </p>
+    <div *ngIf="register.get('username').errors && registerSubmitted">
+      <div *ngIf="register.get('username').hasError('required')">
+        <span style="color: red;">Please enter your name!</span>
+      </div>
+    </div>
+    <div *ngIf="register.get('email').errors && registerSubmitted">
+      <div *ngIf="register.get('email').hasError('required')">
+        <span style="color: red;">Please enter your email!</span>
+      </div>
+      <div *ngIf="register.get('email').hasError('email')">
+        <span style="color: red;">You must enter a valid email!</span>
+      </div>
+    </div>
+    <div *ngIf="register.get('password').errors && registerSubmitted">
+      <div *ngIf="register.get('password').hasError('required')">
+        <span style="color: red;">Please enter your password!</span>
+      </div>
+    </div>
+    <div *ngIf="register.get('city').errors && registerSubmitted">
+      <div *ngIf="register.get('city').hasError('required')">
+        <span style="color: red;">Please enter your city!</span>
+      </div>
+    </div>
     <br>
-    <button type="submit" (click)="onSubmit()">Register</button>
+    <button mat-raised-button color="primary">Register</button>
   </div>
 </form>

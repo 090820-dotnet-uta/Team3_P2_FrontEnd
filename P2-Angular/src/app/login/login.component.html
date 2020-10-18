@@ -1,4 +1,14 @@
-<br>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Log In</h2>
+    Email:
+    <input matInput placeholder="johndoe@email.com" formControlName="username" required> &nbsp;
+    Password:
+    <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
+    <br><br>
+  <button mat-raised-button color="primary">Login</button>
+</form>
+
+<!-- <br>
 <form [formGroup]="login">
   <div>
     <label for="email">Email: </label>
@@ -38,7 +48,4 @@
     <li>Password: {{ user.password }}</li>
     <li>Preference ID: {{ user.preferencesId }}</li>
   </ul>
-</div>
-<!-- <h2>{{name1}}</h2>
-<h2>{{userName}}</h2> -->
-<!-- <pre>{{login.value | json}}</pre> -->
+</div> -->
