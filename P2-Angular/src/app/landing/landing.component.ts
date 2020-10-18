@@ -53,12 +53,20 @@ export class LandingComponent implements OnInit {
     //   password: new FormControl('', [Validators.required]),
     //   city:     new FormControl('', [Validators.required])
     // });
-    this.editingForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', Validators.email],
-      password: ['', Validators.required],
-      city: ['', Validators.required]
-    });
+    // this.editingForm = this.fb.group({
+    //   username: ['', Validators.required],
+    //   email: ['', Validators.email],
+    //   password: ['', Validators.required],
+    //   city: ['', Validators.required]
+    // });
+    this.editingForm = new FormGroup(
+      {
+        username: new FormControl(),
+        email: new FormControl(),
+        password: new FormControl(),
+        city: new FormControl()
+      }
+    );
   }
 
   onEdit() {
