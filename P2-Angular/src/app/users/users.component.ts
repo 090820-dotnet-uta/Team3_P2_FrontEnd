@@ -15,7 +15,6 @@ export class UsersComponent implements OnInit {
     preferencesId: 1
   }
 
-
   constructor() { }
 
   ngOnInit(): void {

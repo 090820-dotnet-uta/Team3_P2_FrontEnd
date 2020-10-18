@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
   };
 
   public getUsers(): Observable<User[]> {
@@ -28,5 +28,19 @@ export class ApiService {
 
   public createUser(user: User): Observable<User> {
     return this.http.post<User>(this.API_URL, user, this.httpOptions);
+  }
+
+  public editUser(user: User | number): Observable<User> {
+    const id = typeof user === 'number' ? user : user.userId;
+    const REQUEST_URL = `${this.API_URL}/${id}`
+
+    return this.http.put<User>(REQUEST_URL, user, this.httpOptions)
+  }
+
+  public deleteUser(user: User | number): Observable<User> {
+    const id = typeof user === 'number' ? user : user.userId;
+    const REQUEST_URL = `${this.API_URL}/${id}`
+
+    return this.http.delete<User>(REQUEST_URL, this.httpOptions)
   }
 }

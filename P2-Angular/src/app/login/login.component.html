@@ -2,10 +2,12 @@
 <form [formGroup]="login">
   <div>
     <label for="email">Email: </label>
-    <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required>
+    <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required> &nbsp;
+    <label for="password">Password: </label>
+    <input formControlName="password" type="text" placeholder="johndoe99" name="password" id="password" required>
   </div>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
     <button type="submit" (click)="onSubmit()">Login</button>
     <button routerLink="/register">Register</button>
   </div>
@@ -39,4 +41,4 @@
 </div>
 <!-- <h2>{{name1}}</h2>
 <h2>{{userName}}</h2> -->
-<!-- <pre>{{login.value | json}}</pre> -->    
+<!-- <pre>{{login.value | json}}</pre> -->
