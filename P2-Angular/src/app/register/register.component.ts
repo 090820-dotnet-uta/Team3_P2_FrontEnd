@@ -42,42 +42,42 @@ export class RegisterComponent implements OnInit {
     // alert(`${this.userService.getCurrentID()}`);
     //localStorage.getItem("currentEmail");
     this.apiService.getUsers().subscribe(users => this.users = users);
-    // this.register = this.fb.group({
-    //   username:       new FormControl('', [Validators.required]),
-    //   email:          new FormControl('', [Validators.required, Validators.email]),
-    //   password:       new FormControl('', [Validators.required]),
-    //   city:           new FormControl('', [Validators.required]),
-    //   animals:        [''],
-    //   art:            [''],
-    //   nightlife:      [''],
-    //   beauty:         [''],
-    //   learning:       [''],
-    //   entertainment:  [''],
-    //   religion:       [''],
-    //   shopping:       [''],
-    //   homedecour:     [''],
-    //   fitness:        ['']
-    // });
+    this.register = this.fb.group({
+      username:       new FormControl('', [Validators.required]),
+      email:          new FormControl('', [Validators.required, Validators.email]),
+      password:       new FormControl('', [Validators.required]),
+      city:           new FormControl('', [Validators.required]),
+      animals:        [''],
+      art:            [''],
+      nightlife:      [''],
+      beauty:         [''],
+      learning:       [''],
+      entertainment:  [''],
+      religion:       [''],
+      shopping:       [''],
+      homedecour:     [''],
+      fitness:        ['']
+    });
 
-    this.register = new FormGroup(
-      {
-        username: new FormControl(),
-        email: new FormControl(),
-        password: new FormControl(),
-        city: new FormControl(),
-        // preferencesId: new FormControl()
-        animals: new FormControl(),
-        art: new FormControl(),
-        nightlife: new FormControl(),
-        beauty: new FormControl(),
-        learning: new FormControl(),
-        entertainment: new FormControl(),
-        religion: new FormControl(),
-        shopping: new FormControl(),
-        homedecour: new FormControl(),
-        fitness: new FormControl()
-      }
-    );
+    // this.register = new FormGroup(
+    //   {
+    //     username: new FormControl(),
+    //     email: new FormControl(),
+    //     password: new FormControl(),
+    //     city: new FormControl(),
+    //     // preferencesId: new FormControl()
+    //     animals: new FormControl(),
+    //     art: new FormControl(),
+    //     nightlife: new FormControl(),
+    //     beauty: new FormControl(),
+    //     learning: new FormControl(),
+    //     entertainment: new FormControl(),
+    //     religion: new FormControl(),
+    //     shopping: new FormControl(),
+    //     homedecour: new FormControl(),
+    //     fitness: new FormControl()
+    //   }
+    // );
   }
 
   onRegister() {

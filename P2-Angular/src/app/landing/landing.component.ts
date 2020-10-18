@@ -47,17 +47,17 @@ export class LandingComponent implements OnInit {
     this.users$ = this.apiService.getUsers();
     this.apiService.getUsers().subscribe(users => this.users = users);
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
-    // this.editingForm = this.fb.group({
-    //   username: new FormControl('', [Validators.required]),
-    //   email:    new FormControl('', [Validators.required, Validators.email]),
-    //   password: new FormControl('', [Validators.required]),
-    //   city:     new FormControl('', [Validators.required])
-    // });
     this.editingForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', Validators.email],
-      password: ['', Validators.required]
+      username: new FormControl('', [Validators.required]),
+      email:    new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      city:     new FormControl('', [Validators.required])
     });
+    // this.editingForm = this.fb.group({
+    //   username: ['', Validators.required],
+    //   email: ['', Validators.email],
+    //   password: ['', Validators.required]
+    // });
   }
 
   onEdit() {
