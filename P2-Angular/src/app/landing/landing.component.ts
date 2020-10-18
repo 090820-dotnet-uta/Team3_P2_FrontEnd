@@ -17,7 +17,6 @@ export class LandingComponent implements OnInit {
   @Input('IDVal')
   set newID(newID: number) {
     this.currentID = newID;
-    console.log(this.currentID);
   }
 
   users$: Observable<User[]>;
@@ -74,22 +73,15 @@ export class LandingComponent implements OnInit {
     const password = this.editingForm.get('password').value;
     const city = this.editingForm.get('city').value;
 
-    console.log("Hit 1!")
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
-    console.log("Hit 2!")
 
     if (username != null) { this.user.username = username; }
     if (email != null) { this.user.email = email; }
     if (password != null) { this.user.password = password; }
     if (city != null) { this.user.city = city; }
-    console.log("Hit 3!")
 
     this.apiService.editUser(this.user).subscribe(user => this.user = user);
-    console.log("Hit 4!")
-
     this.EditUser();
-    console.log("Hit 5!")
-
   }
 
   EditUser() {
