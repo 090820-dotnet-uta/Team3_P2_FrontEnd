@@ -19,6 +19,11 @@ button {
   color: #333;
   font-family: Cambria, Georgia;
 }
+
+body {
+  background: darkgray;
+}
+
 /* everywhere else */
 * {
   font-family: Arial, Helvetica, sans-serif;
