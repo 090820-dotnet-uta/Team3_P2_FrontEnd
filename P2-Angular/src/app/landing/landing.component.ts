@@ -78,10 +78,10 @@ export class LandingComponent implements OnInit {
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
     console.log("Hit 2!")
 
-    if (username.length > 0) { this.user.username = username; }
-    if (email.length > 0) { this.user.email = email; }
-    if (password.length > 0) { this.user.password = password; }
-    if (city.length > 0) { this.user.city = city; }
+    if (username != null) { this.user.username = username; }
+    if (email != null) { this.user.email = email; }
+    if (password != null) { this.user.password = password; }
+    if (city != null) { this.user.city = city; }
     console.log("Hit 3!")
 
     this.apiService.editUser(this.user).subscribe(user => this.user = user);
