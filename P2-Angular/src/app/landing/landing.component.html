@@ -51,7 +51,7 @@
       <li *ngFor="let filtereduser of filteredUsers">
         <ul>
           <li>Name: {{ filtereduser.username }}</li>
-          <li><a [attr.href]="'mailto:' + filtereduser.email">Email: {{ filtereduser.email }}</a></li>
+          <li>Email: <a [attr.href]="'mailto:' + filtereduser.email">{{ filtereduser.email }}</a></li>
           <li *ngIf="(user.preferencesModel.animals == filtereduser.preferencesModel.animals) && (filtereduser.preferencesModel.animals == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
           <li *ngIf="(user.preferencesModel.art == filtereduser.preferencesModel.art) && (filtereduser.preferencesModel.art == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
           <li *ngIf="(user.preferencesModel.beauty == filtereduser.preferencesModel.beauty) && (filtereduser.preferencesModel.beauty == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
