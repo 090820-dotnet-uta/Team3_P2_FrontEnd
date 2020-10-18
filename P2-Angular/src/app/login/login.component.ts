@@ -34,15 +34,15 @@ export class LoginComponent implements OnInit {
     this.apiService.getUsers().subscribe(users => this.users = users);
     // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/landing';
 
-    // this.form = this.fb.group({
-    //   username: ['', Validators.email],
-    //   password: ['', Validators.required]
-    // });
-
     this.form = this.fb.group({
-      email:    new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required])
-    })
+      username: ['', Validators.email],
+      password: ['', Validators.required]
+    });
+
+    // this.form = this.fb.group({
+    //   email:    new FormControl('', [Validators.required, Validators.email]),
+    //   password: new FormControl('', [Validators.required])
+    // })
 
     // if (await this.authService.checkAuthenticated()) {
     //   await this.router.navigate([this.returnUrl]);
