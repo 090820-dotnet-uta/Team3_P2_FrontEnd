@@ -28,15 +28,14 @@ export class LoginComponent implements OnInit {
     private apiService: ApiService,
     private userService: UserService
   ) {
-    this.form = this.fb.group({
-      username: ['', Validators.email, Validators.required],
-      password: ['', Validators.required]
-    });
   }
 
   async ngOnInit() {
     this.apiService.getUsers().subscribe(users => this.users = users);
-    this.form;
+    this.form = this.fb.group({
+      username: ['', Validators.email, Validators.required],
+      password: ['', Validators.required]
+    });
     // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/landing';
 
     // if (await this.authService.checkAuthenticated()) {

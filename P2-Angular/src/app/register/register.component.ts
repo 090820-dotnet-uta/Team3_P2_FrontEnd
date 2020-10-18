@@ -36,6 +36,12 @@ export class RegisterComponent implements OnInit {
   isSubmitted: boolean = false;
 
   constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) {
+  }
+
+  ngOnInit(): void {
+    // alert(`${this.userService.getCurrentID()}`);
+    //localStorage.getItem("currentEmail");
+    this.apiService.getUsers().subscribe(users => this.users = users);
     this.register = this.fb.group({
       username:       new FormControl('', [Validators.required]),
       email:          new FormControl('', [Validators.required, Validators.email]),
@@ -52,13 +58,6 @@ export class RegisterComponent implements OnInit {
       homedecour:     [''],
       fitness:        ['']
     });
-  }
-
-  ngOnInit(): void {
-    // alert(`${this.userService.getCurrentID()}`);
-    //localStorage.getItem("currentEmail");
-    this.apiService.getUsers().subscribe(users => this.users = users);
-    this.register;
     // this.register = new FormGroup(
     //   {
     //     username: new FormControl(),
