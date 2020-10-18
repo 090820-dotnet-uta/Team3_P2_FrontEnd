@@ -58,6 +58,7 @@ export class RegisterComponent implements OnInit {
     // alert(`${this.userService.getCurrentID()}`);
     //localStorage.getItem("currentEmail");
     this.apiService.getUsers().subscribe(users => this.users = users);
+    this.register;
     // this.register = new FormGroup(
     //   {
     //     username: new FormControl(),

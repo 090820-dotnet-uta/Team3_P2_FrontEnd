@@ -53,6 +53,7 @@ export class LandingComponent implements OnInit {
     this.users$ = this.apiService.getUsers();
     this.apiService.getUsers().subscribe(users => this.users = users);
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
+    this.editingForm;
   }
 
   onEdit() {

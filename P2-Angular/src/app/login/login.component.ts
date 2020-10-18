@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit() {
     this.apiService.getUsers().subscribe(users => this.users = users);
+    this.form;
     // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/landing';
 
     // if (await this.authService.checkAuthenticated()) {
