@@ -52,7 +52,7 @@
         <ul>
           <li>Name: {{ filtereduser.username }}</li>
           <li>Email: {{ filtereduser.email }}</li>
-          <li><script type="text/javascript">var useremail = filtereduser.email; document.write("<a href = mailto:" + useremail + ">" + useremail + "</a>");</script></li>
+          <li><a [attr.href]="filtereduser.email"></a></li>
           <li *ngIf="(user.preferencesModel.animals == filtereduser.preferencesModel.animals) && (filtereduser.preferencesModel.animals == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
           <li *ngIf="(user.preferencesModel.art == filtereduser.preferencesModel.art) && (filtereduser.preferencesModel.art == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
           <li *ngIf="(user.preferencesModel.beauty == filtereduser.preferencesModel.beauty) && (filtereduser.preferencesModel.beauty == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
