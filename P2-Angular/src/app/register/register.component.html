@@ -29,7 +29,7 @@
       <div *ngIf="register.get('email').hasError('required')">
         <span style="color: red;">Please enter your email!</span>
       </div>
-      <div *ngIf="register.get('email').hasError('pattern')">
+      <div *ngIf="register.get('email').hasError('email')">
         <span style="color: red;">You must enter a valid email!</span>
       </div>
     </div>

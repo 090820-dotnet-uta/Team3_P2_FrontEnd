@@ -62,9 +62,9 @@ export class RegisterComponent implements OnInit {
     // );
 
     this.register = this.fb.group({
-      username:       ['', Validators.required],
-      email:          ['', Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")],
-      password:       ['', Validators.required, Validators.minLength(5)],
+      username:       new FormControl('', [Validators.required]),
+      email:          new FormControl('', [Validators.required, Validators.email]),
+      password:       new FormControl('', [Validators.required, Validators.minLength(5)]),
       animals:        [''],
       art:            [''],
       nightlife:      [''],
