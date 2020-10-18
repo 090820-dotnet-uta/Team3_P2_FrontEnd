@@ -14,6 +14,7 @@
     <button *ngIf="currentID == 0" (click)="clickedRegister()">
       Register
     </button>
+    <span *ngIf="currentID != 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
     <button *ngIf="currentID != 0" (click)="clickedLogout()">
       Logout
     </button>
