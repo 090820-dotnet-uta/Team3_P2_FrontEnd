@@ -1,14 +1,11 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2>Log In</h2>
     Email:
-    <input placeholder="johndoe@email.com" formControlName="username" required> &nbsp;
+    <input matInput placeholder="johndoe@email.com" formControlName="username" required> &nbsp;
     Password:
-    <input type="password" placeholder="johndoe99" formControlName="password" required>
-    <div *ngIf="formSubmitAttempt">
-      <span style="color: red;">Please enter a valid email and password!</span>
-    </div>
-    <br>
-  <button>Login</button>
+    <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
+    <br><br>
+  <button mat-raised-button color="primary">Login</button>
 </form>
 
 <!-- <br>
