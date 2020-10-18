@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
   shopping: boolean;
   homedecour: boolean;
   fitness: boolean;
-  registerErrorFlag: boolean = false;
   isSubmitted: boolean = false;
 
   constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) { }
@@ -64,7 +63,7 @@ export class RegisterComponent implements OnInit {
     this.register = this.fb.group({
       username:       new FormControl('', [Validators.required]),
       email:          new FormControl('', [Validators.required, Validators.email]),
-      password:       new FormControl('', [Validators.required, Validators.minLength(5)]),
+      password:       new FormControl('', [Validators.required]),
       animals:        [''],
       art:            [''],
       nightlife:      [''],
@@ -100,14 +99,9 @@ export class RegisterComponent implements OnInit {
 
     if (this.register.valid)
     {
-      this.registerErrorFlag = false;
       this.isSubmitted = false;
       this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
       this.registeredEvent.emit(1);
-    }
-    else
-    {
-      this.registerErrorFlag = true;
     }
 
     // try {

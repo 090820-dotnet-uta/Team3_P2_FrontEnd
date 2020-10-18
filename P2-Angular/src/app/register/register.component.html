@@ -37,9 +37,6 @@
       <div *ngIf="register.get('password').hasError('required')">
         <span style="color: red;">Please enter your password!</span>
       </div>
-      <div *ngIf="register.get('password').hasError('minLength')">
-        <span style="color: red;">Your password must be at least 5 characters long!</span>
-      </div>
     </div>
     <br>
     <button mat-raised-button color="primary">Register</button>

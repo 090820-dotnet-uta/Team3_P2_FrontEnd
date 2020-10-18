@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from '../user';
 import { ApiService } from '../api.service';
@@ -26,6 +26,7 @@ export class LandingComponent implements OnInit {
   filteredUsers: User[];
   // currentID: number;
   form: FormGroup;
+  isSubmitted: boolean = false;
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) { }
 
@@ -42,9 +43,9 @@ export class LandingComponent implements OnInit {
 
     // alert(this.currentID);
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', Validators.email],
-      password: ['', Validators.required]
+      username: new FormControl('', [Validators.required]),
+      email:    new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
     });
 
     this.users$ = this.apiService.getUsers();
@@ -53,6 +54,7 @@ export class LandingComponent implements OnInit {
   }
 
   onEdit() {
+    this.isSubmitted = true;
     const username = this.form.get('username').value;
     const email = this.form.get('email').value;
     const password = this.form.get('password').value;
@@ -63,8 +65,12 @@ export class LandingComponent implements OnInit {
     this.user.email = email;
     this.user.password = password;
 
-    this.apiService.editUser(this.user).subscribe(user => this.user = user);
-    this.EditUser();
+    if (this.form.valid)
+    {
+      this.isSubmitted = false;
+      this.apiService.editUser(this.user).subscribe(user => this.user = user);
+      this.EditUser();
+    }
   }
 
   EditUser() {
