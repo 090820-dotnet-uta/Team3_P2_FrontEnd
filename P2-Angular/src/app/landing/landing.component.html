@@ -2,11 +2,11 @@
   <br>
   <h1>Welcome to the website!</h1>
 
-  <button (click)="EditUser()">Edit Profile</button>
+  <button (click)="EditUser()">Edit Profile</button> &nbsp;
   <button (click)="ShowSimilarUsers(user.userId)">Show Similar Users</button>
 
+  <br><br>
   <div id="EditingForm" style="display: none;">
-    <br>
     <form [formGroup]="editingForm" (ngSubmit)="onEdit()">
         Name:
         <input matInput type="username" formControlName="username" id="username" required> &nbsp;
@@ -43,7 +43,7 @@
         </div>
       </div> -->
   </div>
-
+  <br>
   <div id="ShowUsersDisplay" style="display: none;">
     <h2>Similar Users</h2>
     <ul>

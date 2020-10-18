@@ -1,0 +1,18 @@
+#EditingForm {
+  background: grey;
+  padding: 15px;
+  border-radius: 15px;
+  max-width: 980px;
+}
+
+#ShowUsersDisplay {
+  background: grey;
+  padding: 15px;
+  border-radius: 15px;
+  max-width: 300px;
+}
+
+h2 {
+  margin-block-start: 0em;
+  margin-block-end: 0.3em;
+}
