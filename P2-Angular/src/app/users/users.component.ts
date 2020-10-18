@@ -13,6 +13,7 @@ export class UsersComponent implements OnInit {
     username: "",
     email: "",
     password: "",
+    city: "",
     preferencesModel: {animals: false, art: false, nightlife: false, beauty: false, learning: false, entertainment: false, religion: false, shopping: false, homedecour: false, fitness: false}
   }
 

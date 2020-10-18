@@ -25,7 +25,7 @@ export class LandingComponent implements OnInit {
   users: User[];
   filteredUsers: User[];
   // currentID: number;
-  form: FormGroup;
+  editingForm: FormGroup;
   isSubmitted: boolean = false;
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) { }
@@ -42,10 +42,11 @@ export class LandingComponent implements OnInit {
     // alert(`${this.currentID}`);
 
     // alert(this.currentID);
-    this.form = this.fb.group({
+    this.editingForm = this.fb.group({
       username: new FormControl('', [Validators.required]),
       email:    new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required]),
+      city:     new FormControl('', [Validators.required])
     });
 
     this.users$ = this.apiService.getUsers();
@@ -55,17 +56,19 @@ export class LandingComponent implements OnInit {
 
   onEdit() {
     this.isSubmitted = true;
-    const username = this.form.get('username').value;
-    const email = this.form.get('email').value;
-    const password = this.form.get('password').value;
+    const username = this.editingForm.get('username').value;
+    const email = this.editingForm.get('email').value;
+    const password = this.editingForm.get('password').value;
+    const city = this.editingForm.get('city').value;
 
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
 
     this.user.username = username;
     this.user.email = email;
     this.user.password = password;
+    this.user.city = city;
 
-    if (this.form.valid)
+    if (this.editingForm.valid)
     {
       this.isSubmitted = false;
       this.apiService.editUser(this.user).subscribe(user => this.user = user);

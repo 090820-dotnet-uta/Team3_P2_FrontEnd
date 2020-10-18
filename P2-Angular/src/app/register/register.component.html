@@ -7,6 +7,8 @@
     <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required> &nbsp;
     <label for="password">Password: </label>
     <input formControlName="password" type="text" placeholder="johndoe99" name="password" id="password" required> &nbsp;<br>
+    <label for="city">City: </label>
+    <input formControlName="city" type="text" placeholder="Chicago" name="city" id="city" required> &nbsp;<br>
     Preferences:<br>
     <p>
       <input type="checkbox" name="animals" id="1" value="true"> Animals
@@ -36,6 +38,11 @@
     <div *ngIf="register.get('password').errors && isSubmitted">
       <div *ngIf="register.get('password').hasError('required')">
         <span style="color: red;">Please enter your password!</span>
+      </div>
+    </div>
+    <div *ngIf="register.get('city').errors && isSubmitted">
+      <div *ngIf="register.get('city').hasError('required')">
+        <span style="color: red;">Please enter your city!</span>
       </div>
     </div>
     <br>

@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
       username:       new FormControl('', [Validators.required]),
       email:          new FormControl('', [Validators.required, Validators.email]),
       password:       new FormControl('', [Validators.required]),
+      city:           new FormControl('', [Validators.required]),
       animals:        [''],
       art:            [''],
       nightlife:      [''],
@@ -82,6 +83,7 @@ export class RegisterComponent implements OnInit {
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
+    let city = this.register.get('city').value;
 
     let animals = (<HTMLInputElement> document.getElementById("1")).checked;
     let art = (<HTMLInputElement> document.getElementById("2")).checked;
@@ -95,7 +97,7 @@ export class RegisterComponent implements OnInit {
     let fitness = (<HTMLInputElement> document.getElementById("10")).checked;
 
     this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
-    this.passedUser = { username: username, email: email, password: password, preferencesModel: this.preferences}
+    this.passedUser = { username: username, email: email, password: password, city: city, preferencesModel: this.preferences}
 
     if (this.register.valid)
     {
