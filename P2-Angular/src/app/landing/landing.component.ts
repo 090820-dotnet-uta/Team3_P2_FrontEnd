@@ -29,6 +29,11 @@ export class LandingComponent implements OnInit {
   isSubmitted: boolean = false;
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) {
+    this.editingForm = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', Validators.email],
+      password: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
@@ -53,11 +58,6 @@ export class LandingComponent implements OnInit {
     //   password: new FormControl('', [Validators.required]),
     //   city:     new FormControl('', [Validators.required])
     // });
-    this.editingForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', Validators.email],
-      password: ['', Validators.required]
-    });
   }
 
   onEdit() {
