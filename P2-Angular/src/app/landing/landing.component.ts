@@ -28,7 +28,14 @@ export class LandingComponent implements OnInit {
   editingForm: FormGroup;
   isSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) {
+    this.editingForm = this.fb.group({
+      username: new FormControl('', [Validators.required]),
+      email:    new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      city:     new FormControl('', [Validators.required])
+    });
+  }
 
   ngOnInit(): void {
     // this.currentID = this.userService.getCurrentID();
@@ -42,12 +49,6 @@ export class LandingComponent implements OnInit {
     // alert(`${this.currentID}`);
 
     // alert(this.currentID);
-    this.editingForm = this.fb.group({
-      username: new FormControl('', [Validators.required]),
-      email:    new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
-      city:     new FormControl('', [Validators.required])
-    });
 
     this.users$ = this.apiService.getUsers();
     this.apiService.getUsers().subscribe(users => this.users = users);

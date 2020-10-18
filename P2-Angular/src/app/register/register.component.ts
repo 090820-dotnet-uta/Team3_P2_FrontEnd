@@ -35,7 +35,24 @@ export class RegisterComponent implements OnInit {
   fitness: boolean;
   isSubmitted: boolean = false;
 
-  constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) { }
+  constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) {
+    this.register = this.fb.group({
+      username:       new FormControl('', [Validators.required]),
+      email:          new FormControl('', [Validators.required, Validators.email]),
+      password:       new FormControl('', [Validators.required]),
+      city:           new FormControl('', [Validators.required]),
+      animals:        [''],
+      art:            [''],
+      nightlife:      [''],
+      beauty:         [''],
+      learning:       [''],
+      entertainment:  [''],
+      religion:       [''],
+      shopping:       [''],
+      homedecour:     [''],
+      fitness:        ['']
+    });
+  }
 
   ngOnInit(): void {
     // alert(`${this.userService.getCurrentID()}`);
@@ -59,23 +76,6 @@ export class RegisterComponent implements OnInit {
     //     fitness: new FormControl()
     //   }
     // );
-
-    this.register = this.fb.group({
-      username:       new FormControl('', [Validators.required]),
-      email:          new FormControl('', [Validators.required, Validators.email]),
-      password:       new FormControl('', [Validators.required]),
-      city:           new FormControl('', [Validators.required]),
-      animals:        [''],
-      art:            [''],
-      nightlife:      [''],
-      beauty:         [''],
-      learning:       [''],
-      entertainment:  [''],
-      religion:       [''],
-      shopping:       [''],
-      homedecour:     [''],
-      fitness:        ['']
-    });
   }
 
   onRegister() {
