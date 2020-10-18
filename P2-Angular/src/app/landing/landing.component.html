@@ -14,7 +14,9 @@
         Email:
         <input matInput placeholder="johndoe@email.com" formControlName="email" required> &nbsp;
         Password:
-        <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
+        <input matInput type="password" placeholder="johndoe99" formControlName="password" required> &nbsp;
+        City:
+        <input matInput type="city" placeholder="Chicago" formControlName="city" required>
         <br><br>
         <button mat-raised-button color="primary">Submit Changes</button>
       </form>
@@ -34,6 +36,11 @@
       <div *ngIf="editingForm.get('password').errors && editedSubmitted">
         <div *ngIf="editingForm.get('password').hasError('required')">
           <span style="color: red;">Please enter your password!</span>
+        </div>
+      </div>
+      <div *ngIf="editingForm.get('city').errors && editedSubmitted">
+        <div *ngIf="editingForm.get('city').hasError('required')">
+          <span style="color: red;">Please enter your city!</span>
         </div>
       </div>
   </div>
