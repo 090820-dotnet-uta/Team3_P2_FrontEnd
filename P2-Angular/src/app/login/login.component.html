@@ -4,7 +4,10 @@
     <input placeholder="johndoe@email.com" formControlName="username" required> &nbsp;
     Password:
     <input type="password" placeholder="johndoe99" formControlName="password" required>
-    <br><br>
+    <div *ngIf="formSubmitAttempt">
+      <span style="color: red;">Please enter a valid email and password!</span>
+    </div>
+    <br>
   <button>Login</button>
 </form>
 
