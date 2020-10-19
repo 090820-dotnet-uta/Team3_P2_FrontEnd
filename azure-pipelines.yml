@@ -28,30 +28,30 @@ steps:
   workingDirectory: $(appDir)
   displayName: npx ng build
 
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'Project2_Team3_SonarCloud'
-    organization: 'chriskeller94'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'chriskeller94_Project2_Team3_FrontEnd'
-    cliProjectName: 'Project2_Team3'
-    cliSources: '$(appDir)/src'
-    extraProperties: |
-      sonar.coverage.exclusions=**/*.spec.ts
-      sonar.typescript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
-  displayName: sonarcloud preparing analysis
+# - task: SonarCloudPrepare@1
+#   inputs:
+#     SonarCloud: 'Project2_Team3_SonarCloud'
+#     organization: 'chriskeller94'
+#     scannerMode: 'CLI'
+#     configMode: 'manual'
+#     cliProjectKey: 'chriskeller94_Project2_Team3_FrontEnd'
+#     cliProjectName: 'Project2_Team3'
+#     cliSources: '$(appDir)/src'
+#     extraProperties: |
+#       sonar.coverage.exclusions=**/*.spec.ts
+#       sonar.typescript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
+#   displayName: sonarcloud preparing analysis
 
-- script: npx ng test --browsers ChromeHeadless --no-watch --code-coverage
-  workingDirectory: $(appDir)
-  continueOnError: true
-  displayName: ng test
+# - script: npx ng test --browsers ChromeHeadless --no-watch --code-coverage
+#   workingDirectory: $(appDir)
+#   continueOnError: true
+#   displayName: ng test
 
-- task: SonarCloudAnalyze@1
-  displayName: sonarcloud analysis
+# - task: SonarCloudAnalyze@1
+#   displayName: sonarcloud analysis
 
-- task: SonarCloudPublish@1
-  displayName: sonarcloud publish results
+# - task: SonarCloudPublish@1
+#   displayName: sonarcloud publish results
 
 - task: AzureRmWebAppDeployment@4
   inputs:
