@@ -18,9 +18,6 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { MapComponent } from './map/map.component';
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

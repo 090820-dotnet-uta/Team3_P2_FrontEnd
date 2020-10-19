@@ -11,7 +11,7 @@ export class GooglePlacesService {
   private location = 'location=';
   private radius = '&radius=';
   private rankby = '&rankby=prominence'
-  private type = '&type=';
+  private type: string;
   private APIKey = '&key=AIzaSyCK8o1hVCxYyT2DI5GImfJcP1hpTQxV5OM';
   connectionString: string;
   httpOptions = {
@@ -35,12 +35,12 @@ export class GooglePlacesService {
     }
     else{
     this.radius = this.radius + radius;
-    return 11;
+    return 10;
     }
   }
 
   setType(type: string){
-    this.type = this.type + type;
+    this.type = "&type=" + type;
   }
 
   getPlaces(): Observable<any> {

@@ -107,7 +107,12 @@ export class RegisterComponent implements OnInit {
         }
         // City
         else if(address.address_components[index].types[0] == "locality"){
-          this.addressClicked += address.address_components[index].long_name + ", ";
+          if(address.address_components[index - 1].types[0] == "neighborhood"){
+            this.addressClicked += address.address_components[index - 1].long_name + ", ";
+          }
+          else{
+            this.addressClicked += address.address_components[index].long_name + ", ";
+          }
         }
         // State
         else if(address.address_components[index].types[0] == "administrative_area_level_1"){

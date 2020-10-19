@@ -6,6 +6,8 @@ import { GooglePlacesService } from '../google-places.service';
 import { User } from '../user';
 import { ApiService } from '../api.service';
 import { UserService } from '../user.service';
+import { Preferences } from '../preferences';
+import { MapMarker } from '../marker';
 
 @Component({
   selector: 'app-map',
@@ -17,9 +19,11 @@ export class MapComponent implements OnInit {
   zoom = 9;
   @Input() lat: number;
   @Input() lng: number;
+
+  @Input() preferences: Preferences;
   marker_lat: number;
   marker_lng: number;
-  locations: Object[] = new Array();
+  locations: MapMarker[] = new Array();
   homeIcon = "/assets/Location_Icons/png/Home_3.png";
   user: User;
 
@@ -33,6 +37,7 @@ export class MapComponent implements OnInit {
     this.SetMarkers();
     console.log(this.lat);
     console.log(this.lng);
+    console.log(this.preferences)
   }
 
   public SetMarkers() {
@@ -43,18 +48,86 @@ export class MapComponent implements OnInit {
     console.log("Map Component LNG is:" + this.marker_lng);
 
     this.placesService.setLocation(this.lat, this.lng);
+    this.zoom = this.placesService.setRadius(20000);
 
     // NEED A WAY FOR USERS TO ENTER THIS
-    this.placesService.setType('bar');
-    this.zoom = this.placesService.setRadius(0);
+    if(this.preferences.animals == true){
+      let animalIcon = "/assets/Location_Icons/png/Deer_6.png";
+      this.findPlacesOfType("aquarium", animalIcon);
+      this.findPlacesOfType("pet_store", animalIcon);
+      this.findPlacesOfType("veterinary_care", animalIcon);
+      this.findPlacesOfType("zoo", animalIcon);
+    } 
+    if(this.preferences.art == true){
+      let artIcon = "/assets/Location_Icons/png/Artist_4.png";
+      this.findPlacesOfType("art_gallery", artIcon);
+      this.findPlacesOfType("museum", artIcon);
+    } 
+    if(this.preferences.beauty == true){
+      let beautyIcon = "/assets/Location_Icons/png/Hair_Dresser_8.png";
+      this.findPlacesOfType("beauty_salon", beautyIcon);
+      this.findPlacesOfType("hair_care", beautyIcon);
+      this.findPlacesOfType("spa", beautyIcon);
+
+    } 
+    if(this.preferences.entertainment == true){
+      let entertainmentIcon = "/assets/Location_Icons/png/Crown_7.png";
+      this.findPlacesOfType("bowling_alley", entertainmentIcon);
+      this.findPlacesOfType("movie_theater", entertainmentIcon);
+      this.findPlacesOfType("tourist_attraction", entertainmentIcon);
+    } 
+    if(this.preferences.fitness == true){
+      let fitnessIcon = "/assets/Location_Icons/png/Health_5.png";
+      
+      this.findPlacesOfType("gym", fitnessIcon);
+      this.findPlacesOfType("bicycle_store", fitnessIcon);
+      this.findPlacesOfType("park", fitnessIcon);
+    } 
+    if(this.preferences.homedecour == true){
+      let fitnessIcon = "/assets/Location_Icons/png/Flower_2.png";
+      this.findPlacesOfType("florist", fitnessIcon);
+      this.findPlacesOfType("furniture_store", fitnessIcon);
+      this.findPlacesOfType("home_goods_store", fitnessIcon);
+    } 
+    if(this.preferences.learning == true){
+      let learningIcon = "/assets/Location_Icons/png/School_1.png";
+      this.findPlacesOfType("book_store", learningIcon);
+      this.findPlacesOfType("library", learningIcon);
+      this.findPlacesOfType("university", learningIcon);
+    } 
+    if(this.preferences.nightlife == true){
+      let nightlifeIcon = "/assets/Location_Icons/png/Beer_4.png";
+      this.findPlacesOfType("bar", nightlifeIcon);
+      this.findPlacesOfType("casino", nightlifeIcon);
+      this.findPlacesOfType("night_club", nightlifeIcon);
+    } 
+    if(this.preferences.religion == true){
+      let religionIcon = "/assets/Location_Icons/png/Official_2.png";
+      this.findPlacesOfType("church", religionIcon);
+      this.findPlacesOfType("hindu_temple", religionIcon);
+      this.findPlacesOfType("mosque", religionIcon);
+      this.findPlacesOfType("synagogue", religionIcon);
+    } 
+    if(this.preferences.shopping == true){
+      let shoppingIcon = "/assets/Location_Icons/png/Shopping_Bag_7.png";
+      this.findPlacesOfType("clothing_store", shoppingIcon);
+      this.findPlacesOfType("department_store", shoppingIcon);
+      this.findPlacesOfType("jewelry_store", shoppingIcon);
+      this.findPlacesOfType("shoe_store", shoppingIcon);
+      this.findPlacesOfType("shopping_mall", shoppingIcon);
+    } 
+  }
+  findPlacesOfType(type: string, iconUrl: string){
+    this.placesService.setType(type);
     var response = this.placesService.getPlaces();
     response.subscribe(
       res => {
         for (let index = 0; index < res.results.length; index++) {
           var element = res.results[index];
-          this.locations.push(element);
-          console.log("Name of location " + index + " = " + element.name);
-          if (index == 4) {
+          let marker = new MapMarker(element.geometry.location.lat, element.geometry.location.lng, element.name, iconUrl);
+          this.locations.push(marker);
+          console.log("Coordinates for type " + type + " are: " + marker.latitude + ", " + marker.latitude);
+          if (index == 1) {
             break;
           }
           // console.log("This location is named: " + res.results[index].name);
