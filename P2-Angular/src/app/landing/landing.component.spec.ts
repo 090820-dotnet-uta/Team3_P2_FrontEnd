@@ -29,6 +29,7 @@ describe('testing landing component', () => {
   })
 
   it('it should create', (done) => {
+    component.ngOnInit();
     expect(component).toBeTruthy;
     done();
   })
