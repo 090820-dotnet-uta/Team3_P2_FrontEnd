@@ -13,10 +13,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
-import {AgmCoreModule } from '@agm/core'
+import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { MapComponent } from './map/map.component';
-
 
 @NgModule({
   declarations: [
@@ -38,7 +37,7 @@ import { MapComponent } from './map/map.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCK8o1hVCxYyT2DI5GImfJcP1hpTQxV5OM'
     }),
-    GooglePlaceModule,
+    GooglePlaceModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

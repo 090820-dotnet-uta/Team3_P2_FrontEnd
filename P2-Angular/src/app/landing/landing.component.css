@@ -2,6 +2,7 @@
   background: grey;
   padding: 15px;
   border-radius: 15px;
+  border: 1px solid black;
   max-width: 980px;
 }
 
@@ -9,6 +10,7 @@
   background: grey;
   padding: 15px;
   border-radius: 15px;
+  border: 1px solid black;
   max-width: 300px;
 }
 

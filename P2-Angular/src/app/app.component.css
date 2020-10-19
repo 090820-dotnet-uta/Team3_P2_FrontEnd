@@ -3,6 +3,7 @@
   padding: 15px;
   margin: 15px;
   border-radius: 15px;
+  border: 1px solid black;
   max-width: 225px;
   max-height: 200px;
 }
@@ -12,6 +13,7 @@
   padding: 15px;
   margin: 15px;
   border-radius: 15px;
+  border: 1px solid black;
   max-width: 225px;
   max-height: 200px;
   position: absolute;
