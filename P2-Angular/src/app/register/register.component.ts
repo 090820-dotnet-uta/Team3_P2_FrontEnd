@@ -94,15 +94,32 @@ export class RegisterComponent implements OnInit {
     this.lat = address.geometry.location.lat();
     this.lng = address.geometry.location.lng();
     this.address = address;
-    if(address.address_components.length == 9){
+    if((address.address_components.length == 9 || address.address_components.length == 8) &&
+      (<HTMLInputElement> document.getElementById("address")).value != ""){
+      for (let index = 0; index<address.address_components.length; index++){
+        // Street Num
+        if(address.address_components[index].types[0] == "street_number"){
+          this.addressClicked += address.address_components[index].long_name;
+        }
+        // Street Name
+        else if(address.address_components[index].types[0] == "route"){
+          this.addressClicked += address.address_components[index].long_name;
+        }
+        // City
+        else if(address.address_components[index].types[0] == "locality"){
+          this.addressClicked += address.address_components[index].long_name;
+        }
+        // State
+        else if(address.address_components[index].types[0] == "administrative_area_level_1"){
+          this.addressClicked += address.address_components[index].short_name;
+        }
+      }
+      this.addressClicked += "USA";
       this.addressIsValid = true;
     }
     else{
       this.addressIsValid = false;
     }
-
-    this.addressClicked = address.address_components[0].long_name + " " +  address.address_components[1].long_name + ", " +
-    address.address_components[3].long_name + ", " +  address.address_components[5].short_name + ", USA";
 
     console.log("App Component LAT is:" + this.lat);
     console.log("App Component LNG is:" + this.lng);
