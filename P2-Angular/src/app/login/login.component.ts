@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+// import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { ApiService } from '../api.service';
 import { UserService } from '../user.service';
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
+    // private authService: AuthService,
     private apiService: ApiService,
     private userService: UserService
   ) {

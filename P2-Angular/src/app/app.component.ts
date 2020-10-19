@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service';
+// import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 
 @Component({
@@ -16,10 +16,7 @@ export class AppComponent implements OnInit {
   loginFlag: boolean = false;
   registerFlag: boolean = false;
 
-  constructor(public authService: AuthService, private userService: UserService) {
-    this.authService.isAuthenticated.subscribe(
-      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
-    );
+  constructor(private userService: UserService) {
   }
 
   async ngOnInit() {
