@@ -62,7 +62,6 @@ export class LandingComponent implements OnInit {
         username: new FormControl(),
         email: new FormControl(),
         password: new FormControl(),
-        city: new FormControl()
       }
     );
   }
@@ -71,14 +70,12 @@ export class LandingComponent implements OnInit {
     const username = this.editingForm.get('username').value;
     const email = this.editingForm.get('email').value;
     const password = this.editingForm.get('password').value;
-    const city = this.editingForm.get('city').value;
 
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
 
     if (username != null) { this.user.username = username; }
     if (email != null) { this.user.email = email; }
     if (password != null) { this.user.password = password; }
-    if (city != null) { this.user.city = city; }
 
     this.apiService.editUser(this.user).subscribe(user => this.user = user);
     this.EditUser();
@@ -91,7 +88,6 @@ export class LandingComponent implements OnInit {
       (<HTMLInputElement> document.getElementById('username')).value = this.user.username;
       (<HTMLInputElement> document.getElementById('email')).value = this.user.email;
       (<HTMLInputElement> document.getElementById('password')).value = this.user.password;
-      (<HTMLInputElement> document.getElementById('city')).value = this.user.city;
     } else {
       x.style.display = "none";
     }

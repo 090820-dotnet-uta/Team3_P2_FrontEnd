@@ -4,22 +4,26 @@
 
   <button (click)="EditUser()">Edit Profile</button> &nbsp;
   <button (click)="ShowSimilarUsers(user.userId)">Show Similar Users</button>
+  <br>
+  <br>
+  <br>
+  <div *ngIf="user">
+    <app-map [lat]="user.latitude" [lng]="user.longitude"></app-map>
+  </div>
 
-  <br><br>
   <div id="EditingForm" style="display: none;">
     <form [formGroup]="editingForm" (ngSubmit)="onEdit()">
-        Name:
-        <input matInput type="username" formControlName="username" id="username" required> &nbsp;
-        Email:
-        <input matInput formControlName="email" id="email" required> &nbsp;
-        Password:
-        <input matInput type="password" formControlName="password" id="password" required> &nbsp;
-        City:
-        <input matInput type="city" formControlName="city" id="city" required>
-        <br><br>
-        <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)" style="background-color: red;">Delete Account</button>
-      </form>
-      <!-- <div *ngIf="editingForm.get('username').errors && editedSubmitted">
+      Name:
+      <input matInput type="username" formControlName="username" id="username" required> &nbsp;
+      Email:
+      <input matInput formControlName="email" id="email" required> &nbsp;
+      Password:
+      <input matInput type="password" formControlName="password" id="password" required> &nbsp;
+      <br><br>
+      <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)"
+        style="background-color: red;">Delete Account</button>
+    </form>
+    <!-- <div *ngIf="editingForm.get('username').errors && editedSubmitted">
         <div *ngIf="editingForm.get('username').hasError('required')">
           <span style="color: red;">Please enter your name!</span>
         </div>
@@ -51,16 +55,36 @@
         <ul>
           <li>Name: {{ filtereduser.username }}</li>
           <li>Email: <a [attr.href]="'mailto:' + filtereduser.email">{{ filtereduser.email }}</a></li>
-          <li *ngIf="(user.preferencesModel.animals == filtereduser.preferencesModel.animals) && (filtereduser.preferencesModel.animals == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
-          <li *ngIf="(user.preferencesModel.art == filtereduser.preferencesModel.art) && (filtereduser.preferencesModel.art == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
-          <li *ngIf="(user.preferencesModel.beauty == filtereduser.preferencesModel.beauty) && (filtereduser.preferencesModel.beauty == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
-          <li *ngIf="(user.preferencesModel.entertainment == filtereduser.preferencesModel.entertainment) && (filtereduser.preferencesModel.entertainment == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Entertainment</li>
-          <li *ngIf="(user.preferencesModel.fitness == filtereduser.preferencesModel.fitness) && (filtereduser.preferencesModel.fitness== true)"> &nbsp;&nbsp;&nbsp;&nbsp;Fitness</li>
-          <li *ngIf="(user.preferencesModel.homedecour == filtereduser.preferencesModel.homedecour) && (filtereduser.preferencesModel.homedecour == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Home Decour</li>
-          <li *ngIf="(user.preferencesModel.learning == filtereduser.preferencesModel.learning) && (filtereduser.preferencesModel.learning == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Learning</li>
-          <li *ngIf="(user.preferencesModel.nightlife == filtereduser.preferencesModel.nightlife) && (filtereduser.preferencesModel.nightlife == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Nightlife</li>
-          <li *ngIf="(user.preferencesModel.religion == filtereduser.preferencesModel.religion) && (filtereduser.preferencesModel.religion == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Religion</li>
-          <li *ngIf="(user.preferencesModel.shopping == filtereduser.preferencesModel.shopping) && (filtereduser.preferencesModel.shopping == true)"> &nbsp;&nbsp;&nbsp;&nbsp;Shopping</li>
+          <li
+            *ngIf="(user.preferencesModel.animals == filtereduser.preferencesModel.animals) && (filtereduser.preferencesModel.animals == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
+          <li
+            *ngIf="(user.preferencesModel.art == filtereduser.preferencesModel.art) && (filtereduser.preferencesModel.art == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
+          <li
+            *ngIf="(user.preferencesModel.beauty == filtereduser.preferencesModel.beauty) && (filtereduser.preferencesModel.beauty == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
+          <li
+            *ngIf="(user.preferencesModel.entertainment == filtereduser.preferencesModel.entertainment) && (filtereduser.preferencesModel.entertainment == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Entertainment</li>
+          <li
+            *ngIf="(user.preferencesModel.fitness == filtereduser.preferencesModel.fitness) && (filtereduser.preferencesModel.fitness== true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Fitness</li>
+          <li
+            *ngIf="(user.preferencesModel.homedecour == filtereduser.preferencesModel.homedecour) && (filtereduser.preferencesModel.homedecour == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Home Decour</li>
+          <li
+            *ngIf="(user.preferencesModel.learning == filtereduser.preferencesModel.learning) && (filtereduser.preferencesModel.learning == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Learning</li>
+          <li
+            *ngIf="(user.preferencesModel.nightlife == filtereduser.preferencesModel.nightlife) && (filtereduser.preferencesModel.nightlife == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Nightlife</li>
+          <li
+            *ngIf="(user.preferencesModel.religion == filtereduser.preferencesModel.religion) && (filtereduser.preferencesModel.religion == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Religion</li>
+          <li
+            *ngIf="(user.preferencesModel.shopping == filtereduser.preferencesModel.shopping) && (filtereduser.preferencesModel.shopping == true)">
+            &nbsp;&nbsp;&nbsp;&nbsp;Shopping</li>
         </ul>
       </li>
     </ul>
@@ -79,3 +103,4 @@
     </ul>
   </div>
 </div>
+

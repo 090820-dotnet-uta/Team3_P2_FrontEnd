@@ -1,0 +1,8 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <agm-marker [latitude]="marker_lat" [longitude]="marker_lng" [iconUrl]="homeIcon"></agm-marker>
+    <div *ngFor="let l of locations">
+        <agm-marker [latitude]="l.geometry.location.lat" [longitude]="l.geometry.location.lng"></agm-marker>
+    </div>
+</agm-map>
+<br>
+<br>

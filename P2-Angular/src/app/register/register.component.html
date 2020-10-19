@@ -31,13 +31,11 @@
             <span id="dangerText">Please enter your password!</span>
           </div>
         </div>
-        <label for="city">City: </label>
-        <input formControlName="city" type="text" placeholder="Chicago" name="city" id="city" required>
+        <label for="city">Address: </label>
+        <input id="address" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" placeholder="your address" />
         <div *ngIf="!register.get('city').errors || !registerSubmitted"><br></div>
-        <div *ngIf="register.get('city').errors && registerSubmitted">
-          <div *ngIf="register.get('city').hasError('required')">
-            <span id="dangerText">Please enter your city!</span>
-          </div>
+        <div *ngIf="!addressIsValid && registerSubmitted">
+          <span id="dangerText">Please enter a valid address!</span>
         </div>
       </div>
       <div id="interestSection">

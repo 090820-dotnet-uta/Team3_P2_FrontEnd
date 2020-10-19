@@ -35,6 +35,17 @@ export class RegisterComponent implements OnInit {
   fitness: boolean;
   registerSubmitted: boolean = false;
 
+  lat: number;
+  lng: number;
+  options = { 
+    componentRestrictions:{ 
+      country:["US"] 
+    }
+  }
+  address: any; 
+  addressIsValid: boolean;
+  addressClicked: string;
+
   constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) {
   }
 
@@ -46,7 +57,7 @@ export class RegisterComponent implements OnInit {
       username:       new FormControl('', [Validators.required]),
       email:          new FormControl('', [Validators.required, Validators.email]),
       password:       new FormControl('', [Validators.required]),
-      city:           new FormControl('', [Validators.required]),
+      city:           new FormControl(''),
       animals:        [''],
       art:            [''],
       nightlife:      [''],
@@ -79,13 +90,37 @@ export class RegisterComponent implements OnInit {
     //   }
     // );
   }
+  public AddressChange(address: any) { 
+    this.lat = address.geometry.location.lat();
+    this.lng = address.geometry.location.lng();
+    this.address = address;
+    if(address.address_components.length == 9){
+      this.addressIsValid = true;
+    }
+    else{
+      this.addressIsValid = false;
+    }
+
+    this.addressClicked = address.address_components[0].long_name + " " +  address.address_components[1].long_name + ", " +
+    address.address_components[3].long_name + ", " +  address.address_components[5].short_name + ", USA";
+
+    console.log("App Component LAT is:" + this.lat);
+    console.log("App Component LNG is:" + this.lng);
+    console.log("Addrress is valid is: " + this.addressIsValid);
+    console.log(address);
+  }
 
   onRegister() {
     this.registerSubmitted = true;
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
-    let city = this.register.get('city').value;
+    let city = this.address.address_components[3].long_name;
+    let latitude = this.address.geometry.location.lat();
+    let longitude = this.address.geometry.location.lng();
+
+    console.log("GetElementByID: " + (<HTMLInputElement> document.getElementById("address")).value);
+    console.log("AddressClicked: " + this.addressClicked)
 
     let animals = (<HTMLInputElement> document.getElementById("1")).checked;
     let art = (<HTMLInputElement> document.getElementById("2")).checked;
@@ -99,9 +134,9 @@ export class RegisterComponent implements OnInit {
     let fitness = (<HTMLInputElement> document.getElementById("10")).checked;
 
     this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
-    this.passedUser = { username: username, email: email, password: password, city: city, preferencesModel: this.preferences}
+    this.passedUser = { username: username, email: email, password: password, city: city, latitude: latitude, longitude: longitude, preferencesModel: this.preferences}
 
-    if (this.register.valid)
+    if (this.register.valid && this.addressIsValid && this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value)
     {
       this.registerSubmitted = false;
       this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);

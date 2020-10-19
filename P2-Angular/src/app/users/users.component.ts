@@ -14,6 +14,8 @@ export class UsersComponent implements OnInit {
     email: "",
     password: "",
     city: "",
+    latitude: 0,
+    longitude: 0,
     preferencesModel: {animals: false, art: false, nightlife: false, beauty: false, learning: false, entertainment: false, religion: false, shopping: false, homedecour: false, fitness: false}
   }
 
