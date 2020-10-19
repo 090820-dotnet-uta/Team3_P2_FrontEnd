@@ -32,7 +32,7 @@
           </div>
         </div>
         <label for="city">Address: </label>
-        <input id="address" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" placeholder="your address" />
+        <input id="address" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" />
         <div *ngIf="!register.get('city').errors || !registerSubmitted"><br></div>
         <div *ngIf="!addressIsValid && registerSubmitted">
           <span id="dangerText">Please enter a valid address!</span>

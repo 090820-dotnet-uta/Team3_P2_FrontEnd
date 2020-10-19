@@ -14,10 +14,9 @@ export class GooglePlacesService {
   private type = '&type=';
   private APIKey = '&key=AIzaSyCK8o1hVCxYyT2DI5GImfJcP1hpTQxV5OM';
   connectionString: string;
-  // options: {
-  //   headers: {[header: string]: "http://localhost:4200/"},
-  //   responseType: 'arraybuffer'//|'blob'|'json'|'text',
-  // }
+  httpOptions = {
+    headers: new HttpHeaders({'Access-Control-Allow-Origin': '*'})
+  };
   constructor(private http: HttpClient) { }
 
   setLocation(lat: number, lng: number) {
@@ -48,7 +47,7 @@ export class GooglePlacesService {
     // console.log("Your connections string: " + this.placesURL + this.location +
     //   this.radius + this.type + this.APIKey)
     this.connectionString = this.placesURL + this.location + this.radius + this.rankby + this.type + this.APIKey;
-    return this.http.get(this.connectionString).pipe(
+    return this.http.get(this.connectionString, this.httpOptions).pipe(
         tap(_ => console.log('fetched places')),
         catchError(this.handleError('getPlaces', []))
       )
