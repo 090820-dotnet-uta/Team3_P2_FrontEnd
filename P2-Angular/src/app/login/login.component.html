@@ -2,16 +2,15 @@
   <div id="loginSection">
     <h2 style="text-align: center;">Sign In!</h2>
       <hr><br>
-      Email:
+      <strong>Email: </strong>
       <input matInput placeholder="johndoe@email.com" formControlName="username" required> &nbsp;
-      Password:
+      <strong>Password: </strong>
       <input matInput type="password" placeholder="johndoe99" formControlName="password" required>
       <br><br>
       <div id="dangerText" *ngIf="formSubmitAttempt">
         Please enter a valid email and password!
-      </div>
-      <br>
-    <div style="text-align: center"><button>Login</button></div>
+      </div><hr>
+    <div style="text-align: center"><button style="width: 150px; height: 30px; font-family:'Roboto',sans-serif;">Login</button></div>
   </div>
 </form>
 

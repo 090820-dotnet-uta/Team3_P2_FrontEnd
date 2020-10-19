@@ -36,7 +36,7 @@
         </div>
         <label for="city">Address: </label>
         <input id="address" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" />
-        <div *ngIf="!register.get('city').errors || !registerSubmitted"><br></div>
+        <div *ngIf="addressIsValid || !registerSubmitted"><br></div>
         <div *ngIf="!addressIsValid && registerSubmitted">
           <span id="dangerText">Please enter a valid address!</span>
         </div>
@@ -56,8 +56,8 @@
           <input type="checkbox" name="fitness" id="10" value="true"> Fitness
         </p>
       </div>
-      <br><br><br><br><br><br><br><br><br><br>
-      <div style="text-align: center"><button>Register</button></div>
+      <br><br><br><br><br><br><br><br><br><hr>
+      <div style="text-align: center"><button style="width: 150px; height: 30px; font-family:'Roboto',sans-serif;">Register</button></div>
     </div>
   </div>
 </form>
