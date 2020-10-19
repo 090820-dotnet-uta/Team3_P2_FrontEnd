@@ -19,13 +19,19 @@ export class LandingComponent implements OnInit {
     this.currentID = newID;
   }
 
+  lat: number;
+  lng: number;
+  address: any;
+
   users$: Observable<User[]>;
   user: User;
   users: User[];
   filteredUsers: User[];
   // currentID: number;
   editingForm: FormGroup;
+  tempUser: User;
 
+  displayMap = true;
   constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) {
   }
 
@@ -76,12 +82,17 @@ export class LandingComponent implements OnInit {
     if (username != null) { this.user.username = username; }
     if (email != null) { this.user.email = email; }
     if (password != null) { this.user.password = password; }
+    if (this.lat != null) {this.user.latitude = this.lat;}
+    if (this.lng != null) {this.user.longitude = this.lng;}
+    if (this.address != null) {this.user.city = this.address.address_components[3].long_name;}
 
     this.apiService.editUser(this.user).subscribe(user => this.user = user);
     this.EditUser();
+    this.displayMap = true;
   }
 
   EditUser() {
+    this.displayMap = false;
     var x = document.getElementById("EditingForm");
     if (x.style.display === "none") {
       x.style.display = "block";
@@ -129,5 +140,12 @@ export class LandingComponent implements OnInit {
     } else {
       x.style.display = "none";
     }
+  }
+
+public AddressChange(address: any) {
+    this.lat = address.geometry.location.lat();
+    this.lng = address.geometry.location.lng();
+    this.address = address;
+    console.log(address);
   }
 }

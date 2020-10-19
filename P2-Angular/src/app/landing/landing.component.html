@@ -6,8 +6,9 @@
   <button (click)="ShowSimilarUsers(user.userId)">Show Similar Users</button>
   <br>
   <br>
+  <p>Zoom in and out on the map to see locations</p>
   <br>
-  <div *ngIf="user">
+  <div *ngIf="user && displayMap">
     <app-map [lat]="user.latitude" [lng]="user.longitude" [preferences]="user.preferencesModel"></app-map>
   </div>
 
@@ -20,6 +21,8 @@
       Password:
       <input matInput type="password" formControlName="password" id="password" required> &nbsp;
       <br><br>
+      <input id="address" size="40" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" />
+      <br>
       <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)"
         style="background-color: red;">Delete Account</button>
     </form>

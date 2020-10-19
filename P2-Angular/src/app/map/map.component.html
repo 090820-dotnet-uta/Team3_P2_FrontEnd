@@ -1,4 +1,6 @@
-<div id="map"></div>
+<div id="map">
+</div>
+
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
     <agm-marker [latitude]="marker_lat" [longitude]="marker_lng" [iconUrl]="homeIcon"></agm-marker>
     <div *ngFor="let l of locations">
@@ -19,7 +21,7 @@
                     Phone Number: {{l.phoneNumber}}
                </li>
                <li *ngIf="l.website">
-                   Website: <a [attr.href]="l.website">{{l.title}}</a>
+                   Website: <a [attr.href]="l.website" target="_blank">{{l.title}}</a>
                </li>
            </ul>
         </li>
