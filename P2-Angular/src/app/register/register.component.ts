@@ -34,15 +34,17 @@ export class RegisterComponent implements OnInit {
   homedecour: boolean;
   fitness: boolean;
   registerSubmitted: boolean = false;
+  takenEmailFlag: boolean = false;
+  takenEmailString: string = '';
 
   lat: number;
   lng: number;
-  options = { 
-    componentRestrictions:{ 
-      country:["US"] 
+  options = {
+    componentRestrictions:{
+      country:["US"]
     }
   }
-  address: any; 
+  address: any;
   addressIsValid: boolean;
   addressClicked: string;
 
@@ -90,7 +92,7 @@ export class RegisterComponent implements OnInit {
     //   }
     // );
   }
-  public AddressChange(address: any) { 
+  public AddressChange(address: any) {
     this.lat = address.geometry.location.lat();
     this.lng = address.geometry.location.lng();
     this.address = address;
@@ -158,7 +160,18 @@ export class RegisterComponent implements OnInit {
     this.preferences = {animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness};
     this.passedUser = { username: username, email: email, password: password, city: city, latitude: latitude, longitude: longitude, preferencesModel: this.preferences}
 
-    if (this.register.valid && this.addressIsValid && this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value)
+    this.takenEmailFlag = false;
+    this.takenEmailString = '';
+    for(let i=0; i< this.users.length; i++)
+    {
+      if (this.users[i].email == email)
+      {
+        this.takenEmailFlag = true;
+        this.takenEmailString = email;
+      }
+    }
+
+    if (!this.takenEmailFlag && this.register.valid && this.addressIsValid && this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value)
     {
       this.registerSubmitted = false;
       this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);

@@ -14,13 +14,16 @@
         </div>
         <label for="email">Email: </label>
         <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required> &nbsp;
-        <div *ngIf="!register.get('email').errors || !registerSubmitted"><br></div>
-        <div *ngIf="register.get('email').errors && registerSubmitted">
+        <div *ngIf="(!takenEmailFlag && !register.get('email').errors) || !registerSubmitted"><br></div>
+        <div *ngIf="(takenEmailFlag || register.get('email').errors) && registerSubmitted">
           <div *ngIf="register.get('email').hasError('required')">
             <span id="dangerText">Please enter your email!</span>
           </div>
           <div *ngIf="register.get('email').hasError('email')">
             <span id="dangerText">You must enter a valid email!</span>
+          </div>
+          <div *ngIf="takenEmailFlag">
+            <span id="dangerText">{{takenEmailString}} is not available!</span>
           </div>
         </div>
         <label for="password">Password: </label>
