@@ -10,6 +10,7 @@ import { Preferences } from '../preferences';
 import { MapMarker } from '../marker';
 import { google } from "google-maps";
 import { Observable } from 'rxjs';
+import { delay, retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -49,6 +50,14 @@ export class MapComponent implements OnInit {
     console.log(this.preferences)
   }
 
+  public wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+      end = new Date().getTime();
+    }
+  }
+
   public SetMarkers() {
     //Adding Marker to map
     this.marker_lat = this.lat;
@@ -66,57 +75,57 @@ export class MapComponent implements OnInit {
       this.findPlacesOfType("pet_store", animalIcon);
       this.findPlacesOfType("veterinary_care", animalIcon);
       this.findPlacesOfType("zoo", animalIcon);
-    } 
+    }
     if(this.preferences.art == true){
       let artIcon = "/assets/Location_Icons/png/Artist_4.png";
       this.findPlacesOfType("art_gallery", artIcon);
       this.findPlacesOfType("museum", artIcon);
-    } 
+    }
     if(this.preferences.beauty == true){
       let beautyIcon = "/assets/Location_Icons/png/Hair_Dresser_8.png";
       this.findPlacesOfType("beauty_salon", beautyIcon);
       this.findPlacesOfType("hair_care", beautyIcon);
       this.findPlacesOfType("spa", beautyIcon);
 
-    } 
+    }
     if(this.preferences.entertainment == true){
       let entertainmentIcon = "/assets/Location_Icons/png/Crown_7.png";
       this.findPlacesOfType("bowling_alley", entertainmentIcon);
       this.findPlacesOfType("movie_theater", entertainmentIcon);
       this.findPlacesOfType("tourist_attraction", entertainmentIcon);
-    } 
+    }
     if(this.preferences.fitness == true){
       let fitnessIcon = "/assets/Location_Icons/png/Health_5.png";
-      
+
       this.findPlacesOfType("gym", fitnessIcon);
       this.findPlacesOfType("bicycle_store", fitnessIcon);
       this.findPlacesOfType("park", fitnessIcon);
-    } 
+    }
     if(this.preferences.homedecour == true){
       let fitnessIcon = "/assets/Location_Icons/png/Flower_2.png";
       this.findPlacesOfType("florist", fitnessIcon);
       this.findPlacesOfType("furniture_store", fitnessIcon);
       this.findPlacesOfType("home_goods_store", fitnessIcon);
-    } 
+    }
     if(this.preferences.learning == true){
       let learningIcon = "/assets/Location_Icons/png/School_1.png";
       this.findPlacesOfType("book_store", learningIcon);
       this.findPlacesOfType("library", learningIcon);
       this.findPlacesOfType("university", learningIcon);
-    } 
+    }
     if(this.preferences.nightlife == true){
       let nightlifeIcon = "/assets/Location_Icons/png/Beer_4.png";
       this.findPlacesOfType("bar", nightlifeIcon);
       this.findPlacesOfType("casino", nightlifeIcon);
       this.findPlacesOfType("night_club", nightlifeIcon);
-    } 
+    }
     if(this.preferences.religion == true){
       let religionIcon = "/assets/Location_Icons/png/Official_2.png";
       this.findPlacesOfType("church", religionIcon);
       this.findPlacesOfType("hindu_temple", religionIcon);
       this.findPlacesOfType("mosque", religionIcon);
       this.findPlacesOfType("synagogue", religionIcon);
-    } 
+    }
     if(this.preferences.shopping == true){
       let shoppingIcon = "/assets/Location_Icons/png/Shopping_Bag_7.png";
       this.findPlacesOfType("clothing_store", shoppingIcon);
@@ -124,7 +133,7 @@ export class MapComponent implements OnInit {
       this.findPlacesOfType("jewelry_store", shoppingIcon);
       this.findPlacesOfType("shoe_store", shoppingIcon);
       this.findPlacesOfType("shopping_mall", shoppingIcon);
-    } 
+    }
   }
   findPlacesOfType(type: string, iconUrl: string){
     let map = document.getElementById("map") as HTMLDivElement;
@@ -132,7 +141,8 @@ export class MapComponent implements OnInit {
     this.response = this.placesService.getPlaces();
     this.response.subscribe(
       res => {
-        for (let index = 0; index < res.results.length; index++) {
+        for (let index = 0; index < 1; index++) {
+          // res.results.length
           var element = res.results[index];
           let marker: MapMarker;
           var request = {
@@ -141,6 +151,7 @@ export class MapComponent implements OnInit {
           };
           let service = new google.maps.places.PlacesService(map);
           service.getDetails(request, (place, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) { retry(); }
             if (status === google.maps.places.PlacesServiceStatus.OK) {
               if (place.website && place.formatted_phone_number) {
                 marker = {
@@ -193,9 +204,10 @@ export class MapComponent implements OnInit {
           // console.log(this.formatted_phone_number);
           // console.log(this.website
           // console.log("Coordinates for type " + type + " are: " + marker.latitude + ", " + marker.longitude);
-          if (index == 3) {
-            break;
-          }
+          // if (index == 3) {
+          //   index = res.results.length;
+          //   break;
+          // }
           // console.log("This location is named: " + res.results[index].name);
         } console.log('HTTP response', res.results)
       },

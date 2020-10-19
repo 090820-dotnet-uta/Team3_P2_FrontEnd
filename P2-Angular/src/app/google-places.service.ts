@@ -8,8 +8,8 @@ import { Observable, of } from 'rxjs';
 })
 export class GooglePlacesService {
   private placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-  private location = 'location=';
-  private radius = '&radius=';
+  private location: string = '';
+  private radius: string = '';
   private rankby = '&rankby=prominence'
   private type: string;
   private APIKey = '&key=AIzaSyCK8o1hVCxYyT2DI5GImfJcP1hpTQxV5OM';
@@ -20,22 +20,22 @@ export class GooglePlacesService {
   constructor(private http: HttpClient) { }
 
   setLocation(lat: number, lng: number) {
-    this.location = this.location + lat + "," + lng;
+    this.location = 'location=' + lat + "," + lng;
     console.log("Location string is: " + this.location);
   }
 
   setRadius(radius: number){
     if(radius <= 0){
-      this.radius = this.radius + 1600;
+      this.radius = '&radius=' + 1600;
       return 14;
     }
     else if(radius > 50000){
-      this.radius = this.radius + 50000;
+      this.radius = '&radius=' + 50000;
       return 5;
     }
     else{
-    this.radius = this.radius + radius;
-    return 10;
+      this.radius = '&radius=' + radius;
+      return 10;
     }
   }
 
@@ -71,5 +71,5 @@ export class GooglePlacesService {
       return of(result as T);
     };
   }
-} 
+}
 
