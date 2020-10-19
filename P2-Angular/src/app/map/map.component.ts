@@ -8,6 +8,8 @@ import { ApiService } from '../api.service';
 import { UserService } from '../user.service';
 import { Preferences } from '../preferences';
 import { MapMarker } from '../marker';
+import { google } from "google-maps";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -26,6 +28,13 @@ export class MapComponent implements OnInit {
   locations: MapMarker[] = new Array();
   homeIcon = "/assets/Location_Icons/png/Home_3.png";
   user: User;
+  google: google;
+
+  formatted_address: string;
+  website: string;
+  formatted_phone_number: string;
+
+  response: Observable<any>;
 
   constructor(private placesService: GooglePlacesService, private apiService: ApiService) { }
 
@@ -118,16 +127,73 @@ export class MapComponent implements OnInit {
     } 
   }
   findPlacesOfType(type: string, iconUrl: string){
+    let map = document.getElementById("map") as HTMLDivElement;
     this.placesService.setType(type);
-    var response = this.placesService.getPlaces();
-    response.subscribe(
+    this.response = this.placesService.getPlaces();
+    this.response.subscribe(
       res => {
         for (let index = 0; index < res.results.length; index++) {
           var element = res.results[index];
-          let marker = new MapMarker(element.geometry.location.lat, element.geometry.location.lng, element.name, iconUrl);
-          this.locations.push(marker);
-          console.log("Coordinates for type " + type + " are: " + marker.latitude + ", " + marker.latitude);
-          if (index == 1) {
+          let marker: MapMarker;
+          var request = {
+            placeId: element.place_id,
+            fields: ['formatted_address', 'formatted_phone_number', 'rating', 'website']
+          };
+          let service = new google.maps.places.PlacesService(map);
+          service.getDetails(request, (place, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              if (place.website && place.formatted_phone_number) {
+                marker = {
+                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
+                  iconUrl: iconUrl, address: element.vicinity, website: place.website, phoneNumber: place.formatted_phone_number
+                }
+              } else if (place.website) {
+                marker = {
+                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
+                  iconUrl: iconUrl, address: element.vicinity, website: place.website
+                }
+              } else if (place.formatted_phone_number) {
+                marker = {
+                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
+                  iconUrl: iconUrl, address: element.vicinity, phoneNumber: place.formatted_phone_number
+                }
+              } else {
+                marker = {
+                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
+                  iconUrl: iconUrl, address: element.vicinity
+                }
+              }
+              let exists = false;
+              for (let i = 0; i < this.locations.length; i++) {
+                if (this.locations[i].address == marker.address) {
+                  exists = true;
+                }
+              }
+              if (!exists) {
+                this.locations.push(marker);
+              }
+            }
+            else {
+              marker = {
+                latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
+                iconUrl: iconUrl, address: element.vicinity
+              }
+              let exists = false;
+              for (let i = 0; i < this.locations.length; i++) {
+                if (this.locations[i].address == marker.address) {
+                  exists = true;
+                }
+              }
+              if (!exists) {
+                this.locations.push(marker);
+              }
+            }
+          });
+          // console.log(this.formatted_address);
+          // console.log(this.formatted_phone_number);
+          // console.log(this.website
+          // console.log("Coordinates for type " + type + " are: " + marker.latitude + ", " + marker.longitude);
+          if (index == 3) {
             break;
           }
           // console.log("This location is named: " + res.results[index].name);

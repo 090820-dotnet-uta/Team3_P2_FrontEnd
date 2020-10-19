@@ -47,6 +47,11 @@ export class RegisterComponent implements OnInit {
   address: any;
   addressIsValid: boolean;
   addressClicked: string;
+  addressClicked2: string = '';
+  addressShort: string = '';
+  addressShort2: string = '';
+
+  city: string;
 
   constructor(private apiService: ApiService, private userService: UserService, private fb: FormBuilder,) {
   }
@@ -102,34 +107,46 @@ export class RegisterComponent implements OnInit {
         // Street Num
         if(address.address_components[index].types[0] == "street_number"){
           this.addressClicked = address.address_components[index].long_name + " ";
+          this.addressClicked2 = address.address_components[index].long_name + " ";
+          this.addressShort = address.address_components[index].long_name + " ";
+          this.addressShort2 = address.address_components[index].long_name + " ";
+
         }
         // Street Name
         else if(address.address_components[index].types[0] == "route"){
           this.addressClicked += address.address_components[index].long_name + ", ";
+          this.addressClicked2 += address.address_components[index].long_name + ", ";
+          this.addressShort += address.address_components[index].short_name + ", ";
+          this.addressShort2 += address.address_components[index].short_name + ", ";
         }
         // City
         else if(address.address_components[index].types[0] == "locality"){
           if(address.address_components[index - 1].types[0] == "neighborhood"){
-            this.addressClicked += address.address_components[index - 1].long_name + ", ";
+            this.addressClicked2 += address.address_components[index - 1].long_name + ", ";
+            this.addressShort2 += address.address_components[index - 1].long_name + ", ";
+
           }
-          else{
-            this.addressClicked += address.address_components[index].long_name + ", ";
-          }
+          this.addressClicked += address.address_components[index].long_name + ", ";
+          this.addressShort += address.address_components[index].long_name + ", "
+          this.city = address.address_components[index].long_name;
         }
         // State
         else if(address.address_components[index].types[0] == "administrative_area_level_1"){
           this.addressClicked += address.address_components[index].short_name + ", ";
+          this.addressClicked2 += address.address_components[index].short_name + ", ";
+          this.addressShort += address.address_components[index].short_name + ", ";
+          this.addressShort2 += address.address_components[index].short_name + ", "
         }
       }
       this.addressClicked += "USA";
+      this.addressClicked2 += "USA";
+      this.addressShort += "USA";
+      this.addressShort2 += "USA";
       this.addressIsValid = true;
     }
     else{
       this.addressIsValid = false;
     }
-
-    console.log("App Component LAT is:" + this.lat);
-    console.log("App Component LNG is:" + this.lng);
     console.log("Addrress is valid is: " + this.addressIsValid);
     console.log(address);
   }
@@ -139,12 +156,15 @@ export class RegisterComponent implements OnInit {
     let username = this.register.get('username').value;
     let email = this.register.get('email').value;
     let password = this.register.get('password').value;
-    let city = this.address.address_components[3].long_name;
+    let city = this.city;
     let latitude = this.address.geometry.location.lat();
     let longitude = this.address.geometry.location.lng();
 
     console.log("GetElementByID: " + (<HTMLInputElement> document.getElementById("address")).value);
     console.log("AddressClicked: " + this.addressClicked)
+    console.log("AddressClicked2: " + this.addressClicked2)
+    console.log("AddressShort: " + this.addressShort)
+    console.log("AddressShort2: " + this.addressShort)
 
     let animals = (<HTMLInputElement> document.getElementById("1")).checked;
     let art = (<HTMLInputElement> document.getElementById("2")).checked;
@@ -171,11 +191,22 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    if (!this.takenEmailFlag && this.register.valid && this.addressIsValid && this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value)
+    if (!this.takenEmailFlag && this.register.valid && this.addressIsValid && 
+      (this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value || 
+      this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value ||
+      this.addressShort == (<HTMLInputElement> document.getElementById("address")).value ||
+      this.addressShort2 == (<HTMLInputElement> document.getElementById("address")).value))
     {
       this.registerSubmitted = false;
       this.apiService.createUser(this.passedUser).subscribe(user => this.user = user);
       this.registeredEvent.emit(1);
+    }
+    else{
+      this.addressClicked = '';
+      this.addressClicked2 = '';
+      this.addressShort = '';
+      this.addressShort2 = '';
+
     }
 
     // try {
