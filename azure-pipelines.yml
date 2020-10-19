@@ -38,7 +38,7 @@ steps:
     cliProjectName: 'Project2_Team3_FrontEnd'
     cliSources: '$(appDir)/src'
     extraProperties: |
-      sonar.coverage.exclusions=**/*.spec.ts
+      sonar.coverage.exclusions=**/*.spec.ts, **/*.html, **/*.css
       sonar.typescript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
   displayName: sonarcloud preparing analysis
 
