@@ -1,4 +1,16 @@
 agm-map {
-    height: 300px;
-    width: 500px;
-  }
+  position: relative;
+  float: left;
+  height: 420px;
+  width: 700px;
+}
+
+#locationBox {
+  position: relative;
+  float: right;
+  background: grey;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid black;
+  max-width: 400px;
+}

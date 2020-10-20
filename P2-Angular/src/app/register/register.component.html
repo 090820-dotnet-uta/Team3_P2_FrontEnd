@@ -4,7 +4,7 @@
       <h2 style="text-align: center;">Create Your Account!</h2>
       <hr><br>
       <div id="informationSection">
-        <label for="username">Name: </label>
+        <strong><label for="username">Name: </label></strong>
         <input formControlName="username" type="text" placeholder="John Doe" name="username" id="username" required> &nbsp;
         <div *ngIf="!register.get('username').errors || !registerSubmitted"><br></div>
         <div *ngIf="register.get('username').errors && registerSubmitted">
@@ -12,7 +12,7 @@
             <span id="dangerText">Please enter your name!</span>
           </div>
         </div>
-        <label for="email">Email: </label>
+        <strong><label for="email">Email: </label></strong>
         <input formControlName="email" type="text" placeholder="johndoe@email.com" name="email" id="email" required> &nbsp;
         <div *ngIf="(!takenEmailFlag && !register.get('email').errors) || !registerSubmitted"><br></div>
         <div *ngIf="(takenEmailFlag || register.get('email').errors) && registerSubmitted">
@@ -26,7 +26,7 @@
             <span id="dangerText">{{takenEmailString}} is not available!</span>
           </div>
         </div>
-        <label for="password">Password: </label>
+        <strong><label for="password">Password: </label></strong>
         <input formControlName="password" type="text" placeholder="johndoe99" name="password" id="password" required> &nbsp;
         <div *ngIf="!register.get('password').errors || !registerSubmitted"><br></div>
         <div *ngIf="register.get('password').errors && registerSubmitted">
@@ -34,15 +34,15 @@
             <span id="dangerText">Please enter your password!</span>
           </div>
         </div>
-        <label for="city">Address: </label>
-        <input id="address" size="40" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" />
-        <div *ngIf="addressIsValid || !registerSubmitted"><br></div>
+        <strong>Address: </strong><br>
+        <input id="address" size="40" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="123 Real Street, Townville, IL, USA" />
+        <div *ngIf="addressIsValid || !registerSubmitted"></div>
         <div *ngIf="!addressIsValid && registerSubmitted">
           <span id="dangerText">Please enter a valid address!</span>
         </div>
       </div>
       <div id="interestSection">
-        Interests:<br>
+        <strong>Interests:</strong><br>
         <p>
           <input type="checkbox" name="animals" id="1" value="true"> Animals
           <input type="checkbox" name="art" id="2" value="true"> Art
@@ -56,7 +56,7 @@
           <input type="checkbox" name="fitness" id="10" value="true"> Fitness
         </p>
       </div>
-      <br><br><br><br><br><br><br><br><br><hr>
+      <br><br><br><br><br><br><br><br><br><br><hr>
       <div style="text-align: center"><button style="width: 150px; height: 30px; font-family:'Roboto',sans-serif;">Register</button></div>
     </div>
   </div>

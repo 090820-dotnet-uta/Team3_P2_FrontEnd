@@ -141,84 +141,56 @@ export class MapComponent implements OnInit {
       this.findPlacesOfType("shopping_mall", shoppingIcon);
     }
   }
+
+  getInformationOfPlace(givenPlace: MapMarker){
+    let map = document.getElementById("map") as HTMLDivElement;
+    this.placesService.setType(givenPlace.placetype);
+    this.response = this.placesService.getPlaces();
+
+    var request = {
+      placeId: givenPlace.placeID,
+      fields: ['formatted_address', 'formatted_phone_number', 'rating', 'website']
+    };
+    let service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, (place, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        if (place.website && place.formatted_phone_number) {
+          givenPlace.website = place.website;
+          givenPlace.phoneNumber = place.formatted_phone_number;
+        } else if (place.website) {
+          givenPlace.website = place.website;
+        } else if (place.formatted_phone_number) {
+          givenPlace.phoneNumber = place.formatted_phone_number;
+        }
+      }
+    });
+  }
+
   findPlacesOfType(type: string, iconUrl: string){
     let map = document.getElementById("map") as HTMLDivElement;
     this.placesService.setType(type);
     this.response = this.placesService.getPlaces();
-    this.response.subscribe(
-      res => {
-        for (let index = 0; index < 1; index++) {
+    for (let index = 0; index < 20; index++) {
+      this.response.subscribe(
+        res => {
           // res.results.length
           var element = res.results[index];
           let marker: MapMarker;
-          var request = {
-            placeId: element.place_id,
-            fields: ['formatted_address', 'formatted_phone_number', 'rating', 'website']
-          };
-          let service = new google.maps.places.PlacesService(map);
-          service.getDetails(request, (place, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) { retry(); }
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-              if (place.website && place.formatted_phone_number) {
-                marker = {
-                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
-                  iconUrl: iconUrl, address: element.vicinity, website: place.website, phoneNumber: place.formatted_phone_number
-                }
-              } else if (place.website) {
-                marker = {
-                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
-                  iconUrl: iconUrl, address: element.vicinity, website: place.website
-                }
-              } else if (place.formatted_phone_number) {
-                marker = {
-                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
-                  iconUrl: iconUrl, address: element.vicinity, phoneNumber: place.formatted_phone_number
-                }
-              } else {
-                marker = {
-                  latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
-                  iconUrl: iconUrl, address: element.vicinity
-                }
-              }
-              let exists = false;
-              for (let i = 0; i < this.locations.length; i++) {
-                if (this.locations[i].address == marker.address) {
-                  exists = true;
-                }
-              }
-              if (!exists) {
-                this.locations.push(marker);
-              }
+          marker = {
+            latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
+            iconUrl: iconUrl, address: element.vicinity, placetype: type, placeID: element.place_id
+          }
+          let exists = false;
+          for (let i = 0; i < this.locations.length; i++) {
+            if (this.locations[i].address == marker.address) {
+              exists = true;
             }
-            else {
-              marker = {
-                latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
-                iconUrl: iconUrl, address: element.vicinity
-              }
-              let exists = false;
-              for (let i = 0; i < this.locations.length; i++) {
-                if (this.locations[i].address == marker.address) {
-                  exists = true;
-                }
-              }
-              if (!exists) {
-                this.locations.push(marker);
-              }
-            }
-          });
-          // console.log(this.formatted_address);
-          // console.log(this.formatted_phone_number);
-          // console.log(this.website
-          // console.log("Coordinates for type " + type + " are: " + marker.latitude + ", " + marker.longitude);
-          // if (index == 3) {
-          //   index = res.results.length;
-          //   break;
-          // }
-          // console.log("This location is named: " + res.results[index].name);
-        } console.log('HTTP response', res.results)
-      },
-      err => console.log('HTTP Error', err),
-      () => console.log('HTTP request completed.')
-    );
+          }
+          if (!exists) {
+            this.locations.push(marker);
+          }
+        }
+      );
+    }
   }
 }

@@ -9,21 +9,23 @@
 </agm-map>
 <br>
 <br>
-<div *ngFor="let l of locations">
-    <ul>
-        <li>
-           Name: {{l.title}}
-           <ul>
-               <li>
-                   Address: {{l.address}}
-               </li>
-               <li *ngIf="l.phoneNumber">
-                    Phone Number: {{l.phoneNumber}}
-               </li>
-               <li *ngIf="l.website">
-                   Website: <a [attr.href]="l.website" target="_blank">{{l.title}}</a>
-               </li>
-           </ul>
-        </li>
-    </ul>
+<div id="locationBox">
+  <div *ngFor="let l of locations">
+      <ul>
+          <li (click)="getInformationOfPlace(l)">
+            Name: {{l.title}}
+            <ul>
+                <li>
+                    Address: {{l.address}}
+                </li>
+                <li *ngIf="l.phoneNumber">
+                      Phone Number: {{l.phoneNumber}}
+                </li>
+                <li *ngIf="l.website">
+                    Website: <a [attr.href]="l.website" target="_blank">{{l.title}}</a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+  </div>
 </div>
