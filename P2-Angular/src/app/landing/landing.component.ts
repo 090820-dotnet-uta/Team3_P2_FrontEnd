@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from '../user';
 import { ApiService } from '../api.service';
 import { UserService } from '../user.service';
 import { Preferences } from '../preferences';
+import { Preference } from '../prefence';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-landing',
@@ -22,7 +24,7 @@ export class LandingComponent implements OnInit {
   lat: number;
   lng: number;
   city: string;
-  radius = 8046.72;
+  radius = 16093.4;
   options = {
     componentRestrictions:{
       country:["US"]
@@ -36,10 +38,13 @@ export class LandingComponent implements OnInit {
   // currentID: number;
   editingForm: FormGroup;
   tempUser: User;
+  preferencesSelected: Preference[] = new Array<Preference>();
 
   displayMap = true;
+  displayFilters = false;
   constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) {
   }
+
 
   ngOnInit(): void {
     // this.currentID = this.userService.getCurrentID();
@@ -80,30 +85,90 @@ export class LandingComponent implements OnInit {
     );
   }
 
+  setPreferencesSelected(userPreferences: Preferences){
+    if(userPreferences.art == true){ let p = {type: "art", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "art", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.animals == true){ let p = {type: "animals", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "animals", clicked: false}; this.preferencesSelected.push(p); console.log(p.clicked)}
+
+    if(userPreferences.nightlife == true){ let p = {type: "nightlife", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "nightlife", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.beauty == true){ let p = {type: "beauty", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "beauty", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.learning == true){ let p = {type: "learning", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "learning", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.entertainment == true){ let p = {type: "entertainment", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "entertainment", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.religion == true){ let p = {type: "religion", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "religion", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.shopping == true){ let p = {type: "shopping", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "shopping", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.homedecour == true){ let p = {type: "home decour", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "home decour", clicked: false}; this.preferencesSelected.push(p);}
+
+    if(userPreferences.fitness == true){ let p = {type: "fitness", clicked: true}; this.preferencesSelected.push(p);}
+    else{ let p = {type: "fitness", clicked: false}; this.preferencesSelected.push(p);}
+  }
+
+  // preferenceClicked(preference: Preference){
+  //   for(let k = 0; k < this.preferencesSelected.length; k++ ){
+  //     if(this.preferencesSelected[k].type == preference.type){
+  //       this.preferencesSelected[k].clicked = false;
+  //     }
+  //   }
+  // }
+
   onEdit() {
     const username = this.editingForm.get('username').value;
     const email = this.editingForm.get('email').value;
     const password = this.editingForm.get('password').value;
     const address = this.editingForm.get('address').value;
-    const radius = this.editingForm.get('radius').value;
+    let radius = this.editingForm.get('radius').value;
+    if(radius == null){
+      radius = 10;
+    }
+    if ((radius > 0 && radius <= 30)) {
+      let animals = (<HTMLInputElement>document.getElementById("1")).checked;
+      let art = (<HTMLInputElement>document.getElementById("2")).checked;
+      let nightlife = (<HTMLInputElement>document.getElementById("3")).checked;
+      let beauty = (<HTMLInputElement>document.getElementById("4")).checked;
+      let learning = (<HTMLInputElement>document.getElementById("5")).checked;
+      let entertainment = (<HTMLInputElement>document.getElementById("6")).checked;
+      let religion = (<HTMLInputElement>document.getElementById("7")).checked;
+      let shopping = (<HTMLInputElement>document.getElementById("8")).checked;
+      let homedecour = (<HTMLInputElement>document.getElementById("9")).checked;
+      let fitness = (<HTMLInputElement>document.getElementById("10")).checked;
 
-    this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
+      this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
 
-    if (username != null) { this.user.username = username; }
-    if (email != null) { this.user.email = email; }
-    if (password != null) { this.user.password = password; }
-    if (address != null) {this.user.latitude = this.lat;}
-    if (address != null) {this.user.longitude = this.lng;}
-    if (address != null) {this.user.city = this.city;}
-    if (radius != null) { (this.radius = radius / 0.00062137); }
+      if (username != null) { this.user.username = username; }
+      if (email != null) { this.user.email = email; }
+      if (password != null) { this.user.password = password; }
+      if (address != null) { this.user.latitude = this.lat; }
+      if (address != null) { this.user.longitude = this.lng; }
+      if (address != null) { this.user.city = this.city; }
+      if (radius != null) { (this.radius = radius / 0.00062137); }
 
+      this.user.preferencesModel = { animals, art, nightlife, beauty, learning, entertainment, religion, shopping, homedecour, fitness };
 
-    this.apiService.editUser(this.user).subscribe(user => this.user = user);
-    this.EditUser();
-    this.displayMap = true;
+      this.apiService.editUser(this.user).subscribe(user => this.user = user);
+      this.EditUser();
+      this.displayMap = true;
+    }
+    else{
+
+    }
   }
 
   EditUser() {
+    this.setPreferencesSelected(this.user.preferencesModel);
     if(this.displayMap == true){
       this.displayMap = false;
     } else{

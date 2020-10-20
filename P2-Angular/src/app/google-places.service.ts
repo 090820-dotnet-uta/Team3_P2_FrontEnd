@@ -12,7 +12,7 @@ export class GooglePlacesService {
   private radius: string = '';
   private rankby = '&rankby=prominence'
   private type: string;
-  private APIKey = '&key=AIzaSyCK8o1hVCxYyT2DI5GImfJcP1hpTQxV5OM';
+  private APIKey = '&key=AIzaSyAzlOKSCvJdT40U0JuKrbVd4cWE1I4kFIA';
   connectionString: string;
   httpOptions = {
     headers: new HttpHeaders({'Access-Control-Allow-Origin': '*'})
@@ -27,15 +27,15 @@ export class GooglePlacesService {
   setRadius(radius: number){
     if(radius <= 0){
       this.radius = '&radius=' + 1600;
-      return 14;
+      return 18;
     }
     else if(radius > 50000){
       this.radius = '&radius=' + 50000;
-      return 5;
+      return 9;
     }
     else{
       this.radius = '&radius=' + radius;
-      return 10;
+      return 14;
     }
   }
 

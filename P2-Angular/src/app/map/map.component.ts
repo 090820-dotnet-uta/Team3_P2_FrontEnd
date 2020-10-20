@@ -19,7 +19,7 @@ import { delay, retry } from 'rxjs/operators';
 })
 export class MapComponent implements OnInit {
   // @Input() currentID: number;
-  zoom = 9;
+  zoom = 13;
   @Input() lat: number;
   @Input() lng: number;
   @Input() radius: number;
@@ -165,7 +165,7 @@ export class MapComponent implements OnInit {
       this.zoom = this.placesService.setRadius(this.radius);
     }
     else{
-      this.zoom = this.placesService.setRadius(8046);
+      this.zoom = this.placesService.setRadius(16093.4);
     }
 
     // NEED A WAY FOR USERS TO ENTER THIS
@@ -263,7 +263,7 @@ export class MapComponent implements OnInit {
     let map = document.getElementById("map") as HTMLDivElement;
     this.placesService.setType(type);
     this.response = this.placesService.getPlaces();
-    for (let index = 0; index < 20; index++) {
+    for (let index = 0; index < 2; index++) {
       this.response.subscribe(
         res => {
           // res.results.length

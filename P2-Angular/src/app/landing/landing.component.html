@@ -23,10 +23,75 @@
       <input matInput type="password" formControlName="password" id="password" required> &nbsp;
       <br><br>
       Address
-      <input id="address" formControlName="address" size="40" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" />
-      <br>
+      <input id="address" formControlName="address" size="40" ngx-google-places-autocomplete 
+      [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" /> &nbsp;
       Radius
-      <input type="number" id="radius" formControlName="radius" min="1" max="30" value="10"> miles
+      <input type="number" id="radius" formControlName="radius" min="1" max="30" value="10"> miles (1-30)
+      <br>
+      <br>
+      <div id="interestSection">
+        Interests:<br>
+        <div *ngIf="this.user.preferencesModel.animals">
+          <input type="checkbox" name="animals" id="1" checked> Animals
+        </div>
+        <div *ngIf="!this.user.preferencesModel.animals">
+          <input type="checkbox" name="animals" id="1"> Animals
+        </div>
+        <div *ngIf="this.user.preferencesModel.art">
+          <input type="checkbox" name="art" id="2" value="true" checked> Art
+        </div>
+        <div *ngIf="!this.user.preferencesModel.art">
+          <input type="checkbox" name="art" id="2"> Art
+        </div>
+        <div *ngIf="this.user.preferencesModel.nightlife">
+          <input type="checkbox" name="nightlife" id="3" checked> Nightlife
+        </div>
+        <div *ngIf="!this.user.preferencesModel.nightlife">
+          <input type="checkbox" name="nightlife" id="3"> Nightlife
+        </div>
+        <div *ngIf="this.user.preferencesModel.beauty">
+          <input type="checkbox" name="beauty" id="4" checked> Beauty<br>
+        </div>
+        <div *ngIf="!this.user.preferencesModel.beauty">
+          <input type="checkbox" name="beauty" id="4"> Beauty<br>
+        </div>
+        <div *ngIf="this.user.preferencesModel.learning">
+          <input type="checkbox" name="learning" id="5" checked> Learning
+        </div>
+        <div *ngIf="!this.user.preferencesModel.learning">
+          <input type="checkbox" name="learning" id="5"> Learning
+        </div>
+        <div *ngIf="this.user.preferencesModel.entertainment">
+          <input type="checkbox" name="entertainment" id="6" checked> Entertainment
+        </div>
+        <div *ngIf="!this.user.preferencesModel.entertainment">
+          <input type="checkbox" name="entertainment" id="6"> Entertainment
+        </div>
+        <div *ngIf="this.user.preferencesModel.religion">
+          <input type="checkbox" name="religion" id="7" checked> Religion<br>
+        </div>
+        <div *ngIf="!this.user.preferencesModel.religion">
+          <input type="checkbox" name="religion" id="7"> Religion<br>
+        </div>
+        <div *ngIf="this.user.preferencesModel.shopping">
+          <input type="checkbox" name="shopping" id="8" checked> Shopping
+        </div>
+        <div *ngIf="!this.user.preferencesModel.shopping">
+          <input type="checkbox" name="shopping" id="8"> Shopping
+        </div>
+        <div *ngIf="this.user.preferencesModel.homedecour">
+          <input type="checkbox" name="homedecour" id="9" checked> Home Decour
+        </div>
+        <div *ngIf="!this.user.preferencesModel.homedecour">
+          <input type="checkbox" name="homedecour" id="9"> Home Decour
+        </div>
+        <div *ngIf="this.user.preferencesModel.fitness">
+          <input type="checkbox" name="fitness" id="10" checked> Fitness
+        </div>
+        <div *ngIf="!this.user.preferencesModel.fitness">
+          <input type="checkbox" name="fitness" id="10"> Fitness
+        </div>
+      </div>
       <br>
       <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)"
         style="background-color: red;">Delete Account</button>

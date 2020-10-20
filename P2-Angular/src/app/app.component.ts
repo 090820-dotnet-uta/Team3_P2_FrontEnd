@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './api.service';
+import { User } from './user';
 // import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 
@@ -15,6 +17,7 @@ export class AppComponent implements OnInit {
   currentID: number;
   loginFlag: boolean = false;
   registerFlag: boolean = false;
+  user: User;
 
   constructor(private userService: UserService) {
   }
