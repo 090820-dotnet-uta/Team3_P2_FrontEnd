@@ -22,6 +22,7 @@ export class MapComponent implements OnInit {
   zoom = 9;
   @Input() lat: number;
   @Input() lng: number;
+  @Input() radius: number;
 
   @Input() preferences: Preferences;
   marker_lat: number;
@@ -66,7 +67,12 @@ export class MapComponent implements OnInit {
     console.log("Map Component LNG is:" + this.marker_lng);
 
     this.placesService.setLocation(this.lat, this.lng);
-    this.zoom = this.placesService.setRadius(20000);
+    if(this.radius){
+      this.zoom = this.placesService.setRadius(this.radius);
+    }
+    else{
+      this.zoom = this.placesService.setRadius(8046);
+    }
 
     // NEED A WAY FOR USERS TO ENTER THIS
     if(this.preferences.animals == true){

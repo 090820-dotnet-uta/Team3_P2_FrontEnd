@@ -21,7 +21,13 @@ export class LandingComponent implements OnInit {
 
   lat: number;
   lng: number;
-  address: any;
+  city: string;
+  radius = 8046.72;
+  options = {
+    componentRestrictions:{
+      country:["US"]
+    }
+  }
 
   users$: Observable<User[]>;
   user: User;
@@ -68,6 +74,8 @@ export class LandingComponent implements OnInit {
         username: new FormControl(),
         email: new FormControl(),
         password: new FormControl(),
+        address: new FormControl(),
+        radius: new FormControl()
       }
     );
   }
@@ -76,15 +84,19 @@ export class LandingComponent implements OnInit {
     const username = this.editingForm.get('username').value;
     const email = this.editingForm.get('email').value;
     const password = this.editingForm.get('password').value;
+    const address = this.editingForm.get('address').value;
+    const radius = this.editingForm.get('radius').value;
 
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
 
     if (username != null) { this.user.username = username; }
     if (email != null) { this.user.email = email; }
     if (password != null) { this.user.password = password; }
-    if (this.lat != null) {this.user.latitude = this.lat;}
-    if (this.lng != null) {this.user.longitude = this.lng;}
-    if (this.address != null) {this.user.city = this.address.address_components[3].long_name;}
+    if (address != null) {this.user.latitude = this.lat;}
+    if (address != null) {this.user.longitude = this.lng;}
+    if (address != null) {this.user.city = this.city;}
+    if (radius != null) { (this.radius = radius / 0.00062137); }
+
 
     this.apiService.editUser(this.user).subscribe(user => this.user = user);
     this.EditUser();
@@ -92,13 +104,19 @@ export class LandingComponent implements OnInit {
   }
 
   EditUser() {
-    this.displayMap = false;
+    if(this.displayMap == true){
+      this.displayMap = false;
+    } else{
+      this.displayMap = true;
+    }
     var x = document.getElementById("EditingForm");
     if (x.style.display === "none") {
       x.style.display = "block";
       (<HTMLInputElement> document.getElementById('username')).value = this.user.username;
       (<HTMLInputElement> document.getElementById('email')).value = this.user.email;
       (<HTMLInputElement> document.getElementById('password')).value = this.user.password;
+      let r = this.radius*0.00062137;
+      (<HTMLInputElement> document.getElementById('radius')).value = <string><unknown>(Math.ceil(r));
     } else {
       x.style.display = "none";
     }
@@ -145,7 +163,7 @@ export class LandingComponent implements OnInit {
 public AddressChange(address: any) {
     this.lat = address.geometry.location.lat();
     this.lng = address.geometry.location.lng();
-    this.address = address;
-    console.log(address);
+    this.city = address.address_components[3].long_name;
+    // console.log(address);
   }
 }

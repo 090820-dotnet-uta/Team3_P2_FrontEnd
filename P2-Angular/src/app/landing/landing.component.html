@@ -9,7 +9,8 @@
   <p>Zoom in and out on the map to see locations</p>
   <br>
   <div *ngIf="user && displayMap">
-    <app-map [lat]="user.latitude" [lng]="user.longitude" [preferences]="user.preferencesModel"></app-map>
+    <app-map [lat]="user.latitude" [lng]="user.longitude" 
+    [preferences]="user.preferencesModel" [radius]="radius"></app-map>
   </div>
 
   <div id="EditingForm" style="display: none;">
@@ -21,7 +22,11 @@
       Password:
       <input matInput type="password" formControlName="password" id="password" required> &nbsp;
       <br><br>
-      <input id="address" size="40" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" />
+      Address
+      <input id="address" formControlName="address" size="40" ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" />
+      <br>
+      Radius
+      <input type="number" id="radius" formControlName="radius" min="1" max="30" value="10"> miles
       <br>
       <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)"
         style="background-color: red;">Delete Account</button>
