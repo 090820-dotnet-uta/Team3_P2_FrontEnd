@@ -10,7 +10,9 @@ import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 
 import { LandingComponent } from './landing.component';
 import { ExpectedConditions } from 'protractor';
-import { Observable, observable } from 'rxjs';
+import { Observable, observable, of } from 'rxjs';
+import { Preferences } from '../preferences';
+import { subscribeOn } from 'rxjs/operators';
 
 describe('testing landing component', () => {
   let component: LandingComponent;
@@ -27,6 +29,7 @@ describe('testing landing component', () => {
 
   class MockAPI extends ApiService {
     public getUser(){
+      spyOn(component, 'EditUser').and.callThrough();
       let user: User;
       user.userId = 1;
       let obsUser: Observable<User>;
@@ -112,13 +115,31 @@ describe('onEdit should be run', () =>{
 
   class MockAPI extends ApiService {
 
-    public getUser(){
+    public getUser(id: number){
       let obsUser: Observable<User>;
-      return obsUser;
+      let fakeUser: User;
+      let fakePrefs: Preferences;
+      fakePrefs = { preferencesId: 1, art: true, animals: false, nightlife: true, beauty: true, learning: true, entertainment: true, religion: true, shopping: true, homedecour: true, fitness: true};
+      fakeUser = {userId: 1, username: 'a', email: 'a', password: 'a', latitude: 1, longitude: 1, city: 'a', preferencesModel: fakePrefs};
+      return of(fakeUser);
+      }
+    public editUser(user: User){
+        let obsUser: Observable<User>;
+        let fakeUser: User;
+        let fakePrefs: Preferences;
+        fakePrefs = { preferencesId: 1, art: true, animals: false, nightlife: true, beauty: true, learning: true, entertainment: true, religion: true, shopping: true, homedecour: true, fitness: true};
+        fakeUser = {userId: 1, username: 'a', email: 'a', password: 'a', latitude: 1, longitude: 1, city: 'a', preferencesModel: fakePrefs};
+        return of(fakeUser);
       }
     public getUsers(){
-      let obsUsers: Observable<User[]>
-      return obsUsers;
+      let obsUsers: Observable<User[]>;
+      let fakeUsers: User[] = [];
+      let fakeUser: User;
+      let fakePrefs: Preferences;
+      fakePrefs = { preferencesId: 1, art: true, animals: false, nightlife: true, beauty: true, learning: true, entertainment: true, religion: true, shopping: true, homedecour: true, fitness: true};
+      fakeUser = {userId: 1, username: 'a', email: 'a', password: 'a', latitude: 1, longitude: 1, city: 'a', preferencesModel: fakePrefs};
+      fakeUsers.push(fakeUser);
+      return of(fakeUsers);
     }
     }
 
@@ -138,6 +159,7 @@ describe('onEdit should be run', () =>{
     })
 
   it('onEdit should be run', () => {
+    spyOn(component, 'EditUser').and.stub();
     component.editingForm = formBuilder.group( {
       username: new FormControl(''),
       password: new FormControl(''),
@@ -145,7 +167,8 @@ describe('onEdit should be run', () =>{
       address: new FormControl(''),
       radius: new FormControl('')
     });
-    expect(component.onEdit).toThrowError();
+    component.onEdit();
+    expect(component.EditUser).toHaveBeenCalled();
 
   })
 })
