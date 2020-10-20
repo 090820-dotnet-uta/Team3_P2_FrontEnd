@@ -116,6 +116,10 @@ describe('onEdit should be run', () =>{
       let obsUser: Observable<User>;
       return obsUser;
       }
+    public getUsers(){
+      let obsUsers: Observable<User[]>
+      return obsUsers;
+    }
     }
 
     beforeEach(async() => {
