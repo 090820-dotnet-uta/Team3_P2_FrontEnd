@@ -85,7 +85,7 @@ describe('testing landing component', () => {
   })
 
   it('onEdit is called', async() => {
-    component.EditUser = jasmine.createSpy("EditUser spy");
+    component.onEdit = jasmine.createSpy("onEdit spy");
 
     component.editingForm = formBuilder.group( {
       username: new FormControl(''),
@@ -94,8 +94,8 @@ describe('testing landing component', () => {
       address: new FormControl(''),
       radius: new FormControl('')
     });
-    component.EditUser();
-    expect(component.EditUser).toHaveBeenCalled();
+    component.onEdit();
+    expect(component.onEdit).toHaveBeenCalled();
   })
   });
 
