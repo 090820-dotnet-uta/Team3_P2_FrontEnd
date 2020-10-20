@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { User } from '../user';
@@ -20,22 +20,40 @@ describe('testing landing component', () => {
   let serviceSpy: jasmine.SpyObj<ApiService>;
   let form : HTMLElement;
   const formBuilder: FormBuilder = new FormBuilder();
+  let service: ApiService;
+  let mockService: MockAPI;
+  let spy: any;
+  let http: HttpClient;
+
+  class MockAPI extends ApiService {
+    public getUser(){
+      let user: User;
+      user.userId = 1;
+      let obsUser: Observable<User>;
+      obsUser.subscribe(user => user);
+      return obsUser;
+      }
+    }
+
 
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
     declarations: [LandingComponent],
     imports: [ReactiveFormsModule, HttpClientModule, FormsModule],
-    providers: [HttpClient, UserService, ApiService,{ provide: ComponentFixtureAutoDetect, useValue: true }, { provide: FormBuilder, useValue: formBuilder } ],
+    providers: [HttpClient, UserService, MockAPI, { provide: ComponentFixtureAutoDetect, useValue: true }, { provide: FormBuilder, useValue: formBuilder } ],
   })
   .compileComponents();
   })
 
   beforeEach(() => {
+    service = new ApiService(http);
+    mockService = new MockAPI(http);
     fixture = TestBed.createComponent(LandingComponent);
     component = fixture.componentInstance;
+
     de = fixture.debugElement;
-    serviceSpy = TestBed.inject(ApiService) as jasmine.SpyObj<ApiService>;
+
 
 
   })
@@ -54,11 +72,6 @@ describe('testing landing component', () => {
 
   it('EditUser is called', async() => {
     component.ngOnInit();
-    component.editingForm = formBuilder.group({
-      username: 'a',
-      password: 'a',
-      email: 'a'
-    })
     let x = true;
     try{
     component.EditUser();
@@ -70,5 +83,20 @@ describe('testing landing component', () => {
     expect(component.EditUser()).toBeUndefined();
     expect(x).toBeFalse;
   })
-});
+
+  it('onEdit is called', async() => {
+    component.EditUser = jasmine.createSpy("EditUser spy");
+
+    component.editingForm = formBuilder.group( {
+      username: new FormControl(''),
+      password: new FormControl(''),
+      email: new FormControl(''),
+      address: new FormControl(''),
+      radius: new FormControl('')
+    });
+    component.EditUser();
+    expect(component.EditUser).toHaveBeenCalled();
+  })
+  });
+
 
