@@ -9,23 +9,40 @@
 </agm-map>
 <br>
 <br>
-<div id="locationBox">
-  <div *ngFor="let l of locations">
-      <ul>
-          <li (click)="getInformationOfPlace(l)">
-            Name: {{l.title}}
-            <ul>
-                <li>
-                    Address: {{l.address}}
-                </li>
-                <li *ngIf="l.phoneNumber">
-                      Phone Number: {{l.phoneNumber}}
-                </li>
-                <li *ngIf="l.website">
-                    Website: <a [attr.href]="l.website" target="_blank">{{l.title}}</a>
-                </li>
-            </ul>
-          </li>
-      </ul>
+<div id="locationBox" (drag)="dragElement()">
+  <div id="customLabel"><strong>Discovered Locations</strong></div><hr>
+  <div class="col-md-12" style="padding-inline-start: 0 !important;">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      responsive="true"
+      (pageChange)="handlePageChange($event)"
+      style="padding-inline-start: 0 !important;"
+    ></pagination-controls>
+  </div>
+  <button *ngFor="let l of locations | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index;" [class.active]="i == currentIndex" (click)="getInformationOfPlace(l)" style="width: 450px; font-family:'Roboto',sans-serif;">
+    <span *ngIf="!l.clicked" style="text-align: center;">{{l.title}}</span>
+    <span *ngIf="l.clicked" style="text-align: center;"><br><i>{{l.title}}</i></span>
+    <ul *ngIf="l.clicked" style="text-align: left;">
+        <hr>
+        <li>
+          <strong>Address:</strong> {{l.address}}
+        </li>
+        <li *ngIf="l.phoneNumber">
+          <strong>Phone Number:</strong> {{l.phoneNumber}}
+        </li>
+        <li *ngIf="l.website">
+          <strong>Website: </strong> <a [attr.href]="l.website" target="_blank">{{l.title}}</a>
+        </li>
+    </ul>
+  </button>
+  <br><br>
+  <div id="customLabel">
+    Items / Page:
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
   </div>
 </div>

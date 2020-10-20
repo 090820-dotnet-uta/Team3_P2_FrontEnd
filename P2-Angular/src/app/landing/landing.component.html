@@ -7,9 +7,9 @@
   <br>
   <br>
   <p>Zoom in and out on the map to see locations</p>
-  <br>
   <div *ngIf="user && displayMap">
-    <app-map [lat]="user.latitude" [lng]="user.longitude" 
+    <br>
+    <app-map [lat]="user.latitude" [lng]="user.longitude"
     [preferences]="user.preferencesModel" [radius]="radius"></app-map>
   </div>
 
@@ -99,7 +99,7 @@
   </div>
 
 
-  <br>
+  <!-- <br>
   <br>
   <div *ngIf="user">
     <h2>Current User (Debug)</h2>
@@ -110,5 +110,4 @@
       <li>Password: {{ user.password }}</li>
     </ul>
   </div>
-</div>
-
+</div> -->

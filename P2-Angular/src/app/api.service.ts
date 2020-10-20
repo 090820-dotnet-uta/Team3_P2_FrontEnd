@@ -39,4 +39,8 @@ export class ApiService {
     const REQUEST_URL = `${this.API_URL}/${userID}`;
     return this.http.delete<User>(REQUEST_URL, this.httpOptions);
   }
+
+  getAll(params): Observable<any> {
+    return this.http.get("https://winnerteamfrontend.azurewebsites.net", { params });
+  }
 }

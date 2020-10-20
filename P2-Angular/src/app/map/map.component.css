@@ -6,11 +6,25 @@ agm-map {
 }
 
 #locationBox {
-  position: relative;
-  float: right;
+  /* position: relative;
+  float: right; */
   background: grey;
   padding: 15px;
   border-radius: 15px;
   border: 1px solid black;
-  max-width: 400px;
+  max-width: 450px;
+
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  -moz-transform: translateX(-30%) translateY(-50%);
+  -webkit-transform: translateX(-30%) translateY(-50%);
+  transform: translateX(-30%) translateY(-50%);
+}
+
+#customLabel {
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
 }

@@ -16,6 +16,7 @@ import { UserService } from './user.service';
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { MapComponent } from './map/map.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MapComponent } from './map/map.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCK8o1hVCxYyT2DI5GImfJcP1hpTQxV5OM'
     }),
-    GooglePlaceModule
+    GooglePlaceModule,
+    NgxPaginationModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

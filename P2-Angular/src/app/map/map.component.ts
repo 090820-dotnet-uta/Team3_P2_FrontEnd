@@ -38,6 +38,58 @@ export class MapComponent implements OnInit {
 
   response: Observable<any>;
 
+  currentIndex = -1;
+  currentLocation = null;
+  page = 1;
+  count = 0;
+  pageSize = 3;
+  pageSizes = [3, 5, 10];
+
+  public dragElement() {
+    let elmnt = document.getElementById("locationBox");
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "header")) {
+      // if present, the header is where you move the DIV from:
+      document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    } else {
+      // otherwise, move the DIV from anywhere inside the DIV:
+      elmnt.onmousedown = dragMouseDown;
+    }
+
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // call a function whenever the cursor moves:
+      document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // set the element's new position:
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+      // stop moving when mouse button is released:
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+
+
+
+
   constructor(private placesService: GooglePlacesService, private apiService: ApiService) { }
 
   ngOnInit(): void {
@@ -49,6 +101,48 @@ export class MapComponent implements OnInit {
     console.log(this.lat);
     console.log(this.lng);
     console.log(this.preferences)
+  }
+
+  getRequestParams(page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let params = {};
+
+    if (page) {
+      params[`page`] = page - 1;
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+
+    return params;
+  }
+
+  retrieveTutorials(): void {
+    const params = this.getRequestParams(this.page, this.pageSize);
+
+    this.apiService.getAll(params)
+      .subscribe(
+        response => {
+          const { tutorials, totalItems } = response;
+          this.locations = tutorials;
+          this.count = totalItems;
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  handlePageChange(event): void {
+    this.page = event;
+    this.retrieveTutorials();
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.retrieveTutorials();
   }
 
   public wait(ms) {
@@ -154,14 +248,13 @@ export class MapComponent implements OnInit {
     let service = new google.maps.places.PlacesService(map);
     service.getDetails(request, (place, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        if (place.website && place.formatted_phone_number) {
+        if (place.website) {
           givenPlace.website = place.website;
-          givenPlace.phoneNumber = place.formatted_phone_number;
-        } else if (place.website) {
-          givenPlace.website = place.website;
-        } else if (place.formatted_phone_number) {
+        }
+        if (place.formatted_phone_number) {
           givenPlace.phoneNumber = place.formatted_phone_number;
         }
+        givenPlace.clicked = true;
       }
     });
   }
@@ -178,7 +271,7 @@ export class MapComponent implements OnInit {
           let marker: MapMarker;
           marker = {
             latitude: element.geometry.location.lat, longitude: element.geometry.location.lng, title: element.name,
-            iconUrl: iconUrl, address: element.vicinity, placetype: type, placeID: element.place_id
+            iconUrl: iconUrl, address: element.vicinity, placetype: type, placeID: element.place_id, clicked: false
           }
           let exists = false;
           for (let i = 0; i < this.locations.length; i++) {
