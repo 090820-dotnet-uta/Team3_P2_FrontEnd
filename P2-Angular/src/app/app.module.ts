@@ -36,7 +36,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAzlOKSCvJdT40U0JuKrbVd4cWE1I4kFIA'
+      apiKey: 'AIzaSyDQyW1PFujIO4020A7s50LKHNkS9s2uunk'
     }),
     GooglePlaceModule,
     NgxPaginationModule

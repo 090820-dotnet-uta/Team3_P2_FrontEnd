@@ -12,7 +12,7 @@ export class GooglePlacesService {
   private radius: string = '';
   private rankby = '&rankby=prominence'
   private type: string;
-  private APIKey = '&key=AIzaSyAzlOKSCvJdT40U0JuKrbVd4cWE1I4kFIA';
+  private APIKey = '&key=AIzaSyDQyW1PFujIO4020A7s50LKHNkS9s2uunk';
   connectionString: string;
   httpOptions = {
     headers: new HttpHeaders({'Access-Control-Allow-Origin': '*'})
