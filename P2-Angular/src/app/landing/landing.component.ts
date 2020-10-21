@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, DoCheck, SimpleChanges } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from '../user';
@@ -35,6 +35,7 @@ export class LandingComponent implements OnInit {
   user: User;
   users: User[];
   filteredUsers: User[];
+  clickedUsers: boolean[] = [];
   // currentID: number;
   editingForm: FormGroup;
   tempUser: User;
@@ -42,9 +43,9 @@ export class LandingComponent implements OnInit {
 
   displayMap = true;
   displayFilters = false;
+  displayLocations: boolean = false;
   constructor(private fb: FormBuilder, private apiService: ApiService, private userService: UserService) {
   }
-
 
   ngOnInit(): void {
     // this.currentID = this.userService.getCurrentID();
@@ -59,11 +60,16 @@ export class LandingComponent implements OnInit {
 
     // alert(this.currentID);
 
+    this.clickedUsers = [];
     this.users$ = this.apiService.getUsers();
     this.apiService.getUsers().subscribe(users => this.users = users);
+    for (let user in this.users)
+    {
+      this.clickedUsers.push(false);
+    }
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
     // this.editingForm = this.fb.group({
-    //   username: new FormControl('', [Validators.required]),
+    //   username: new ForfmControl('', [Validators.required]),
     //   email:    new FormControl('', [Validators.required, Validators.email]),
     //   password: new FormControl('', [Validators.required]),
     //   city:     new FormControl('', [Validators.required])
@@ -117,14 +123,6 @@ export class LandingComponent implements OnInit {
     else{ let p = {type: "fitness", clicked: false}; this.preferencesSelected.push(p);}
   }
 
-  // preferenceClicked(preference: Preference){
-  //   for(let k = 0; k < this.preferencesSelected.length; k++ ){
-  //     if(this.preferencesSelected[k].type == preference.type){
-  //       this.preferencesSelected[k].clicked = false;
-  //     }
-  //   }
-  // }
-
   onEdit() {
     const username = this.editingForm.get('username').value;
     const email = this.editingForm.get('email').value;
@@ -163,7 +161,6 @@ export class LandingComponent implements OnInit {
       this.displayMap = true;
     }
     else{
-
     }
   }
 
@@ -195,6 +192,14 @@ export class LandingComponent implements OnInit {
     // window.location.href = 'http://localhost:4200/home';
   }
 
+  handleClickedUser(userID: number) {
+    this.clickedUsers[userID-1] = !this.clickedUsers[userID-1];
+  }
+
+  ShowLocationList() {
+    this.displayLocations = !this.displayLocations;
+  }
+
   ShowSimilarUsers(userID: number) {
     this.apiService.getUsers().subscribe(users => this.users = users);
     this.apiService.getUser(this.currentID).subscribe(user => this.user = user);
@@ -213,7 +218,10 @@ export class LandingComponent implements OnInit {
          ((this.users[i].preferencesModel.religion == this.user.preferencesModel.religion) && (this.users[i].preferencesModel.religion == true)) ||
          ((this.users[i].preferencesModel.shopping == this.user.preferencesModel.shopping) && (this.users[i].preferencesModel.shopping == true))) && (this.users[i].userId != this.currentID))
       {
-        this.filteredUsers.push(this.users[i]);
+        if (this.users[i].city == this.user.city)
+        {
+          this.filteredUsers.push(this.users[i]);
+        }
       }
     }
 

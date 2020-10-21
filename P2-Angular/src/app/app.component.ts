@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './api.service';
-import { User } from './user';
 // import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import { ApiService } from './api.service';
+import { User } from './user';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { UserService } from './user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'P2-Angular';
+  title = 'Interest';
   isAuthenticated: boolean;
   // currentID = parseInt(localStorage.getItem("currentID"));
   //currentID = new BehaviorSubject<number>(parseInt(localStorage.getItem("currentID")));

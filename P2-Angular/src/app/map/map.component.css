@@ -1,14 +1,21 @@
-agm-map {
+#agm-map {
   position: relative;
   float: left;
   height: 420px;
   width: 700px;
+
+  position: absolute;
+  top: 50%;
+  left: 49.5%;
+  -moz-transform: translateX(-50.5%) translateY(-50%);
+  -webkit-transform: translateX(-50.5%) translateY(-50%);
+  transform: translateX(-50.5%) translateY(-50%);
 }
 
 #locationBox {
   /* position: relative;
   float: right; */
-  background: grey;
+  background: lightskyblue;
   padding: 15px;
   border-radius: 15px;
   border: 1px solid black;
@@ -16,10 +23,10 @@ agm-map {
 
   position: absolute;
   top: 50%;
-  left: 70%;
-  -moz-transform: translateX(-30%) translateY(-50%);
-  -webkit-transform: translateX(-30%) translateY(-50%);
-  transform: translateX(-30%) translateY(-50%);
+  left: 75.5%;
+  -moz-transform: translateX(-24.5%) translateY(-50%);
+  -webkit-transform: translateX(-24.5%) translateY(-50%);
+  transform: translateX(-24.5%) translateY(-50%);
 }
 
 #customLabel {

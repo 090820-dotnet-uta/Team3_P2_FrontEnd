@@ -191,9 +191,9 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    if (!this.takenEmailFlag && this.register.valid && this.addressIsValid && 
-      (this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value || 
-      this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value ||
+    if (!this.takenEmailFlag && this.register.valid && this.addressIsValid &&
+      (this.addressClicked == (<HTMLInputElement> document.getElementById("address")).value ||
+      this.addressClicked2 == (<HTMLInputElement> document.getElementById("address")).value ||
       this.addressShort == (<HTMLInputElement> document.getElementById("address")).value ||
       this.addressShort2 == (<HTMLInputElement> document.getElementById("address")).value))
     {

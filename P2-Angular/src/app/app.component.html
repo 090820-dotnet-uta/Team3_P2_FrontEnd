@@ -3,18 +3,7 @@
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 <div id="leftNavSection" *ngIf="currentID != 0">
-  <h1 style="text-align: center;">{{title}}</h1>
-
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button (click)="clickedHome()">Home</button> &nbsp;
-    <button *ngIf="currentID == 0" (click)="clickedLogin()">
-      Login
-    </button> &nbsp;
-    <button *ngIf="currentID == 0" (click)="clickedRegister()">
-      Register
-    </button>
-    <span *ngIf="currentID != 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
     <button *ngIf="currentID != 0" (click)="clickedLogout()">
       Logout
     </button>
@@ -22,10 +11,9 @@
 </div>
 
 <div id="navSection" *ngIf="currentID == 0">
-  <h1>{{title}}</h1>
+  <h1>&nbsp;{{title}}</h1>
 
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button (click)="clickedHome()">Home</button>
     <button *ngIf="currentID == 0" (click)="clickedLogin()">
       Login

@@ -1,7 +1,7 @@
 <div id="map">
 </div>
 
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+<agm-map id="agm-map" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
     <agm-marker [latitude]="marker_lat" [longitude]="marker_lng" [iconUrl]="homeIcon"></agm-marker>
     <div *ngFor="let l of locations">
         <agm-marker [latitude]="l.latitude" [longitude]="l.longitude" [title]="l.title" [iconUrl]="l.iconUrl"></agm-marker>
@@ -9,7 +9,7 @@
 </agm-map>
 <br>
 <br>
-<div id="locationBox" (drag)="dragElement()">
+<div *ngIf="displayLocations" id="locationBox" (drag)="dragElement()">
   <div id="customLabel"><strong>Discovered Locations</strong></div><hr>
   <div class="col-md-12" style="padding-inline-start: 0 !important;">
     <pagination-controls
@@ -22,9 +22,8 @@
   </div>
   <button *ngFor="let l of locations | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index;" [class.active]="i == currentIndex" (click)="getInformationOfPlace(l)" style="width: 450px; font-family:'Roboto',sans-serif;">
     <span *ngIf="!l.clicked" style="text-align: center;">{{l.title}}</span>
-    <span *ngIf="l.clicked" style="text-align: center;"><br><i>{{l.title}}</i></span>
+    <span *ngIf="l.clicked" style="text-align: center;"><br><em>{{l.title}}</em><hr></span>
     <ul *ngIf="l.clicked" style="text-align: left;">
-        <hr>
         <li>
           <strong>Address:</strong> {{l.address}}
         </li>

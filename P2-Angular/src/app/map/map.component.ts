@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
   @Input() lat: number;
   @Input() lng: number;
   @Input() radius: number;
-
+  @Input() displayLocations: boolean;
   @Input() preferences: Preferences;
   marker_lat: number;
   marker_lng: number;
@@ -263,7 +263,7 @@ export class MapComponent implements OnInit {
     let map = document.getElementById("map") as HTMLDivElement;
     this.placesService.setType(type);
     this.response = this.placesService.getPlaces();
-    for (let index = 0; index < 2; index++) {
+    for (let index = 0; index < 10; index++) {
       this.response.subscribe(
         res => {
           // res.results.length

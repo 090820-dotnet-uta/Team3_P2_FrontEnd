@@ -1,168 +1,121 @@
 <div *ngIf="currentID != 0">
   <br>
-  <h1>Welcome to the website!</h1>
+  <div id="topSection">
+    <h1 id="websiteTitleText">Welcome!</h1>
 
-  <button (click)="EditUser()">Edit Profile</button> &nbsp;
-  <button (click)="ShowSimilarUsers(user.userId)">Show Similar Users</button>
-  <br>
-  <br>
-  <p>Zoom in and out on the map to see locations</p>
-  <div *ngIf="user && displayMap">
-    <br>
-    <app-map [lat]="user.latitude" [lng]="user.longitude"
-    [preferences]="user.preferencesModel" [radius]="radius"></app-map>
-  </div>
-
-  <div id="EditingForm" style="display: none;">
-    <form [formGroup]="editingForm" (ngSubmit)="onEdit()">
-      Name:
-      <input matInput type="username" formControlName="username" id="username" required> &nbsp;
-      Email:
-      <input matInput formControlName="email" id="email" required> &nbsp;
-      Password:
-      <input matInput type="password" formControlName="password" id="password" required> &nbsp;
-      <br><br>
-      Address
-      <input id="address" formControlName="address" size="40" ngx-google-places-autocomplete 
-      [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="your address" /> &nbsp;
-      Radius
-      <input type="number" id="radius" formControlName="radius" min="1" max="30" value="10"> miles (1-30)
-      <br>
-      <br>
-      <div id="interestSection">
-        Interests:<br>
-        <div *ngIf="this.user.preferencesModel.animals">
-          <input type="checkbox" name="animals" id="1" checked> Animals
-        </div>
-        <div *ngIf="!this.user.preferencesModel.animals">
-          <input type="checkbox" name="animals" id="1"> Animals
-        </div>
-        <div *ngIf="this.user.preferencesModel.art">
-          <input type="checkbox" name="art" id="2" value="true" checked> Art
-        </div>
-        <div *ngIf="!this.user.preferencesModel.art">
-          <input type="checkbox" name="art" id="2"> Art
-        </div>
-        <div *ngIf="this.user.preferencesModel.nightlife">
-          <input type="checkbox" name="nightlife" id="3" checked> Nightlife
-        </div>
-        <div *ngIf="!this.user.preferencesModel.nightlife">
-          <input type="checkbox" name="nightlife" id="3"> Nightlife
-        </div>
-        <div *ngIf="this.user.preferencesModel.beauty">
-          <input type="checkbox" name="beauty" id="4" checked> Beauty<br>
-        </div>
-        <div *ngIf="!this.user.preferencesModel.beauty">
-          <input type="checkbox" name="beauty" id="4"> Beauty<br>
-        </div>
-        <div *ngIf="this.user.preferencesModel.learning">
-          <input type="checkbox" name="learning" id="5" checked> Learning
-        </div>
-        <div *ngIf="!this.user.preferencesModel.learning">
-          <input type="checkbox" name="learning" id="5"> Learning
-        </div>
-        <div *ngIf="this.user.preferencesModel.entertainment">
-          <input type="checkbox" name="entertainment" id="6" checked> Entertainment
-        </div>
-        <div *ngIf="!this.user.preferencesModel.entertainment">
-          <input type="checkbox" name="entertainment" id="6"> Entertainment
-        </div>
-        <div *ngIf="this.user.preferencesModel.religion">
-          <input type="checkbox" name="religion" id="7" checked> Religion<br>
-        </div>
-        <div *ngIf="!this.user.preferencesModel.religion">
-          <input type="checkbox" name="religion" id="7"> Religion<br>
-        </div>
-        <div *ngIf="this.user.preferencesModel.shopping">
-          <input type="checkbox" name="shopping" id="8" checked> Shopping
-        </div>
-        <div *ngIf="!this.user.preferencesModel.shopping">
-          <input type="checkbox" name="shopping" id="8"> Shopping
-        </div>
-        <div *ngIf="this.user.preferencesModel.homedecour">
-          <input type="checkbox" name="homedecour" id="9" checked> Home Decour
-        </div>
-        <div *ngIf="!this.user.preferencesModel.homedecour">
-          <input type="checkbox" name="homedecour" id="9"> Home Decour
-        </div>
-        <div *ngIf="this.user.preferencesModel.fitness">
-          <input type="checkbox" name="fitness" id="10" checked> Fitness
-        </div>
-        <div *ngIf="!this.user.preferencesModel.fitness">
-          <input type="checkbox" name="fitness" id="10"> Fitness
-        </div>
-      </div>
-      <br>
-      <button mat-raised-button color="primary">Submit Changes</button>&nbsp;<button (click)="DeleteUser(user.userId)"
-        style="background-color: red;">Delete Account</button>
-    </form>
-    <!-- <div *ngIf="editingForm.get('username').errors && editedSubmitted">
-        <div *ngIf="editingForm.get('username').hasError('required')">
-          <span style="color: red;">Please enter your name!</span>
-        </div>
-      </div>
-      <div *ngIf="editingForm.get('email').errors && editedSubmitted">
-        <div *ngIf="editingForm.get('email').hasError('required')">
-          <span style="color: red;">Please enter your email!</span>
-        </div>
-        <div *ngIf="editingForm.get('email').hasError('email')">
-          <span style="color: red;">You must enter a valid email!</span>
-        </div>
-      </div>
-      <div *ngIf="editingForm.get('password').errors && editedSubmitted">
-        <div *ngIf="editingForm.get('password').hasError('required')">
-          <span style="color: red;">Please enter your password!</span>
-        </div>
-      </div>
-      <div *ngIf="editingForm.get('city').errors && editedSubmitted">
-        <div *ngIf="editingForm.get('city').hasError('required')">
-          <span style="color: red;">Please enter your city!</span>
-        </div>
-      </div> -->
+    <button (click)="ShowSimilarUsers(user.userId)" style="width: 150px; height: 30px; font-family:'Roboto',sans-serif;">Show Similar Users</button>
+    &nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button (click)="ShowLocationList()" style="width: 150px; height: 30px; font-family:'Roboto',sans-serif;">Show Locations</button>
+    <br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button (click)="EditUser()" style="width: 150px; height: 30px; font-family:'Roboto',sans-serif;">Edit Profile</button>
   </div>
   <br>
-  <div id="ShowUsersDisplay" style="display: none;">
-    <h2>Similar Users</h2>
-    <ul>
-      <li *ngFor="let filtereduser of filteredUsers">
-        <ul>
-          <li>Name: {{ filtereduser.username }}</li>
-          <li>Email: <a [attr.href]="'mailto:' + filtereduser.email">{{ filtereduser.email }}</a></li>
-          <li
+  <div id="editFormContent">
+    <div id="EditingForm" style="display: none;">
+      <form [formGroup]="editingForm" (ngSubmit)="onEdit()">
+        <strong>Name: </strong>
+        <input matInput type="username" formControlName="username" id="username" required> &nbsp;
+        <strong>Email: </strong>
+        <input matInput formControlName="email" id="email" required> &nbsp;
+        <strong>Password: </strong>
+        <input matInput type="password" formControlName="password" id="password" required> &nbsp;
+        <br><br>
+        <strong>Address: </strong>
+        <input id="address" formControlName="address" size="40" ngx-google-places-autocomplete
+        [options]='options' (onAddressChange)="AddressChange($event)" autocomplete="off" placeholder="123 Real Street, Townville, IL, USA" /> &nbsp;
+        &nbsp;&nbsp;&nbsp;<strong>Radius: </strong>
+        <input type="number" id="radius" formControlName="radius" min="1" max="30" value="10"> <strong> miles</strong> <i> (1-30)</i>
+        <br>
+        <br>
+        <div id="interestSection">
+          <strong>Interests:</strong><hr><br>
+          <div>
+            <input *ngIf="this.user.preferencesModel.animals" type="checkbox" name="animals" id="1" checked>
+            <input *ngIf="!this.user.preferencesModel.animals" type="checkbox" name="animals" id="1"> Animals &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.art" type="checkbox" name="art" id="2" value="true" checked>
+            <input *ngIf="!this.user.preferencesModel.art" type="checkbox" name="art" id="2"> Art &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.nightlife" type="checkbox" name="nightlife" id="3" checked>
+            <input *ngIf="!this.user.preferencesModel.nightlife" type="checkbox" name="nightlife" id="3"> Nightlife &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.beauty" type="checkbox" name="beauty" id="4" checked>
+            <input *ngIf="!this.user.preferencesModel.beauty" type="checkbox" name="beauty" id="4"> Beauty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.learning" type="checkbox" name="learning" id="5" checked>
+            <input *ngIf="!this.user.preferencesModel.learning" type="checkbox" name="learning" id="5"> Learning &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+          <div>
+            <input *ngIf="this.user.preferencesModel.entertainment" type="checkbox" name="entertainment" id="6" checked>
+            <input *ngIf="!this.user.preferencesModel.entertainment" type="checkbox" name="entertainment" id="6"> Entertainment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.religion" type="checkbox" name="religion" id="7" checked>
+            <input *ngIf="!this.user.preferencesModel.religion" type="checkbox" name="religion" id="7"> Religion &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.shopping" type="checkbox" name="shopping" id="8" checked>
+            <input *ngIf="!this.user.preferencesModel.shopping" type="checkbox" name="shopping" id="8"> Shopping &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.homedecour" type="checkbox" name="homedecour" id="9" checked>
+            <input *ngIf="!this.user.preferencesModel.homedecour" type="checkbox" name="homedecour" id="9"> Home Decour &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input *ngIf="this.user.preferencesModel.fitness" type="checkbox" name="fitness" id="10" checked>
+            <input *ngIf="!this.user.preferencesModel.fitness" type="checkbox" name="fitness" id="10"> Fitness &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="primary" style="width: 150px; height: 30px; font-family:'Roboto',sans-serif;">Submit Changes</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button (click)="DeleteUser(user.userId)" style="background-color: red; width: 150px; height: 30px; font-family:'Roboto',sans-serif;"><strong>Delete Account</strong></button>
+      </form>
+    </div>
+  </div>
+  <div id="middleContent">
+    <div *ngIf="user && displayMap">
+      <br>
+      <app-map [displayLocations]="this.displayLocations" [lat]="user.latitude" [lng]="user.longitude"
+      [preferences]="user.preferencesModel" [radius]="radius"></app-map>
+    </div>
+    <div *ngIf="displayMap" id="ShowUsersDisplay" style="display: none;">
+      <div id="usersLabel"><strong>Discovered Users</strong></div><hr>
+      <button *ngFor="let filtereduser of filteredUsers" (click)="handleClickedUser(filtereduser.userId)" style="width: 300px; font-family:'Roboto',sans-serif;">
+        <span *ngIf="!clickedUsers[filtereduser.userId-1]" style="text-align: center;">{{filtereduser.username}}</span>
+        <span *ngIf="clickedUsers[filtereduser.userId-1]" style="text-align: center;"><strong>{{filtereduser.username}}</strong><hr></span>
+        <div *ngIf="clickedUsers[filtereduser.userId-1]">
+          <div style="text-align: center;">{{filtereduser.city}} Area</div><br>
+          <div style="text-align: center;"><strong>This user also likes..</strong></div>
+          <div
             *ngIf="(user.preferencesModel.animals == filtereduser.preferencesModel.animals) && (filtereduser.preferencesModel.animals == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Animals</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Animals</div>
+          <div
             *ngIf="(user.preferencesModel.art == filtereduser.preferencesModel.art) && (filtereduser.preferencesModel.art == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Art</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Art</div>
+          <div
             *ngIf="(user.preferencesModel.beauty == filtereduser.preferencesModel.beauty) && (filtereduser.preferencesModel.beauty == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Beauty</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Beauty</div>
+          <div
             *ngIf="(user.preferencesModel.entertainment == filtereduser.preferencesModel.entertainment) && (filtereduser.preferencesModel.entertainment == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Entertainment</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Entertainment</div>
+          <div
             *ngIf="(user.preferencesModel.fitness == filtereduser.preferencesModel.fitness) && (filtereduser.preferencesModel.fitness== true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Fitness</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Fitness</div>
+          <div
             *ngIf="(user.preferencesModel.homedecour == filtereduser.preferencesModel.homedecour) && (filtereduser.preferencesModel.homedecour == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Home Decour</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Home Decour</div>
+          <div
             *ngIf="(user.preferencesModel.learning == filtereduser.preferencesModel.learning) && (filtereduser.preferencesModel.learning == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Learning</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Learning</div>
+          <div style="text-align: center;"
             *ngIf="(user.preferencesModel.nightlife == filtereduser.preferencesModel.nightlife) && (filtereduser.preferencesModel.nightlife == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Nightlife</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Nightlife</div>
+          <div
             *ngIf="(user.preferencesModel.religion == filtereduser.preferencesModel.religion) && (filtereduser.preferencesModel.religion == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Religion</li>
-          <li
+            &nbsp;&nbsp;&nbsp;&nbsp;Religion</div>
+          <div
             *ngIf="(user.preferencesModel.shopping == filtereduser.preferencesModel.shopping) && (filtereduser.preferencesModel.shopping == true)">
-            &nbsp;&nbsp;&nbsp;&nbsp;Shopping</li>
-        </ul>
-      </li>
-    </ul>
+            &nbsp;&nbsp;&nbsp;&nbsp;Shopping</div>
+          <br><div style="text-align: right;">Email: <a [attr.href]="'mailto:' + filtereduser.email">{{ filtereduser.email }}</a></div>
+        </div>
+      </button>
+    </div>
   </div>
-
 
   <!-- <br>
   <br>
