@@ -189,7 +189,7 @@ export class LandingComponent implements OnInit {
     this.apiService.deleteUser(userID).subscribe(user => this.user = user);
     // localStorage.setItem("currentID", "0");
     this.currentID = 0;
-    // window.location.href = 'http://localhost:4200/home';
+    window.location.href = 'https://winnerteamfrontend.azurewebsites.net';
   }
 
   handleClickedUser(userID: number) {

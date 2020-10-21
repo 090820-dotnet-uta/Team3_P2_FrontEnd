@@ -28,3 +28,5 @@
 [1020/161344.993:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1020/164342.119:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1020/171352.065:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1020/175445.123:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1020/204618.002:ERROR:file_io_win.cc(162)] CreateFile C:\Users\chris\AppData\Local\Temp\karma-81981664\Crashpad\settings.dat: The system cannot find the file specified. (0x2)
